@@ -15,4 +15,4 @@ Our vision is a group of individuals and organizations in the metro Huntsville a
 
 This group currently has a home on Facebook for those in the Huntsville, AL area that want to join up:
 
-[Huntsville Data Science, Artificial Intelligence, and Machine Learning](https://www.facebook.com/groups/390465874745286/)
+[Huntsville AI](https://www.facebook.com/groups/390465874745286/)
