@@ -1,5 +1,3 @@
-# 2019 Kickoff & Planning
-
 Let's get together and discuss what we want to do for 2019!
 
 I would like to break the discussion into three areas:
