@@ -18,4 +18,5 @@ Our vision is a group of individuals and organizations in the metro Huntsville a
 This group currently has a home on Facebook and LinkedIn for those in the Huntsville, AL area that want to join up:
 
 [Huntsville AI Facebook Group](https://www.facebook.com/groups/390465874745286/)
+
 [Huntsville AI LinkedIn Group](https://www.linkedin.com/groups/12177562/)
