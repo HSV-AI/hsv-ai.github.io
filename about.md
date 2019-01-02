@@ -15,6 +15,7 @@ Our vision is a group of individuals and organizations in the metro Huntsville a
   * Sponsored "AI Lab" sessions to make cloud computing accessible to everyone that wants to participate
   * Competitions to apply AI to solve problems
 
-This group currently has a home on Facebook for those in the Huntsville, AL area that want to join up:
+This group currently has a home on Facebook and LinkedIn for those in the Huntsville, AL area that want to join up:
 
-[Huntsville Data Science, Artificial Intelligence, and Machine Learning](https://www.facebook.com/groups/390465874745286/)
+[Huntsville AI Facebook Group](https://www.facebook.com/groups/390465874745286/)
+[Huntsville AI LinkedIn Group](https://www.linkedin.com/groups/12177562/)
