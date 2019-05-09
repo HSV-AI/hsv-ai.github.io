@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Huntsville AI</title>
-    <link>https://example.com/posts/</link>
+    <link>https://hsv-ai.com/posts/</link>
     <description>Recent content in Posts on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Jan 2019 22:40:19 -0500</lastBuildDate>
     
-	<atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hsv-ai.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kickoff Planning</title>
-      <link>https://example.com/posts/2019-1-2-2019-kickoff-planning/</link>
+      <link>https://hsv-ai.com/posts/2019-1-2-2019-kickoff-planning/</link>
       <pubDate>Wed, 02 Jan 2019 22:40:19 -0500</pubDate>
       
-      <guid>https://example.com/posts/2019-1-2-2019-kickoff-planning/</guid>
+      <guid>https://hsv-ai.com/posts/2019-1-2-2019-kickoff-planning/</guid>
       <description>Let&amp;rsquo;s get together and discuss what we want to do for 2019!
 I would like to break the discussion into three areas: 1. Education - what do you want to learn? 2. Collaboration - what other groups can we work with in Huntsville? 3. Community - how can we give back to our local community?
 Education Last year, we started working through the Fast.ai Deep Learning course. I think we made it through session 4, but stalled after that.</description>
@@ -24,10 +24,10 @@ Education Last year, we started working through the Fast.ai Deep Learning course
     
     <item>
       <title>The Vision for HSV AI</title>
-      <link>https://example.com/posts/2018-6-5-a-vision-for-huntsville-artificial-intelligence/</link>
+      <link>https://hsv-ai.com/posts/2018-6-5-a-vision-for-huntsville-artificial-intelligence/</link>
       <pubDate>Tue, 05 Jun 2018 22:40:19 -0500</pubDate>
       
-      <guid>https://example.com/posts/2018-6-5-a-vision-for-huntsville-artificial-intelligence/</guid>
+      <guid>https://hsv-ai.com/posts/2018-6-5-a-vision-for-huntsville-artificial-intelligence/</guid>
       <description>The Vision for HSV AI I have been organizing an occasional meetup as part of CoWorking Night beginning in 2018. This group has been invigorating as a place to discuss our interest and interaction with Data Science, Artificial Intelligence, and Machine Learning. As a result, I started putting together my thoughts on what I would like for this group to grow into.
 The best way that I could find to communicate those thoughts is with a Vision &amp;amp; Mission statement:</description>
     </item>
