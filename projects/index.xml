@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Huntsville AI</title>
+    <link>https://hsv-ai.com/projects/</link>
+    <description>Recent content in Projects on Huntsville AI</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 02 Jan 2019 22:40:19 -0500</lastBuildDate>
+    
+	<atom:link href="https://hsv-ai.com/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Software Bug Analysis</title>
+      <link>https://hsv-ai.com/projects/bug-analysis/</link>
+      <pubDate>Wed, 02 Jan 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/projects/bug-analysis/</guid>
+      <description>This project is hosted on GitHub here: Bug Analysis
+Bug Analysis The purpose of this project is to attempt to find a way to recommend similar bugs when assigning a bug or creating a new bug. At the time of this writing, the Eclipse Foundation Bugzilla Database contains 543131 bugs. Below is an excerpt from the Eclipse Foundation 2018 annual report:
+ Photon Simultaneous Release In June 2017 the Eclipse community shipped Eclipse Oxygen, its twelfth annual simultaneous release.</description>
+    </item>
+    
+  </channel>
+</rss>
