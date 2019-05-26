@@ -33,7 +33,7 @@
 You may also want to check out the company behind spaCy - Explosion AI
 The best way to get off the ground is to head over to the Usage page and start from the beginning.
 After you are off the ground, head over to spaCy 101 and follow the tutorial.
-!pip install -U spacy  Collecting spacy [?25l Downloading https://files.pythonhosted.org/packages/52/da/3a1c54694c2d2f40df82f38a19ae14c6eb24a5a1a0dae87205ebea7a84d8/spacy-2.1.3-cp36-cp36m-manylinux1_x86_64.whl (27.7MB) [K 100% |████████████████████████████████| 27." />
+!pip install -U spacy  !python -m spacy download en_core_web_sm  import spacy # spacy." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/190417_spacy/" />
 <meta property="article:published_time" content="2019-04-17T22:40:19-05:00"/>
@@ -44,12 +44,12 @@ After you are off the ground, head over to spaCy 101 and follow the tutorial.
 You may also want to check out the company behind spaCy - Explosion AI
 The best way to get off the ground is to head over to the Usage page and start from the beginning.
 After you are off the ground, head over to spaCy 101 and follow the tutorial.
-!pip install -U spacy  Collecting spacy [?25l Downloading https://files.pythonhosted.org/packages/52/da/3a1c54694c2d2f40df82f38a19ae14c6eb24a5a1a0dae87205ebea7a84d8/spacy-2.1.3-cp36-cp36m-manylinux1_x86_64.whl (27.7MB) [K 100% |████████████████████████████████| 27.">
+!pip install -U spacy  !python -m spacy download en_core_web_sm  import spacy # spacy.">
 
 
 <meta itemprop="datePublished" content="2019-04-17T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-04-17T22:40:19-05:00" />
-<meta itemprop="wordCount" content="887">
+<meta itemprop="wordCount" content="642">
 
 
 
@@ -60,7 +60,7 @@ After you are off the ground, head over to spaCy 101 and follow the tutorial.
 You may also want to check out the company behind spaCy - Explosion AI
 The best way to get off the ground is to head over to the Usage page and start from the beginning.
 After you are off the ground, head over to spaCy 101 and follow the tutorial.
-!pip install -U spacy  Collecting spacy [?25l Downloading https://files.pythonhosted.org/packages/52/da/3a1c54694c2d2f40df82f38a19ae14c6eb24a5a1a0dae87205ebea7a84d8/spacy-2.1.3-cp36-cp36m-manylinux1_x86_64.whl (27.7MB) [K 100% |████████████████████████████████| 27."/>
+!pip install -U spacy  !python -m spacy download en_core_web_sm  import spacy # spacy."/>
 
   </head>
 
@@ -72,10 +72,12 @@ After you are off the ground, head over to spaCy 101 and follow the tutorial.
 
   <header>
     <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
+      
+
+<nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
     <a href="https://hsv-ai.com" class="f3 fw2 hover-white no-underline white-90 dib">
-      Huntsville AI
+	<img src="https://hsv-ai.com/images/logo_v9.png" style="height:80px;"></img>
     </a>
     <div class="flex-l items-center">
       
@@ -190,48 +192,7 @@ After you are off the ground, head over to spaCy 101 and follow the tutorial.
 <pre><code class="language-python">!pip install -U spacy
 </code></pre>
 
-<pre><code>Collecting spacy
-[?25l  Downloading https://files.pythonhosted.org/packages/52/da/3a1c54694c2d2f40df82f38a19ae14c6eb24a5a1a0dae87205ebea7a84d8/spacy-2.1.3-cp36-cp36m-manylinux1_x86_64.whl (27.7MB)
-[K    100% |████████████████████████████████| 27.7MB 1.8MB/s 
-[?25hRequirement already satisfied, skipping upgrade: murmurhash&lt;1.1.0,&gt;=0.28.0 in /usr/local/lib/python3.6/dist-packages (from spacy) (1.0.2)
-Requirement already satisfied, skipping upgrade: requests&lt;3.0.0,&gt;=2.13.0 in /usr/local/lib/python3.6/dist-packages (from spacy) (2.18.4)
-Requirement already satisfied, skipping upgrade: plac&lt;1.0.0,&gt;=0.9.6 in /usr/local/lib/python3.6/dist-packages (from spacy) (0.9.6)
-Requirement already satisfied, skipping upgrade: jsonschema&lt;3.0.0,&gt;=2.6.0 in /usr/local/lib/python3.6/dist-packages (from spacy) (2.6.0)
-Requirement already satisfied, skipping upgrade: numpy&gt;=1.15.0 in /usr/local/lib/python3.6/dist-packages (from spacy) (1.16.2)
-Collecting blis&lt;0.3.0,&gt;=0.2.2 (from spacy)
-[?25l  Downloading https://files.pythonhosted.org/packages/34/46/b1d0bb71d308e820ed30316c5f0a017cb5ef5f4324bcbc7da3cf9d3b075c/blis-0.2.4-cp36-cp36m-manylinux1_x86_64.whl (3.2MB)
-[K    100% |████████████████████████████████| 3.2MB 11.0MB/s 
-[?25hCollecting thinc&lt;7.1.0,&gt;=7.0.2 (from spacy)
-[?25l  Downloading https://files.pythonhosted.org/packages/a9/f1/3df317939a07b2fc81be1a92ac10bf836a1d87b4016346b25f8b63dee321/thinc-7.0.4-cp36-cp36m-manylinux1_x86_64.whl (2.1MB)
-[K    100% |████████████████████████████████| 2.1MB 14.9MB/s 
-[?25hRequirement already satisfied, skipping upgrade: preshed&lt;2.1.0,&gt;=2.0.1 in /usr/local/lib/python3.6/dist-packages (from spacy) (2.0.1)
-Collecting srsly&lt;1.1.0,&gt;=0.0.5 (from spacy)
-[?25l  Downloading https://files.pythonhosted.org/packages/6b/97/47753e3393aa4b18de9f942fac26f18879d1ae950243a556888f389d1398/srsly-0.0.5-cp36-cp36m-manylinux1_x86_64.whl (180kB)
-[K    100% |████████████████████████████████| 184kB 29.2MB/s 
-[?25hRequirement already satisfied, skipping upgrade: cymem&lt;2.1.0,&gt;=2.0.2 in /usr/local/lib/python3.6/dist-packages (from spacy) (2.0.2)
-Collecting wasabi&lt;1.1.0,&gt;=0.2.0 (from spacy)
-  Downloading https://files.pythonhosted.org/packages/76/6c/0376977df1ba9f0ec27835d80456d9284c79737cb5205649451db1181f01/wasabi-0.2.1-py3-none-any.whl
-Requirement already satisfied, skipping upgrade: urllib3&lt;1.23,&gt;=1.21.1 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy) (1.22)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy) (2019.3.9)
-Requirement already satisfied, skipping upgrade: idna&lt;2.7,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy) (2.6)
-Requirement already satisfied, skipping upgrade: chardet&lt;3.1.0,&gt;=3.0.2 in /usr/local/lib/python3.6/dist-packages (from requests&lt;3.0.0,&gt;=2.13.0-&gt;spacy) (3.0.4)
-Requirement already satisfied, skipping upgrade: tqdm&lt;5.0.0,&gt;=4.10.0 in /usr/local/lib/python3.6/dist-packages (from thinc&lt;7.1.0,&gt;=7.0.2-&gt;spacy) (4.28.1)
-Installing collected packages: blis, srsly, wasabi, thinc, spacy
-  Found existing installation: thinc 6.12.1
-    Uninstalling thinc-6.12.1:
-      Successfully uninstalled thinc-6.12.1
-  Found existing installation: spacy 2.0.18
-    Uninstalling spacy-2.0.18:
-      Successfully uninstalled spacy-2.0.18
-Successfully installed blis-0.2.4 spacy-2.1.3 srsly-0.0.5 thinc-7.0.4 wasabi-0.2.1
-</code></pre>
-
 <pre><code class="language-python">!python -m spacy download en_core_web_sm
-</code></pre>
-
-<pre><code>Requirement already satisfied: en_core_web_sm==2.1.0 from https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.1.0/en_core_web_sm-2.1.0.tar.gz#egg=en_core_web_sm==2.1.0 in /usr/local/lib/python3.6/dist-packages (2.1.0)
-[38;5;2m✔ Download and installation successful[0m
-You can now load the model via spacy.load('en_core_web_sm')
 </code></pre>
 
 <pre><code class="language-python">import spacy
