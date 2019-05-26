@@ -32,11 +32,14 @@ Introduction From Wikipedia:
       <pubDate>Wed, 17 Apr 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190417_spacy/</guid>
-      <description>Intro to spaCy Main website is at https://spacy.io/
+      <description>Huntsville AI - April 17, 2019
+View the IPython notebook for this session on Github here
+Or launch the notebook in Google Colab or MyBinder:
+
+
+Intro to spaCy Main website is at https://spacy.io/
 You may also want to check out the company behind spaCy - Explosion AI
-The best way to get off the ground is to head over to the Usage page and start from the beginning.
-After you are off the ground, head over to spaCy 101 and follow the tutorial.
-!pip install -U spacy  !python -m spacy download en_core_web_sm  import spacy # spacy.</description>
+The best way to get off the ground is to head over to the Usage page and start from the beginning.</description>
     </item>
     
     <item>
@@ -46,6 +49,46 @@ After you are off the ground, head over to spaCy 101 and follow the tutorial.
       
       <guid>https://hsv-ai.com/meetups/190410_google_colaboratory/</guid>
       <description>Google Colaboratory Agenda:  Brainstorm Ideas for Sessions Play with Google Colaboratory  Ideas from Brainstorming  NLP (clustering, sentiment analysis) Formulas - data science &amp;amp; analysis - vocabulary/lingo - numpy - feature engineering Feature Engineering What&amp;rsquo;s next after training a model ** Applications of using models From Nick - Eureka Alert Deployment (How the heck do we do this) ** Combined session with CloudComputing Hexagon folks ** Framework - how to put AI into HaftaHave Matlab Octave Learning (Ben - Gary) Data Analysis of CoWorkingNight Data BotOrNot for Instagram Getting Started with Python - (Phil) ** Bring a machine - install Python on it ** Next session - Jupyter Notebooks ** Deploy python application with Flask Getting Started with R (Jonathan)</description>
+    </item>
+    
+    <item>
+      <title>AI Hardware</title>
+      <link>https://hsv-ai.com/meetups/190403_ai_hardware/</link>
+      <pubDate>Wed, 03 Apr 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190403_ai_hardware/</guid>
+      <description>Huntsville AI - April 3, 2019
+Ben Etheredge led the discussion on AI hardware, bottlenecks, and an introduction to Keras. You can download the slides below:
+PDF Slides</description>
+    </item>
+    
+    <item>
+      <title>Amazon Rekognition Service</title>
+      <link>https://hsv-ai.com/meetups/190227_amazon_rekognition/</link>
+      <pubDate>Wed, 27 Feb 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190227_amazon_rekognition/</guid>
+      <description>Huntsville AI - February 27, 2019
+View the IPython notebook for this session on Github here
+Or launch the notebook in Google Colab or MyBinder:
+
+
+Amazon Rekognition Service This is an overview of using the AWS Rekognition Service. As a starting point, we will use an image as a basis to work with. The Rekognition service can work with either images from an S3 bucket or from a stream of bytes.</description>
+    </item>
+    
+    <item>
+      <title>Classification with Scikit-Learn</title>
+      <link>https://hsv-ai.com/meetups/190213_musk_classification/</link>
+      <pubDate>Sat, 23 Feb 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190213_musk_classification/</guid>
+      <description>Huntsville AI - February 13, 2019
+View the IPython notebook for this session on Github here
+Or launch the notebook in Google Colab or MyBinder:
+
+
+Classification with Scikit-Learn This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.
+The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: Musk (Version 2) Data Set</description>
     </item>
     
     <item>
@@ -59,6 +102,39 @@ Azure Notebooks
 Documentation on Azure Notebooks
 The main project that we will be using is from Jake VanderPlas Scikit-Learn tutorial on GitHub. You can find it here
 Principal Component Analysis</description>
+    </item>
+    
+    <item>
+      <title>Variance &amp; Covariance</title>
+      <link>https://hsv-ai.com/meetups/190123_variance/</link>
+      <pubDate>Wed, 23 Jan 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190123_variance/</guid>
+      <description>Huntsville AI - January 23, 2019
+Dr. Phil Bording let the session completing the discussion on linear models with Variance and Covariance. You can download the slides below:
+PDF Slides</description>
+    </item>
+    
+    <item>
+      <title>Intelligent Agents</title>
+      <link>https://hsv-ai.com/meetups/190116_intelligent_agents/</link>
+      <pubDate>Wed, 16 Jan 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190116_intelligent_agents/</guid>
+      <description>Huntsville AI - January 16, 2019
+Dr. Phil Bording let the session covering Intelligent Agents. You can download the slides below:
+Powerpoint Slides</description>
+    </item>
+    
+    <item>
+      <title>Linear Models</title>
+      <link>https://hsv-ai.com/meetups/190109_linear_models/</link>
+      <pubDate>Wed, 09 Jan 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190109_linear_models/</guid>
+      <description>Huntsville AI - January 9, 2019
+Dr. Phil Bording let the session covering linear models. You can download the slides below:
+PDF Slides</description>
     </item>
     
   </channel>
