@@ -6,10 +6,35 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 May 2019 22:40:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 22:40:19 -0500</lastBuildDate>
     
 	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open Discussion</title>
+      <link>https://hsv-ai.com/meetups/190529_opendiscussion/</link>
+      <pubDate>Wed, 29 May 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190529_opendiscussion/</guid>
+      <description>Show &amp;amp; Tell Chuck Rhoman - Mobile app with IBM Watson Photo from a phone does image recognition
+Mike Osaji Working with integrating an image recognition function into a part search
+Jonathan Rosswogg Data Science Hierarchy of Needs
+Jupyter server to use for the community
+J. Langley Trying to train a model based on weather (and other) data.</description>
+    </item>
+    
+    <item>
+      <title>Small Business Innovation Research</title>
+      <link>https://hsv-ai.com/meetups/190522_sbir_topics/</link>
+      <pubDate>Wed, 22 May 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190522_sbir_topics/</guid>
+      <description>More information: STTR 19.2
+SBIR 19.2
+Export Control: Many of these topics include this statement:
+The technology within this topic is restricted under the International Traffic in Arms Regulation (ITAR), 22 CFR Parts 120-130, which controls the export and import of defense-related material and services, including export of sensitive technical data, or the Export Administration Regulation (EAR), 15 CFR Parts 730-774, which controls dual use items. Offerors must disclose any proposed use of foreign nationals (FNs), their country(ies) of origin, the type of visa or work permit possessed, and the statement of work (SOW) tasks intended for accomplishment by the FN(s) in accordance with section 3.</description>
+    </item>
     
     <item>
       <title>Word &amp; Document Vectors</title>
@@ -146,6 +171,15 @@ PDF Slides</description>
       <description>This project is hosted on GitHub here: Bug Analysis
 Bug Analysis The purpose of this project is to attempt to find a way to recommend similar bugs when assigning a bug or creating a new bug. At the time of this writing, the Eclipse Foundation Bugzilla Database contains 543131 bugs. Below is an excerpt from the Eclipse Foundation 2018 annual report:
  Photon Simultaneous Release In June 2017 the Eclipse community shipped Eclipse Oxygen, its twelfth annual simultaneous release.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hsv-ai.com/meetups/190508_word_document_vectors.slides/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190508_word_document_vectors.slides/</guid>
+      <description>190508_Word_Document_Vectors slides    if( window.location.search.match( /print-pdf/gi ) ) { var link = document.createElement( &#39;link&#39; ); link.rel = &#39;stylesheet&#39;; link.type = &#39;text/css&#39;; link.href = &#39;reveal.js/css/print/pdf.css&#39;; document.getElementsByTagName( &#39;head&#39; )[0].appendChild( link ); }     MathJax.Hub.Config({ tex2jax: { inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&#34;\\(&#34;,&#34;\\)&#34;] ], displayMath: [ [&#39;$$&#39;,&#39;$$&#39;], [&#34;\\[&#34;,&#34;\\]&#34;] ], processEscapes: true, processEnvironments: true }, // Center justify equations in code and markdown cells. Elsewhere // we use CSS to left justify single line equations in code cells.</description>
     </item>
     
   </channel>
