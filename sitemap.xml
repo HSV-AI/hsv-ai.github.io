@@ -3,8 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hsv-ai.com/meetups/190710_business_applications/</loc>
+    <lastmod>2019-07-10T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://hsv-ai.com/</loc>
-    <lastmod>2019-05-29T22:40:19-05:00</lastmod>
+    <lastmod>2019-07-10T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/190626_rnn_timeseries_part3/</loc>
+    <lastmod>2019-06-26T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/190612_recurrent_neural_networks/</loc>
+    <lastmod>2019-06-12T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -111,11 +132,6 @@
     <lastmod>2017-03-02T12:00:00-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://hsv-ai.com/meetups/190508_word_document_vectors.slides/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

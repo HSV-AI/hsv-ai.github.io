@@ -6,10 +6,43 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 May 2019 22:40:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jul 2019 22:40:19 -0500</lastBuildDate>
     
 	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Business Application of AI</title>
+      <link>https://hsv-ai.com/meetups/190710_business_applications/</link>
+      <pubDate>Wed, 10 Jul 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190710_business_applications/</guid>
+      <description>&lt;p&gt;Dr Phil Bording walked us through a couple of examples of AI in use in business applications.&lt;/p&gt;
+
+&lt;p&gt;The examples included estimation of housing prices and mechanical failure in airplane landing gear.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Recurrent Neural Networks Part 3</title>
+      <link>https://hsv-ai.com/meetups/190626_rnn_timeseries_part3/</link>
+      <pubDate>Wed, 26 Jun 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190626_rnn_timeseries_part3/</guid>
+      <description>&lt;p&gt;This week we will be covering the final part of RNN development to predict stock price information using previous values.&lt;/p&gt;
+
+&lt;p&gt;This notebook is based on a tutorial: &amp;ldquo;Multivariate Time Series using RNN with Keras&amp;rdquo; from &lt;a href=&#34;https://medium.com/datadriveninvestor/multivariate-time-series-using-rnn-with-keras-7f78f4488679&#34;&gt;here&lt;/a&gt;. We have modified the approach to use all available values as input instead of averaging the low and high price.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Recurrent Neural Networks</title>
+      <link>https://hsv-ai.com/meetups/190612_recurrent_neural_networks/</link>
+      <pubDate>Wed, 12 Jun 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190612_recurrent_neural_networks/</guid>
+      <description>&lt;h2 id=&#34;from-wikipedia&#34;&gt;From WikiPedia:&lt;/h2&gt;
+
+&lt;p&gt;A recurrent neural network (RNN) is a class of artificial neural network where connections between nodes form a directed graph along a temporal sequence. This allows it to exhibit temporal dynamic behavior.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Open Discussion</title>
@@ -17,11 +50,9 @@
       <pubDate>Wed, 29 May 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190529_opendiscussion/</guid>
-      <description>Show &amp;amp; Tell Chuck Rhoman - Mobile app with IBM Watson Photo from a phone does image recognition
-Mike Osaji Working with integrating an image recognition function into a part search
-Jonathan Rosswogg Data Science Hierarchy of Needs
-Jupyter server to use for the community
-J. Langley Trying to train a model based on weather (and other) data.</description>
+      <description>&lt;h1 id=&#34;show-tell&#34;&gt;Show &amp;amp; Tell&lt;/h1&gt;
+
+&lt;p&gt;Updated from Huntsville AI members on their personal or work projects.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,10 +61,13 @@ J. Langley Trying to train a model based on weather (and other) data.</descripti
       <pubDate>Wed, 22 May 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190522_sbir_topics/</guid>
-      <description>More information: STTR 19.2
-SBIR 19.2
-Export Control: Many of these topics include this statement:
-The technology within this topic is restricted under the International Traffic in Arms Regulation (ITAR), 22 CFR Parts 120-130, which controls the export and import of defense-related material and services, including export of sensitive technical data, or the Export Administration Regulation (EAR), 15 CFR Parts 730-774, which controls dual use items. Offerors must disclose any proposed use of foreign nationals (FNs), their country(ies) of origin, the type of visa or work permit possessed, and the statement of work (SOW) tasks intended for accomplishment by the FN(s) in accordance with section 3.</description>
+      <description>&lt;p&gt;This discussion covered selected SBIR topics that included some type of Artificial Intelligence or Machine Learning in the description.&lt;/p&gt;
+
+&lt;h2 id=&#34;more-information&#34;&gt;More information:&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.fbo.gov/index.php?s=opportunity&amp;amp;mode=form&amp;amp;id=82cbf6c93c77bee0ffa23d2cc8c2b422&amp;amp;tab=core&amp;amp;_cview=0&amp;amp;fbclid=IwAR2ddfEFkyEvUIEH-b5Ws2DmINOrRM7Y84X0J19GQmQWrW2kX44fDHe6xw4&#34;&gt;STTR 19.2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.fbo.gov/index?s=opportunity&amp;amp;mode=form&amp;amp;id=0a3eac1d27ab54cfe57a0339b3f863d8&amp;amp;tab=core&amp;amp;_cview=0&amp;amp;fbclid=IwAR3bpKUeOgtN6AMdolrbpUaefVQjSrV-Hbe86M1CNOKC46lNFQ6eN25LCNU&#34;&gt;SBIR 19.2&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,13 +76,11 @@ The technology within this topic is restricted under the International Traffic i
       <pubDate>Wed, 08 May 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190508_word_document_vectors/</guid>
-      <description>Huntsville AI - May 8, 2019
-View the IPython notebook for this session on Github here
-Or launch the notebook in Google Colab or MyBinder:
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
+&lt;p&gt;From &lt;a href=&#34;https://en.wikipedia.org/wiki/Word_embedding&#34;&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
 
-Introduction From Wikipedia:
- Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension.</description>
+&lt;p&gt;Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -57,14 +89,13 @@ Introduction From Wikipedia:
       <pubDate>Wed, 17 Apr 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190417_spacy/</guid>
-      <description>Huntsville AI - April 17, 2019
-View the IPython notebook for this session on Github here
-Or launch the notebook in Google Colab or MyBinder:
+      <description>&lt;p&gt;Main website is at &lt;a href=&#34;https://spacy.io/&#34;&gt;https://spacy.io/&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;You may also want to check out the company behind spaCy - &lt;a href=&#34;https://explosion.ai/&#34;&gt;Explosion AI&lt;/a&gt;&lt;/p&gt;
 
-Intro to spaCy Main website is at https://spacy.io/
-You may also want to check out the company behind spaCy - Explosion AI
-The best way to get off the ground is to head over to the Usage page and start from the beginning.</description>
+&lt;p&gt;The best way to get off the ground is to head over to the &lt;a href=&#34;https://spacy.io/usage&#34;&gt;Usage&lt;/a&gt; page and start from the beginning.&lt;/p&gt;
+
+&lt;p&gt;After you are off the ground, head over to &lt;a href=&#34;https://spacy.io/usage/spacy-101&#34;&gt;spaCy 101&lt;/a&gt; and follow the tutorial.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,7 +104,12 @@ The best way to get off the ground is to head over to the Usage page and start f
       <pubDate>Wed, 10 Apr 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190410_google_colaboratory/</guid>
-      <description>Google Colaboratory Agenda:  Brainstorm Ideas for Sessions Play with Google Colaboratory  Ideas from Brainstorming  NLP (clustering, sentiment analysis) Formulas - data science &amp;amp; analysis - vocabulary/lingo - numpy - feature engineering Feature Engineering What&amp;rsquo;s next after training a model ** Applications of using models From Nick - Eureka Alert Deployment (How the heck do we do this) ** Combined session with CloudComputing Hexagon folks ** Framework - how to put AI into HaftaHave Matlab Octave Learning (Ben - Gary) Data Analysis of CoWorkingNight Data BotOrNot for Instagram Getting Started with Python - (Phil) ** Bring a machine - install Python on it ** Next session - Jupyter Notebooks ** Deploy python application with Flask Getting Started with R (Jonathan)</description>
+      <description>&lt;h2 id=&#34;agenda&#34;&gt;Agenda:&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Brainstorm Ideas for Sessions&lt;/li&gt;
+&lt;li&gt;Play with Google Colaboratory&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -82,9 +118,11 @@ The best way to get off the ground is to head over to the Usage page and start f
       <pubDate>Wed, 03 Apr 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190403_ai_hardware/</guid>
-      <description>Huntsville AI - April 3, 2019
-Ben Etheredge led the discussion on AI hardware, bottlenecks, and an introduction to Keras. You can download the slides below:
-PDF Slides</description>
+      <description>&lt;p&gt;Huntsville AI - April 3, 2019&lt;/p&gt;
+
+&lt;p&gt;Ben Etheredge led the discussion on AI hardware, bottlenecks, and an introduction to Keras. You can download the slides below:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190116_m1002_Intelligent_Agents.pptx?raw=true&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -93,12 +131,7 @@ PDF Slides</description>
       <pubDate>Wed, 27 Feb 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190227_amazon_rekognition/</guid>
-      <description>Huntsville AI - February 27, 2019
-View the IPython notebook for this session on Github here
-Or launch the notebook in Google Colab or MyBinder:
-
-
-Amazon Rekognition Service This is an overview of using the AWS Rekognition Service. As a starting point, we will use an image as a basis to work with. The Rekognition service can work with either images from an S3 bucket or from a stream of bytes.</description>
+      <description>&lt;p&gt;This is an overview of using the AWS Rekognition Service. As a starting point, we will use an image as a basis to work with. The Rekognition service can work with either images from an S3 bucket or from a stream of bytes. Here is a plot of the image that we are using:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -107,13 +140,9 @@ Amazon Rekognition Service This is an overview of using the AWS Rekognition Serv
       <pubDate>Sat, 23 Feb 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190213_musk_classification/</guid>
-      <description>Huntsville AI - February 13, 2019
-View the IPython notebook for this session on Github here
-Or launch the notebook in Google Colab or MyBinder:
+      <description>&lt;p&gt;This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.&lt;/p&gt;
 
-
-Classification with Scikit-Learn This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.
-The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: Musk (Version 2) Data Set</description>
+&lt;p&gt;The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Musk+(Version+2)&#34;&gt;Musk (Version 2) Data Set&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -122,11 +151,11 @@ The dataset that we will use for this example was provided by the UCI Machine Le
       <pubDate>Wed, 30 Jan 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190130_azure_notebooks/</guid>
-      <description>Welcome!!! Tonight we will be going through the setup of an Azure Notebook and running some basic machine learning tasks.
-Azure Notebooks
-Documentation on Azure Notebooks
-The main project that we will be using is from Jake VanderPlas Scikit-Learn tutorial on GitHub. You can find it here
-Principal Component Analysis</description>
+      <description>&lt;h2 id=&#34;welcome&#34;&gt;Welcome!!!&lt;/h2&gt;
+
+&lt;p&gt;Tonight we will be going through the setup of an Azure Notebook and running some basic machine learning tasks.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://notebooks.azure.com/&#34;&gt;Azure Notebooks&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -135,9 +164,9 @@ Principal Component Analysis</description>
       <pubDate>Wed, 23 Jan 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190123_variance/</guid>
-      <description>Huntsville AI - January 23, 2019
-Dr. Phil Bording let the session completing the discussion on linear models with Variance and Covariance. You can download the slides below:
-PDF Slides</description>
+      <description>&lt;p&gt;Dr. Phil Bording let the session completing the discussion on linear models with Variance and Covariance. You can download the slides below:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190123_Notes.pdf&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -146,9 +175,9 @@ PDF Slides</description>
       <pubDate>Wed, 16 Jan 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190116_intelligent_agents/</guid>
-      <description>Huntsville AI - January 16, 2019
-Dr. Phil Bording let the session covering Intelligent Agents. You can download the slides below:
-Powerpoint Slides</description>
+      <description>&lt;p&gt;Dr. Phil Bording let the session covering Intelligent Agents. You can download the slides below:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190116_m1002_Intelligent_Agents.pptx?raw=true&#34;&gt;Powerpoint Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -157,9 +186,9 @@ Powerpoint Slides</description>
       <pubDate>Wed, 09 Jan 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190109_linear_models/</guid>
-      <description>Huntsville AI - January 9, 2019
-Dr. Phil Bording let the session covering linear models. You can download the slides below:
-PDF Slides</description>
+      <description>&lt;p&gt;Dr. Phil Bording let the session covering linear models. You can download the slides below:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190109_Week1_Revised.pdf&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -171,15 +200,6 @@ PDF Slides</description>
       <description>This project is hosted on GitHub here: Bug Analysis
 Bug Analysis The purpose of this project is to attempt to find a way to recommend similar bugs when assigning a bug or creating a new bug. At the time of this writing, the Eclipse Foundation Bugzilla Database contains 543131 bugs. Below is an excerpt from the Eclipse Foundation 2018 annual report:
  Photon Simultaneous Release In June 2017 the Eclipse community shipped Eclipse Oxygen, its twelfth annual simultaneous release.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://hsv-ai.com/meetups/190508_word_document_vectors.slides/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hsv-ai.com/meetups/190508_word_document_vectors.slides/</guid>
-      <description>190508_Word_Document_Vectors slides    if( window.location.search.match( /print-pdf/gi ) ) { var link = document.createElement( &#39;link&#39; ); link.rel = &#39;stylesheet&#39;; link.type = &#39;text/css&#39;; link.href = &#39;reveal.js/css/print/pdf.css&#39;; document.getElementsByTagName( &#39;head&#39; )[0].appendChild( link ); }     MathJax.Hub.Config({ tex2jax: { inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&#34;\\(&#34;,&#34;\\)&#34;] ], displayMath: [ [&#39;$$&#39;,&#39;$$&#39;], [&#34;\\[&#34;,&#34;\\]&#34;] ], processEscapes: true, processEnvironments: true }, // Center justify equations in code and markdown cells. Elsewhere // we use CSS to left justify single line equations in code cells.</description>
     </item>
     
   </channel>
