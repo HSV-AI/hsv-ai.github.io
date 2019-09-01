@@ -12,6 +12,39 @@
     
     
     <item>
+      <title>Working with Large Datasets</title>
+      <link>https://hsv-ai.com/meetups/190821_large_data/</link>
+      <pubDate>Wed, 21 Aug 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190821_large_data/</guid>
+      <description>&lt;p&gt;We talked about approaches to work with large datasets when training deep neural networks.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190821_Large_Data.ipynb&#34; target=&#34;_parent&#34;&gt;&lt;img src=&#34;https://colab.research.google.com/assets/colab-badge.svg&#34; alt=&#34;Open In Colab&#34;/&gt;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Open Discussion</title>
+      <link>https://hsv-ai.com/meetups/190731_open_discussion/</link>
+      <pubDate>Wed, 31 Jul 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190731_open_discussion/</guid>
+      <description>&lt;p&gt;Tonight we had an open discussion on AI for any topics the group wanted to cover. The different topics are listed below.&lt;/p&gt;
+
+&lt;p&gt;There aren&amp;rsquo;t a lot of updates to post on this type of meetup. You kind of have to be there&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deploying AI Models</title>
+      <link>https://hsv-ai.com/meetups/190717_deploying_ai_models/</link>
+      <pubDate>Wed, 17 Jul 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190717_deploying_ai_models/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s a discussion that we had about how to deploy models to be used in an AI application.&lt;/p&gt;
+
+&lt;p&gt;The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Business Application of AI</title>
       <link>https://hsv-ai.com/meetups/190710_business_applications/</link>
       <pubDate>Wed, 10 Jul 2019 22:40:19 -0500</pubDate>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Huntsville AI  | Huntsville AI</title>
+    <title>Huntsville AI  | Deploying AI Models</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -27,36 +27,45 @@
     
 
     
-      <link href="https://hsv-ai.com/index.xml" rel="alternate" type="application/rss+xml" title="Huntsville AI" />
-      <link href="https://hsv-ai.com/index.xml" rel="feed" type="application/rss+xml" title="Huntsville AI" />
-    
 
-    <meta property="og:title" content="Huntsville AI" />
-<meta property="og:description" content="Advancing AI in the Huntsville area." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://hsv-ai.com/" />
+    <meta property="og:title" content="Deploying AI Models" />
+<meta property="og:description" content="Here&rsquo;s a discussion that we had about how to deploy models to be used in an AI application.
 
-<meta property="og:updated_time" content="2019-08-21T22:40:19-05:00"/>
+The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hsv-ai.com/meetups/190717_deploying_ai_models/" />
+<meta property="article:published_time" content="2019-07-17T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2019-07-17T22:40:19-05:00"/>
 
-<meta itemprop="name" content="Huntsville AI">
-<meta itemprop="description" content="Advancing AI in the Huntsville area.">
+<meta itemprop="name" content="Deploying AI Models">
+<meta itemprop="description" content="Here&rsquo;s a discussion that we had about how to deploy models to be used in an AI application.
 
+The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model.">
+
+
+<meta itemprop="datePublished" content="2019-07-17T22:40:19-05:00" />
+<meta itemprop="dateModified" content="2019-07-17T22:40:19-05:00" />
+<meta itemprop="wordCount" content="136">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Huntsville AI"/>
-<meta name="twitter:description" content="Advancing AI in the Huntsville area."/>
+<meta name="twitter:title" content="Deploying AI Models"/>
+<meta name="twitter:description" content="Here&rsquo;s a discussion that we had about how to deploy models to be used in an AI application.
+
+The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model."/>
 
   </head>
 
   <body class="ma0 avenir bg-near-white">
 
     
-
-
-
+   
   
-  
-  <header class="cover bg-top" style="background-image: url('https://hsv-ai.com/images/franck-v-740555-unsplash.jpg');">
-    <div class="bg-black-60">
+
+  <header>
+    <div class="bg-black">
       
 
 <nav class="pv3 ph3 ph4-ns" role="navigation">
@@ -140,143 +149,96 @@
   </div>
 </nav>
 
-      <div class="tc-l pv4 pv6-l ph3 ph4-ns">
-
-        
-          <img src="https://hsv-ai.com/images/logo_v9.png" style="width: 80%; padding-bottom: 20px"></img>
-        
-        
-          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center mt3">
-            Advancing AI in the Huntsville area.
-          </h2>
-        
-      </div>
     </div>
   </header>
 
 
+
     <main class="pb7" role="main">
       
-  <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
-    <p>This group is for anyone in the Huntsville area interested in Machine Learning, Artificial Intelligence, and Data Science in general. We meet at Huntsville West on Wednesdays as part of CoWorking Night.</p>
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        MEETUPS
+      </p>
+      <h1 class="f1 athelas mb1">Deploying AI Models</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2019-07-17T22:40:19-05:00">July 17, 2019</time>      
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>Here&rsquo;s a discussion that we had about how to deploy models to be used in an AI application.</p>
+
+<p>The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model.</p>
+
+<h2 id="agenda">Agenda</h2>
+
+<ul>
+<li>Welcome &amp; Introduction</li>
+<li>Project Updates</li>
+<li>Deploying AI Models</li>
+<li>Plan for next week</li>
+</ul>
+
+<h2 id="deployment-use-case">Deployment Use Case</h2>
+
+<p>Let&rsquo;s start by thinking about this use case from the <a href="https://github.com/HSV-AI/bug-analysis">Bug Analysis Project</a></p>
+
+<p>After we train some sort of model, how do we make it available for the masses?</p>
+
+<p>Think about something like this:</p>
+
+<p><img src="https://miro.medium.com/max/875/1*BmQ3UFuQXptZc2yhqAybLA.png" alt="Image" /></p>
+
+<p>How would we build this?</p>
+
+<p>What about updating the model after you deploy it?</p>
+
+<h2 id="references">References</h2>
+
+<p><a href="https://www.tensorflow.org/tfx/tutorials/serving/rest_simple">Train and serve a TensorFlow model with TensorFlow Serving</a></p>
+
+<p><a href="https://github.com/developmentseed/fastai-serving">fastai serving</a></p>
+
+<p><a href="https://towardsdatascience.com/there-are-two-very-different-ways-to-deploy-ml-models-heres-both-ce2e97c7b9b1">There are two very different ways to deploy ML models, here’s both</a></p><ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hsv-ai" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
 
   </article>
-  
-  
-  
-  
-  
-  
-  
-    
-    
-
-    <div class="pa3 pa4-ns w-100 w-70-ns center">
-      
-       
-          <h1 class="flex-none">
-            Recent Meetups
-          </h1>
-        
-
-      
-
-      <section class="w-100 mw8">
-        
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/meetups/190821_large_data/" class="color-inherit dim link">
-            Working with Large Datasets
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          <p>We talked about approaches to work with large datasets when training deep neural networks.</p>
-
-<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190821_Large_Data.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-        </div>
-          <a href="/meetups/190821_large_data/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/meetups/190731_open_discussion/" class="color-inherit dim link">
-            Open Discussion
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          <p>Tonight we had an open discussion on AI for any topics the group wanted to cover. The different topics are listed below.</p>
-
-<p>There aren&rsquo;t a lot of updates to post on this type of meetup. You kind of have to be there&hellip;</p>
-        </div>
-          <a href="/meetups/190731_open_discussion/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
-      </section>
-
-      
-      <section class="w-100">
-        <h1 class="f3">More</h1>
-        
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/meetups/190717_deploying_ai_models/" class="link black dim">
-              Deploying AI Models
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/meetups/190710_business_applications/" class="link black dim">
-              Business Application of AI
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/meetups/190626_rnn_timeseries_part3/" class="link black dim">
-              Recurrent Neural Networks Part 3
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/meetups/190612_recurrent_neural_networks/" class="link black dim">
-              Recurrent Neural Networks
-            </a>
-          </h2>
-        
-
-        
-        
-          <a href="/meetups/" class="link db f6 pa2 br3 bg-mid-gray white dim w4 tc">All Meetups</a>
-        
-        </section>
-      
-
-      </div>
-  
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">

@@ -3,14 +3,35 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hsv-ai.com/meetups/190710_business_applications/</loc>
-    <lastmod>2019-07-10T22:40:19-05:00</lastmod>
+    <loc>https://hsv-ai.com/</loc>
+    <lastmod>2019-08-21T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://hsv-ai.com/</loc>
+    <loc>https://hsv-ai.com/meetups/190821_large_data/</loc>
+    <lastmod>2019-08-21T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/190731_open_discussion/</loc>
+    <lastmod>2019-07-31T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/190717_deploying_ai_models/</loc>
+    <lastmod>2019-07-17T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/190710_business_applications/</loc>
     <lastmod>2019-07-10T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
