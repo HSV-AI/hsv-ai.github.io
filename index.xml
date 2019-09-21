@@ -6,10 +6,41 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Aug 2019 22:40:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 18 Sep 2019 22:40:19 -0500</lastBuildDate>
     
 	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Transformers and Attention Mechanisms</title>
+      <link>https://hsv-ai.com/meetups/190918_transformers_attention/</link>
+      <pubDate>Wed, 18 Sep 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190918_transformers_attention/</guid>
+      <description>&lt;p&gt;Harsh continued the series for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part two of a multi-part series.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Attention Mechanisms</title>
+      <link>https://hsv-ai.com/meetups/190911_attention_mechanisms/</link>
+      <pubDate>Wed, 11 Sep 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190911_attention_mechanisms/</guid>
+      <description>&lt;p&gt;Harsh gave his first presentation for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part one of a multi-part series.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Issues and Limitations of AI/ML</title>
+      <link>https://hsv-ai.com/meetups/190828_issues_limitations/</link>
+      <pubDate>Wed, 28 Aug 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190828_issues_limitations/</guid>
+      <description>&lt;p&gt;Ben gave a presentation about the issues and limitations of Artificial Intelligence
+and Machine Learning that you need to be aware of working with this technology. These
+items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
+
+&lt;h2 id=&#34;slides-coming-soon&#34;&gt;Slides coming soon!&lt;/h2&gt;</description>
+    </item>
     
     <item>
       <title>Working with Large Datasets</title>
@@ -17,9 +48,7 @@
       <pubDate>Wed, 21 Aug 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190821_large_data/</guid>
-      <description>&lt;p&gt;We talked about approaches to work with large datasets when training deep neural networks.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190821_Large_Data.ipynb&#34; target=&#34;_parent&#34;&gt;&lt;img src=&#34;https://colab.research.google.com/assets/colab-badge.svg&#34; alt=&#34;Open In Colab&#34;/&gt;&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;We talked about approaches to work with large datasets when training deep neural networks. Specifically, using the generator from the Keras package to provide batch-by-batch training data for an LSTM.&lt;/p&gt;</description>
     </item>
     
     <item>
