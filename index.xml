@@ -6,10 +6,19 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Sep 2019 22:40:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 25 Sep 2019 22:40:19 -0500</lastBuildDate>
     
 	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NASA Space Apps Challenge - Intro to AI</title>
+      <link>https://hsv-ai.com/meetups/190925_nasa_spaceapps/</link>
+      <pubDate>Wed, 25 Sep 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/190925_nasa_spaceapps/</guid>
+      <description>&lt;p&gt;This week we presented an Intro to AI/ML for the NASA Space Apps Challenge. This is part of multiple sessions provided by Urban Engine to help people get up to speed on current technology as they sign up for the challenge.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Transformers and Attention Mechanisms</title>
