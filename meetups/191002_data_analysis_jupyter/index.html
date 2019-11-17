@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Huntsville AI  | Attention Mechanisms</title>
+    <title>Huntsville AI  | Analyzing Data with Jupyter Notebook</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -28,27 +28,33 @@
 
     
 
-    <meta property="og:title" content="Attention Mechanisms" />
-<meta property="og:description" content="Harsh gave his first presentation for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part one of a multi-part series." />
+    <meta property="og:title" content="Analyzing Data with Jupyter Notebook" />
+<meta property="og:description" content="Welcome to Huntsville AI. This week we are continuing to work through some technical tutorials in preparation for the NASA Space Apps Challenge.
+
+If you are interested in joining Huntsville AI, please connect through one or more of our communication channels." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hsv-ai.com/meetups/190911_attention_mechanisms/" />
-<meta property="article:published_time" content="2019-09-11T22:40:19-05:00"/>
-<meta property="article:modified_time" content="2019-09-11T22:40:19-05:00"/>
+<meta property="og:url" content="https://hsv-ai.com/meetups/191002_data_analysis_jupyter/" />
+<meta property="article:published_time" content="2019-10-02T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2019-10-02T22:40:19-05:00"/>
 
-<meta itemprop="name" content="Attention Mechanisms">
-<meta itemprop="description" content="Harsh gave his first presentation for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part one of a multi-part series.">
+<meta itemprop="name" content="Analyzing Data with Jupyter Notebook">
+<meta itemprop="description" content="Welcome to Huntsville AI. This week we are continuing to work through some technical tutorials in preparation for the NASA Space Apps Challenge.
+
+If you are interested in joining Huntsville AI, please connect through one or more of our communication channels.">
 
 
-<meta itemprop="datePublished" content="2019-09-11T22:40:19-05:00" />
-<meta itemprop="dateModified" content="2019-09-11T22:40:19-05:00" />
-<meta itemprop="wordCount" content="52">
+<meta itemprop="datePublished" content="2019-10-02T22:40:19-05:00" />
+<meta itemprop="dateModified" content="2019-10-02T22:40:19-05:00" />
+<meta itemprop="wordCount" content="1140">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Attention Mechanisms"/>
-<meta name="twitter:description" content="Harsh gave his first presentation for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part one of a multi-part series."/>
+<meta name="twitter:title" content="Analyzing Data with Jupyter Notebook"/>
+<meta name="twitter:description" content="Welcome to Huntsville AI. This week we are continuing to work through some technical tutorials in preparation for the NASA Space Apps Challenge.
+
+If you are interested in joining Huntsville AI, please connect through one or more of our communication channels."/>
 
   </head>
 
@@ -164,22 +170,323 @@
           
         MEETUPS
       </p>
-      <h1 class="f1 athelas mb1">Attention Mechanisms</h1>
+      <h1 class="f1 athelas mb1">Analyzing Data with Jupyter Notebook</h1>
       
-      <time class="f6 mv4 dib tracked" datetime="2019-09-11T22:40:19-05:00">September 11, 2019</time>      
+      <time class="f6 mv4 dib tracked" datetime="2019-10-02T22:40:19-05:00">October 2, 2019</time>      
       
       
     </header>
 
-    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>Harsh gave his first presentation for the group showing the work he is doing with learning how to apply Attention Mechanisms. This is part one of a multi-part series.</p>
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>Welcome to Huntsville AI. This week we are continuing to work through some technical tutorials in preparation for the NASA Space Apps Challenge.</p>
 
-<p><object data="https://github.com/HSV-AI/presentations/raw/master/2019/191109_Attention_Mechanisms_and_Neural_Machine_Translation.pdf" type="application/pdf" width="100%" height="800px">
-    <embed src="http://yoursite.com/the.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/HSV-AI/presentations/raw/master/2019/191109_Attention_Mechanisms_and_Neural_Machine_Translation.pdf">Download PDF</a>.</p>
-    </embed>
-</object></p>
+<p>If you are interested in joining Huntsville AI, please connect through one or more of our communication channels.</p>
 
-<p>You can access the original PDF file <a href="&quot;https://github.com/HSV-AI/presentations/raw/master/2019/191109_Attention_Mechanisms_and_Neural_Machine_Translation.pdf">here</a></p><ul class="pa0">
+<p><a href="https://www.facebook.com/groups/390465874745286/">Facebook Group</a></p>
+
+<p><a href="https://www.linkedin.com/groups/12177562/">LinkedIn Group</a></p>
+
+<p><a href="https://www.meetup.com/Huntsville-AI/">Meetup Group</a></p>
+
+<p><a href="https://github.com/HSV-AI">Github Page</a></p>
+
+<p>This notebook is based in part on the Data Science Handbook by Jake VanderPlas that you can find <a href="https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/Index.ipynb">here</a></p>
+
+<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/191002_Data_Analysis_Jupyter.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+
+<h1 id="analyzing-data-with-jupyter-notebook">Analyzing Data with Jupyter Notebook</h1>
+
+<h2 id="ipython-tips">IPython Tips</h2>
+
+<p>Here are a few tips that will help you get started using a Jupyter Notebook.</p>
+
+<h3 id="tip-1-help">Tip 1 - Help</h3>
+
+<p>You can use the ? character at the end of a function or type to access the help for that function or type.</p>
+
+<pre><code># Let's create a list and see how to get the length
+v = [1.0, 2.0, 3.0]
+len?
+</code></pre>
+
+<pre><code>len(v)
+</code></pre>
+
+<pre><code># We can even get information about the list itself:
+v?
+</code></pre>
+
+<pre><code># Let's create a function with a helpful description
+def empty_function():
+  &quot;&quot;&quot;This is just an empty function. Please don't call it.&quot;&quot;&quot;
+  return 1
+</code></pre>
+
+<pre><code># Now the description is available by asking for help
+empty_function?
+</code></pre>
+
+<pre><code># Two question marks will display the source for the function
+empty_function??
+</code></pre>
+
+<h3 id="tip-2-tab-completion">Tip 2 - Tab Completion</h3>
+
+<p>Well, I was going to add a section about how to use the &lt;TAB&gt; key to autocomplete, but it appears that Colab already has that feature built into the editor.</p>
+
+<p>Just in case, try the command</p>
+
+<p>?&gt;v.&lt;TAB&gt;</p>
+
+<p>below:</p>
+
+<h3 id="tip-3-magic-commands">Tip 3 - Magic Commands</h3>
+
+<p>No really, they are called magic because they start with a &lsquo;%&rsquo;</p>
+
+<p>One of the most useful commands that can be used to split up a large notebook is the %run magic command. Using it, you
+can run external python scripts or even IPython notebooks
+inside the context of the current notebook.</p>
+
+<p>An example of this can be found in the HSV-AI Bug Analysis notebook <a href="https://colab.research.google.com/github/HSV-AI/bug-analysis/blob/master/Doc2Vec.ipynb">here</a></p>
+
+<p>Two other very useful magic commands are <strong>%time</strong> and <strong>%timeit</strong></p>
+
+<pre><code># Using an example directly from VanderPlas:
+print(&quot;Here's the output of the %timeit command:&quot;)
+%timeit L = [n ** 2 for n in range(1000)]
+
+print(&quot;\nHere's the output of the %time command:&quot;)
+%time  L = [n ** 2 for n in range(1000)]
+</code></pre>
+
+<h3 id="tip-4-suppressing-output">Tip 4 - Suppressing Output</h3>
+
+<p>Jupyter will send the result of the last command from a cell to the output. Sometimes you just want it to stay quiet though - especically if you are generating plots and other items that do not need the ouput text inserted.</p>
+
+<p>In order to suppress the output, just end the line with a &lsquo;;&rsquo;</p>
+
+<pre><code># This code has output
+p1 = 'This little piggy had roast beef'
+p1
+</code></pre>
+
+<pre><code># This code does not have output
+p2 = 'This little piggy had none'
+p2;
+</code></pre>
+
+<h3 id="tip-5-history-magic">Tip 5 - %history Magic</h3>
+
+<p>This particular piece of magic is very helpful when you may have run cells out of order and are trying to troubleshoot what happened in what order.</p>
+
+<pre><code>%history
+</code></pre>
+
+<h3 id="tip-6-shell-commands">Tip 6- Shell Commands</h3>
+
+<p>Most Linux shell commands are available from the Jupyter notebook as well. One good example is shown below and sets us up to start doing some data analysis.</p>
+
+<pre><code>!wget https://data.nasa.gov/api/views/gh4g-9sfh/rows.csv
+</code></pre>
+
+<pre><code>--2019-10-02 22:10:43--  https://data.nasa.gov/api/views/gh4g-9sfh/rows.csv
+Resolving data.nasa.gov (data.nasa.gov)... 128.102.186.77, 2001:4d0:6311:2c05:60b0:5ad8:1210:ea07
+Connecting to data.nasa.gov (data.nasa.gov)|128.102.186.77|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/csv]
+Saving to: ‘rows.csv’
+
+rows.csv                [       &lt;=&gt;          ]   4.55M  3.11MB/s    in 1.5s    
+
+2019-10-02 22:10:46 (3.11 MB/s) - ‘rows.csv’ saved [4769811]
+</code></pre>
+
+<h2 id="nasa-data">NASA Data</h2>
+
+<p>The data that we will be analyzing is described <a href="https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh">HERE</a></p>
+
+<p>This comprehensive data set from The Meteoritical Society contains information on all of the known meteorite landings. The Fusion Table is collected by Javier de la Torre and we&rsquo;ve also provided an XLS file that consists of 34,513 meteorites.</p>
+
+<h2 id="pandas-dataframes">Pandas Dataframes</h2>
+
+<p><a href="https://pandas.pydata.org/">https://pandas.pydata.org/</a></p>
+
+<p>pandas is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.</p>
+
+<p>Pandas datafames are a great way to work with tabular data.</p>
+
+<p>There are several ways to load a dataframe from common file formats like json and csv.</p>
+
+<pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('rows.csv')
+
+# Now let's look at the columns available in the dataframe
+print(df.columns)
+print(df.dtypes)
+</code></pre>
+
+<pre><code>Index(['name', 'id', 'nametype', 'recclass', 'mass (g)', 'fall', 'year',
+       'reclat', 'reclong', 'GeoLocation'],
+      dtype='object')
+name            object
+id               int64
+nametype        object
+recclass        object
+mass (g)       float64
+fall            object
+year            object
+reclat         float64
+reclong        float64
+GeoLocation     object
+dtype: object
+</code></pre>
+
+<pre><code># We can also get an idea of the data by using the head function
+df.head
+</code></pre>
+
+<h2 id="dataframe-copy-vs-view">Dataframe copy vs view</h2>
+
+<p>One thing to keep in mind when working with Pandas is the behavior differences with working with a copy of a dataframe vs a view/reference of a dataframe.</p>
+
+<p>Working with a copy keeps your changes separate, but causes more memory overhead than working with a view.</p>
+
+<pre><code># We can copy columns of the dataframe into a new dataframe
+df_copy = df[['name', 'id']]
+
+df_copy.head
+</code></pre>
+
+<pre><code># We can see that these two items point to different memory addresses
+
+print(id(df))
+print(id(df_copy))
+</code></pre>
+
+<pre><code># Changes to the copy do not affect the original
+df_copy['id'] = 0
+
+print(df_copy.head)
+
+print(df.head)
+</code></pre>
+
+<pre><code># We can also create a view of the dataframe
+df_view = df.iloc[:,:]
+
+print(id(df_view))
+print(id(df))
+</code></pre>
+
+<pre><code># Changes to the view also update the dataframe
+df_view.iloc[:, 1] = 0
+
+print(df_view.head)
+
+print(df.head)
+</code></pre>
+
+<h2 id="updating-values-in-a-dataframe">Updating values in a Dataframe</h2>
+
+<pre><code>df.year
+</code></pre>
+
+<pre><code>
+def updateDate(x):
+  if isinstance(x, float):
+    return int(0)
+  else:
+    return int(x[6:10])
+  
+df.year = df.year.apply(lambda x: updateDate(x))
+
+</code></pre>
+
+<pre><code>df.year
+</code></pre>
+
+<pre><code>df = df[df.year &gt; 0]
+</code></pre>
+
+<h2 id="matplotib">Matplotib</h2>
+
+<p><a href="https://matplotlib.org/">https://matplotlib.org/</a></p>
+
+<p>Matplotlib is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. Matplotlib can be used in Python scripts, the Python and IPython shells, the Jupyter notebook, web application servers, and four graphical user interface toolkits.</p>
+
+<p>There are also some helper methods from Pandas that will automatically create a plot in matplotlib for you.</p>
+
+<pre><code># First, let's put together a plot of the number of meteorite landings per year
+
+grouped = df.loc[:,['id','year']].groupby('year').count()
+grouped.columns = ['count']
+grouped.sort_values(by='year').plot(kind='bar', figsize=(15,10))
+plt.show()
+</code></pre>
+
+<pre><code># Since we have the mass of each meteorite, we might as well figure
+# out the mean per year and plot that as well.
+
+grouped = df.loc[:,['mass (g)','year']].groupby('year').mean()
+grouped.columns = ['avg']
+grouped.sort_values(by='year').plot(kind='bar', figsize=(15,10))
+plt.show()
+</code></pre>
+
+<h3 id="installing-basemap-on-colab">Installing Basemap on Colab</h3>
+
+<pre><code>!apt-get install libgeos-3.5.0
+!apt-get install libgeos-dev
+!pip install https://github.com/matplotlib/basemap/archive/master.zip
+</code></pre>
+
+<pre><code>!pip install pyproj==1.9.6
+</code></pre>
+
+<h3 id="geographic-map">Geographic Map</h3>
+
+<pre><code>#@title Year of Impact
+#@markdown Forms support many types of fields.
+year = 2007 #@param {type:&quot;slider&quot;, min:2000, max:2010, step:1}
+#@markdown ---
+
+</code></pre>
+
+<pre><code>from mpl_toolkits.basemap import Basemap
+
+plt.figure(figsize=(15,10))
+
+map = Basemap(projection='mill',lat_0=0,lon_0=-100,resolution='l')
+# draw coastlines, country boundaries, fill continents.
+map.drawcoastlines(linewidth=0.25)
+map.drawcountries(linewidth=0.25)
+map.fillcontinents(color='coral',lake_color='aqua')
+# draw the edge of the map projection region (the projection limb)
+map.drawmapboundary(fill_color='aqua')
+# draw lat/lon grid lines every 30 degrees.
+map.drawmeridians(np.arange(0,360,30))
+map.drawparallels(np.arange(-90,90,30))
+
+df_year = df[df.year == year]
+x,y = map(df_year.reclong.values, df_year.reclat.values)
+map.plot(x, y, 'bo', markersize=5)
+
+plt.title('Meteorite Impacts in '+str(year))
+plt.show()
+</code></pre>
+
+<p><img src="191002_Data_Analysis_Jupyter_43_0.png" alt="png" /></p>
+
+<h2 id="wrap-up">Wrap-up</h2>
+
+<p>So, that&rsquo;s a quick introduction to doing Data Analysis with Jupyter Notebook.</p>
+
+<p>If you have any questions, please drop me a line at:</p>
+
+<p><a href="https://hsv-ai.com/contact/">https://hsv-ai.com/contact/</a></p><ul class="pa0">
   
 </ul>
 <div class="mt6">
