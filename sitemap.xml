@@ -3,14 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hsv-ai.com/meetups/191002_data_analysis_jupyter/</loc>
-    <lastmod>2019-10-02T22:40:19-05:00</lastmod>
+    <loc>https://hsv-ai.com/</loc>
+    <lastmod>2019-11-20T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://hsv-ai.com/</loc>
+    <loc>https://hsv-ai.com/meetups/191120_trail_camera/</loc>
+    <lastmod>2019-11-20T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/191002_data_analysis_jupyter/</loc>
     <lastmod>2019-10-02T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>Trail Camera Image Classifier</title>
+      <link>https://hsv-ai.com/meetups/191120_trail_camera/</link>
+      <pubDate>Wed, 20 Nov 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/191120_trail_camera/</guid>
+      <description>&lt;p&gt;This notebook originated directly from the Fast.ai Deep Learning course v3 &lt;a href=&#34;https://github.com/fastai/course-v3/raw/master/nbs/dl1/lesson1-pets.ipynb&#34;&gt;Lesson 1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It has been modified to see if it is possible to use the same approach to classify images from trail cameras.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Analyzing Data with Jupyter Notebook</title>
       <link>https://hsv-ai.com/meetups/191002_data_analysis_jupyter/</link>
       <pubDate>Wed, 02 Oct 2019 22:40:19 -0500</pubDate>
