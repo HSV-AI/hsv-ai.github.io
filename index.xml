@@ -6,10 +6,21 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Nov 2019 22:40:19 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 22:40:19 -0500</lastBuildDate>
     
 	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NeurIPS 2019</title>
+      <link>https://hsv-ai.com/meetups/191211_neurips/</link>
+      <pubDate>Wed, 11 Dec 2019 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/191211_neurips/</guid>
+      <description>&lt;p&gt;Huntsville AI was selected to host a remote NeurIPS meetup to coincide with the global NeurIPS conference in Vancouer Canada. The remote meetup consisted of a Wednesday night 3 hour session to close out Huntsville AI for 2019 and another 2 hour session held at Adtran on Thursday.&lt;/p&gt;
+
+&lt;p&gt;Both sessions were well attended, and a lot of good conversations and connections were made!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Trail Camera Image Classifier</title>
