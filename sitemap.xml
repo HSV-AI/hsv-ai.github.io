@@ -3,14 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hsv-ai.com/meetups/200108_kickoff/</loc>
-    <lastmod>2020-01-08T22:40:19-05:00</lastmod>
+    <loc>https://hsv-ai.com/meetups/200129_fastai_lesson1/</loc>
+    <lastmod>2020-01-29T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://hsv-ai.com/</loc>
+    <lastmod>2020-01-29T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/200122_faceoff_aws/</loc>
+    <lastmod>2020-01-22T22:40:19-05:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://hsv-ai.com/meetups/200108_kickoff/</loc>
     <lastmod>2020-01-08T22:40:19-05:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
