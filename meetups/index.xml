@@ -12,6 +12,58 @@
     
     
     <item>
+      <title>Interpretability in Machine Learning</title>
+      <link>https://hsv-ai.com/meetups/200415_interpretability/</link>
+      <pubDate>Wed, 15 Apr 2020 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/200415_interpretability/</guid>
+      <description>Ben lead the talk covering chapter 2 of the Machine Learning Intpretability book. The discussion centered on why interpretability in machine learning matters and the different tradeoffs encountered when making a model more interpretable.
+The slides from the talk are available here.</description>
+    </item>
+    
+    <item>
+      <title>Fast.AI Lesson 3</title>
+      <link>https://hsv-ai.com/meetups/200325_lesson3_planet/</link>
+      <pubDate>Wed, 25 Mar 2020 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/200325_lesson3_planet/</guid>
+      <description>&lt;p&gt;For this session, we covered the results of the Fast.AI Lesson 3 and learned about multi-label classification with a CNN. The full notebook is included in this post.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Group Project (Parts 1-3)</title>
+      <link>https://hsv-ai.com/meetups/200304_group_project/</link>
+      <pubDate>Wed, 04 Mar 2020 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/200304_group_project/</guid>
+      <description>&lt;p&gt;For 3 weeks, we got together and discussed a group project. The intent is to take the output of our Fast.ai lesson 1 model and make it available through a variety of web platforms. Hopefully we will learn how to deploy an image classification model.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fast.AI Lesson 2</title>
+      <link>https://hsv-ai.com/meetups/200226_fast_ai_lesson_2/</link>
+      <pubDate>Wed, 26 Feb 2020 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/200226_fast_ai_lesson_2/</guid>
+      <description>&lt;h2 id=&#34;agenda&#34;&gt;Agenda:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Welcome / Intro&lt;/li&gt;
+&lt;li&gt;Fast.AI Lesson 2&lt;/li&gt;
+&lt;li&gt;Next Sessions&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Huntsville AI Goes to College</title>
+      <link>https://hsv-ai.com/meetups/200211_uah_acm/</link>
+      <pubDate>Tue, 11 Feb 2020 22:40:19 -0500</pubDate>
+      
+      <guid>https://hsv-ai.com/meetups/200211_uah_acm/</guid>
+      <description>&lt;p&gt;The Huntsville AI group gave a presentation on AI/ML at the University of Alambama Huntsville ACM chapter meetup. Here are the notes from the meeting:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Fast.AI Lesson 1</title>
       <link>https://hsv-ai.com/meetups/200129_fastai_lesson1/</link>
       <pubDate>Wed, 29 Jan 2020 22:40:19 -0500</pubDate>
