@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.78.1" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,23 +30,16 @@
 
     <meta property="og:title" content="Word &amp; Document Vectors" />
 <meta property="og:description" content="Introduction
-
 From Wikipedia:
-
 Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/190508_word_document_vectors/" />
-<meta property="article:published_time" content="2019-05-08T22:40:19-05:00"/>
-<meta property="article:modified_time" content="2019-05-08T22:40:19-05:00"/>
-
+<meta property="article:published_time" content="2019-05-08T22:40:19-05:00" />
+<meta property="article:modified_time" content="2019-05-08T22:40:19-05:00" />
 <meta itemprop="name" content="Word &amp; Document Vectors">
 <meta itemprop="description" content="Introduction
-
 From Wikipedia:
-
 Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension.">
-
-
 <meta itemprop="datePublished" content="2019-05-08T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-05-08T22:40:19-05:00" />
 <meta itemprop="wordCount" content="1075">
@@ -57,9 +50,7 @@ Word embedding is the collective name for a set of language modeling and feature
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Word &amp; Document Vectors"/>
 <meta name="twitter:description" content="Introduction
-
 From Wikipedia:
-
 Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension."/>
 
   </head>
@@ -104,7 +95,7 @@ Word embedding is the collective name for a set of language modeling and feature
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/neurips-2019/" title="NeurIPS page">
+            <a class="hover-white no-underline white-90" href="/neurips/" title="NeurIPS page">
               NeurIPS
             </a>
           </li>
@@ -184,103 +175,67 @@ Word embedding is the collective name for a set of language modeling and feature
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="introduction">Introduction</h1>
-
 <p>From <a href="https://en.wikipedia.org/wiki/Word_embedding">Wikipedia</a>:</p>
-
 <p>Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension.</p>
-
 <p>The main function is to create a vector of numbers that represent a word based on the context in which that word is used. These vectors can then be used in a relative fashion to determine the relatedness of words.</p>
-
 <h1 id="notebook-links">Notebook Links</h1>
-
 <p>View the IPython notebook for this session on Github <a href="https://github.com/HSV-AI/presentations/blob/master/2019/190508_Word_Document_Vectors.ipynb">here</a></p>
-
 <p>Or launch the notebook in Google Colab or MyBinder:</p>
-
-<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190508_Word_Document_Vectors.ipynb"><img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab" /></a></p>
-
-<p><a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190508_Word_Document_Vectors.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
-
+<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190508_Word_Document_Vectors.ipynb"><img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab"></a></p>
+<p><a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190508_Word_Document_Vectors.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
 <h1 id="papers">Papers</h1>
-
 <p>Here is a list of the seminal papers that led to the capability available today for word and document vectors:</p>
-
 <ul>
-<li><p><strong>2013</strong> - <em>Distributed Representations of Words and Phrases and their Compositionality</em>
-Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, Jeffrey Dean -  <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf</a></p></li>
-
-<li><p><strong>2013</strong> - <em>Efficient Estimation of Word Representations in Vector Space</em> Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean - <a href="https://arxiv.org/pdf/1301.3781.pdf">https://arxiv.org/pdf/1301.3781.pdf</a></p></li>
-
-<li><p><strong>2014</strong> - <em>Distributed Representations of Sentences and Documents</em>
-Quoc V. Le, Tomas Mikolov - <a href="https://arxiv.org/pdf/1405.4053">https://arxiv.org/pdf/1405.4053</a></p></li>
-
-<li><p><strong>2015</strong> - <em>From Word Embeddings To Document Distances</em> Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger - <a href="http://proceedings.mlr.press/v37/kusnerb15.pdf">http://proceedings.mlr.press/v37/kusnerb15.pdf</a></p></li>
+<li>
+<p><strong>2013</strong> - <em>Distributed Representations of Words and Phrases and their Compositionality</em>
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, Jeffrey Dean -  <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf</a></p>
+</li>
+<li>
+<p><strong>2013</strong> - <em>Efficient Estimation of Word Representations in Vector Space</em> Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean - <a href="https://arxiv.org/pdf/1301.3781.pdf">https://arxiv.org/pdf/1301.3781.pdf</a></p>
+</li>
+<li>
+<p><strong>2014</strong> - <em>Distributed Representations of Sentences and Documents</em>
+Quoc V. Le, Tomas Mikolov - <a href="https://arxiv.org/pdf/1405.4053">https://arxiv.org/pdf/1405.4053</a></p>
+</li>
+<li>
+<p><strong>2015</strong> - <em>From Word Embeddings To Document Distances</em> Matt J. Kusner, Yu Sun, Nicholas I. Kolkin, Kilian Q. Weinberger - <a href="http://proceedings.mlr.press/v37/kusnerb15.pdf">http://proceedings.mlr.press/v37/kusnerb15.pdf</a></p>
+</li>
 </ul>
-
 <h2 id="word-vectors">Word Vectors</h2>
-
 <p>In order to compute the word vectors, we create a neural network and train it to predict things based on either a Skip-gram or Continuous Bag of Words approach. The weights of the hidden layer then become the values used in the word vector.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/1000/0*DY41kNV4X5j_PfXA.png" alt="alt text" /></p>
-
+<p><img src="https://cdn-images-1.medium.com/max/1000/0*DY41kNV4X5j_PfXA.png" alt="alt text"></p>
 <p>Image from <a href="https://arxiv.org/pdf/1301.3781.pdf">Efficient Estimation of Word Representations in
 Vector Space</a></p>
-
-<p><img src="https://multithreaded.stitchfix.com/assets/posts/2016-05-27-lda2vec/anim00.gif" alt="Word2Vec" /></p>
-
+<p><img src="https://multithreaded.stitchfix.com/assets/posts/2016-05-27-lda2vec/anim00.gif" alt="Word2Vec"></p>
 <p>Image from <a href="https://multithreaded.stitchfix.com/blog/2016/05/27/lda2vec">StitchFix Blog</a></p>
-
 <h2 id="document-vectors">Document Vectors</h2>
-
 <p>Document Vectors are created by adding an additional document (or paragraph) ID as an input.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/0*x-gtU4UlO8FAsRvL." alt="alt text" /></p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/0*NtIsrbd4VQzUKVKr." alt="alt text" /></p>
-
+<p><img src="https://cdn-images-1.medium.com/max/800/0*x-gtU4UlO8FAsRvL." alt="alt text"></p>
+<p><img src="https://cdn-images-1.medium.com/max/800/0*NtIsrbd4VQzUKVKr." alt="alt text"></p>
 <p>Images from <a href="https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e">A gentle introduction to Doc2Vec
 </a></p>
-
-<p><img src="https://www.tensorflow.org/images/linear-relationships.png" alt="Word Vector Image" /></p>
-
+<p><img src="https://www.tensorflow.org/images/linear-relationships.png" alt="Word Vector Image"></p>
 <p>Image from <a href="https://www.tensorflow.org/tutorials/representation/word2vec">Vector Representations of Words</a></p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/0*XMW5mf81LSHodnTi.png" alt="Cosine Similarity" /></p>
-
+<p><img src="https://cdn-images-1.medium.com/max/800/0*XMW5mf81LSHodnTi.png" alt="Cosine Similarity"></p>
 <p>Image from <a href="https://towardsdatascience.com/introduction-to-word-embedding-and-word2vec-652d0c2060fa">Introduction to Word Embedding and Word2Vec</a></p>
-
 <h2 id="word-movers-distance">Word Movers Distance</h2>
-
 <p>The distance between words of different sentences can be used to judge the similarity of the sentences or documents.</p>
-
-<p><img src="https://cdn-images-1.medium.com/max/800/1*nTWAm46JMYWXpHVsS9MA5w.png" alt="Word Movers Distance" /></p>
-
+<p><img src="https://cdn-images-1.medium.com/max/800/1*nTWAm46JMYWXpHVsS9MA5w.png" alt="Word Movers Distance"></p>
 <p>Image from <a href="https://towardsdatascience.com/word-distance-between-word-embeddings-cc3e9cf1d632">From Word Embeddings To Document Distances</a></p>
-
 <h1 id="references">References</h1>
-
 <p><a href="https://github.com/stanfordnlp/GloVe">https://github.com/stanfordnlp/GloVe</a></p>
-
 <p><a href="https://github.com/fastai/word-embeddings-workshop">https://github.com/fastai/word-embeddings-workshop</a></p>
-
 <p><a href="https://towardsdatascience.com/lda2vec-word-embeddings-in-topic-models-4ee3fc4b2843">https://towardsdatascience.com/lda2vec-word-embeddings-in-topic-models-4ee3fc4b2843</a></p>
-
 <p><a href="https://multithreaded.stitchfix.com/blog/2016/05/27/lda2vec">https://multithreaded.stitchfix.com/blog/2016/05/27/lda2vec</a></p>
-
 <p><a href="https://stackoverflow.com/questions/38287772/cbow-v-s-skip-gram-why-invert-context-and-target-words">https://stackoverflow.com/questions/38287772/cbow-v-s-skip-gram-why-invert-context-and-target-words</a></p>
-
 <h1 id="application">Application</h1>
-
 <p>Below, we will walk through some examples from the Fast.ai Word Embeddings Workshop.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Get the data and untar it</span>
 
-<pre><code class="language-python">#Get the data and untar it
+<span style="color:#960050;background-color:#1e0010">!</span>wget http:<span style="color:#f92672">//</span>files<span style="color:#f92672">.</span>fast<span style="color:#f92672">.</span>ai<span style="color:#f92672">/</span>models<span style="color:#f92672">/</span>glove_50_glove_100<span style="color:#f92672">.</span>tgz 
 
-!wget http://files.fast.ai/models/glove_50_glove_100.tgz 
-
-!tar xvzf glove_50_glove_100.tgz
-</code></pre>
-
-<pre><code>--2019-05-08 18:34:26--  http://files.fast.ai/models/glove_50_glove_100.tgz
+<span style="color:#960050;background-color:#1e0010">!</span>tar xvzf glove_50_glove_100<span style="color:#f92672">.</span>tgz
+</code></pre></div><pre><code>--2019-05-08 18:34:26--  http://files.fast.ai/models/glove_50_glove_100.tgz
 Resolving files.fast.ai (files.fast.ai)... 67.205.15.147
 Connecting to files.fast.ai (files.fast.ai)|67.205.15.147|:80... connected.
 HTTP request sent, awaiting response... 200 OK
@@ -296,62 +251,40 @@ glove_vectors_50d.npy
 words.txt
 wordsidx.txt
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#import packages needed</span>
 
-<pre><code class="language-python">#import packages needed
+<span style="color:#f92672">import</span> pickle
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">import</span> json
 
-import pickle
-import numpy as np
-import re
-import json
+np<span style="color:#f92672">.</span>set_printoptions(precision<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, suppress<span style="color:#f92672">=</span>True)
+</code></pre></div><p>We will load the glove 50 &amp; 100 vectors as numpy arrays and load the words and word indices as arrays.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vecs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#34;glove_vectors_100d.npy&#34;</span>)
+vecs50 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#34;glove_vectors_50d.npy&#34;</span>)
 
-np.set_printoptions(precision=4, suppress=True)
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;words.txt&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    content <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>readlines()
+words <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>strip() <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> content]
+
+wordidx <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(open(<span style="color:#e6db74">&#39;wordsidx.txt&#39;</span>))
+
+</code></pre></div><p>Now let&rsquo;s see what this data looks like&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">len(words)
+</code></pre></div><pre><code>400000
 </code></pre>
-
-<p>We will load the glove 50 &amp; 100 vectors as numpy arrays and load the words and word indices as arrays.</p>
-
-<pre><code class="language-python">vecs = np.load(&quot;glove_vectors_100d.npy&quot;)
-vecs50 = np.load(&quot;glove_vectors_50d.npy&quot;)
-
-with open('words.txt') as f:
-    content = f.readlines()
-words = [x.strip() for x in content]
-
-wordidx = json.load(open('wordsidx.txt'))
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">words[:<span style="color:#ae81ff">10</span>]
+</code></pre></div><pre><code>['the', ',', '.', 'of', 'to', 'and', 'in', 'a', '&quot;', &quot;'s&quot;]
 </code></pre>
-
-<p>Now let&rsquo;s see what this data looks like&hellip;</p>
-
-<pre><code class="language-python">len(words)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">wordidx[<span style="color:#e6db74">&#39;architect&#39;</span>]
+</code></pre></div><pre><code>4493
 </code></pre>
-
-<pre><code>400000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">words[<span style="color:#ae81ff">4493</span>]
+</code></pre></div><pre><code>'architect'
 </code></pre>
-
-<pre><code class="language-python">words[:10]
-</code></pre>
-
-<pre><code>['the', ',', '.', 'of', 'to', 'and', 'in', 'a', '&quot;', &quot;'s&quot;]
-</code></pre>
-
-<pre><code class="language-python">wordidx['architect']
-</code></pre>
-
-<pre><code>4493
-</code></pre>
-
-<pre><code class="language-python">words[4493]
-</code></pre>
-
-<pre><code>'architect'
-</code></pre>
-
 <p>What about that word vector?</p>
-
-<pre><code class="language-python">vecs[4493]
-</code></pre>
-
-<pre><code>array([-0.2675, -0.1654, -0.6296,  0.448 ,  0.452 , -0.6424,  0.042 ,
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vecs[<span style="color:#ae81ff">4493</span>]
+</code></pre></div><pre><code>array([-0.2675, -0.1654, -0.6296,  0.448 ,  0.452 , -0.6424,  0.042 ,
        -1.0137, -0.6596,  0.9818,  0.2998, -0.7044,  0.0481, -0.3909,
        -0.2515, -0.0907,  0.5111,  0.2321, -1.3972,  0.0896, -1.0962,
         0.1159,  0.0979, -0.7837,  0.1524, -1.3648, -0.5557, -1.0818,
@@ -367,60 +300,36 @@ wordidx = json.load(open('wordsidx.txt'))
        -0.8933,  0.5672,  0.607 ,  0.0374,  0.0441, -0.2491, -1.014 ,
         0.0384, -0.5015], dtype=float32)
 </code></pre>
-
-<pre><code class="language-python">from scipy.spatial.distance import cosine as dist
-</code></pre>
-
-<p>Smaller numbers mean two words are closer together, larger numbers mean they are further apart.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> scipy.spatial.distance <span style="color:#f92672">import</span> cosine <span style="color:#66d9ef">as</span> dist
+</code></pre></div><p>Smaller numbers mean two words are closer together, larger numbers mean they are further apart.</p>
 <p>The distance between similar words is low:</p>
-
-<pre><code class="language-python">dist(vecs[wordidx[&quot;puppy&quot;]], vecs[wordidx[&quot;dog&quot;]])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dist(vecs[wordidx[<span style="color:#e6db74">&#34;puppy&#34;</span>]], vecs[wordidx[<span style="color:#e6db74">&#34;dog&#34;</span>]])
+</code></pre></div><pre><code>0.27636247873306274
 </code></pre>
-
-<pre><code>0.27636247873306274
-</code></pre>
-
 <p>And the distance between unrelated words is high:</p>
-
-<pre><code class="language-python">dist(vecs[wordidx[&quot;avalanche&quot;]], vecs[wordidx[&quot;antique&quot;]])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dist(vecs[wordidx[<span style="color:#e6db74">&#34;avalanche&#34;</span>]], vecs[wordidx[<span style="color:#e6db74">&#34;antique&#34;</span>]])
+</code></pre></div><pre><code>0.9621107056736946
 </code></pre>
-
-<pre><code>0.9621107056736946
-</code></pre>
-
 <h1 id="data-bias">Data Bias</h1>
-
 <p>The word vectors will pick up any bias that exists in the data used to build the vectors:</p>
-
-<pre><code class="language-python">dist(vecs[wordidx[&quot;man&quot;]], vecs[wordidx[&quot;genius&quot;]])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dist(vecs[wordidx[<span style="color:#e6db74">&#34;man&#34;</span>]], vecs[wordidx[<span style="color:#e6db74">&#34;genius&#34;</span>]])
+</code></pre></div><pre><code>0.5098515152931213
 </code></pre>
-
-<pre><code>0.5098515152931213
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dist(vecs[wordidx[<span style="color:#e6db74">&#34;woman&#34;</span>]], vecs[wordidx[<span style="color:#e6db74">&#34;genius&#34;</span>]])
+</code></pre></div><pre><code>0.689783364534378
 </code></pre>
-
-<pre><code class="language-python">dist(vecs[wordidx[&quot;woman&quot;]], vecs[wordidx[&quot;genius&quot;]])
-</code></pre>
-
-<pre><code>0.689783364534378
-</code></pre>
-
 <h1 id="nearest-neighbors">Nearest Neighbors</h1>
-
 <p>We can also see what words are close to a given word.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.neighbors <span style="color:#f92672">import</span> NearestNeighbors
 
-<pre><code class="language-python">from sklearn.neighbors import NearestNeighbors
 
+neigh <span style="color:#f92672">=</span> NearestNeighbors(n_neighbors<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, radius<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, metric<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cosine&#39;</span>, algorithm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;brute&#39;</span>)
+neigh<span style="color:#f92672">.</span>fit(vecs)
 
-neigh = NearestNeighbors(n_neighbors=10, radius=0.5, metric='cosine', algorithm='brute')
-neigh.fit(vecs)
+distances, indices <span style="color:#f92672">=</span> neigh<span style="color:#f92672">.</span>kneighbors([vecs[wordidx[<span style="color:#e6db74">&#34;antique&#34;</span>]]])
 
-distances, indices = neigh.kneighbors([vecs[wordidx[&quot;antique&quot;]]])
-
-[(words[int(ind)], dist) for ind, dist in zip(list(indices[0]), list(distances[0]))]
-</code></pre>
-
-<pre><code>[('antique', 1.1920929e-07),
+[(words[int(ind)], dist) <span style="color:#66d9ef">for</span> ind, dist <span style="color:#f92672">in</span> zip(list(indices[<span style="color:#ae81ff">0</span>]), list(distances[<span style="color:#ae81ff">0</span>]))]
+</code></pre></div><pre><code>[('antique', 1.1920929e-07),
  ('antiques', 0.18471009),
  ('furniture', 0.2613591),
  ('jewelry', 0.26212162),
@@ -431,16 +340,11 @@ distances, indices = neigh.kneighbors([vecs[wordidx[&quot;antique&quot;]]])
  ('decorative', 0.35905504),
  ('pottery', 0.3720798)]
 </code></pre>
-
 <h1 id="math-with-word-vectors">Math with Word Vectors</h1>
-
 <p>You can do some pretty interesting things with these word vectors. We can combine multiple terms and use them as a single input.</p>
-
-<pre><code class="language-python">new_vec = vecs[wordidx[&quot;artificial&quot;]] + vecs[wordidx[&quot;intelligence&quot;]]
-print(new_vec)
-</code></pre>
-
-<pre><code>[ 0.0345 -0.1185  0.746   0.3256  0.3256 -1.4699 -0.8715 -0.9421  0.0679
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">new_vec <span style="color:#f92672">=</span> vecs[wordidx[<span style="color:#e6db74">&#34;artificial&#34;</span>]] <span style="color:#f92672">+</span> vecs[wordidx[<span style="color:#e6db74">&#34;intelligence&#34;</span>]]
+<span style="color:#66d9ef">print</span>(new_vec)
+</code></pre></div><pre><code>[ 0.0345 -0.1185  0.746   0.3256  0.3256 -1.4699 -0.8715 -0.9421  0.0679
   0.922   0.6811 -0.3729  1.0969  0.7196  1.3515  1.2493  0.6621  0.1901
  -0.2707 -0.0444 -1.232   0.1744  0.7577 -0.9177 -1.2184  0.6959 -0.1966
  -0.415  -0.3358  0.5452  0.589  -0.0299 -0.9744 -0.8937  0.2283 -0.2092
@@ -453,13 +357,10 @@ print(new_vec)
   0.3698 -0.001  -0.628   0.2869  0.3119 -0.1093 -0.6341 -1.7804  0.5857
   0.3702]
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">distances, indices <span style="color:#f92672">=</span> neigh<span style="color:#f92672">.</span>kneighbors([new_vec])
 
-<pre><code class="language-python">distances, indices = neigh.kneighbors([new_vec])
-
-[(words[int(ind)], dist) for ind, dist in zip(list(indices[0]), list(distances[0]))]
-</code></pre>
-
-<pre><code>[('intelligence', 0.1883161),
+[(words[int(ind)], dist) <span style="color:#66d9ef">for</span> ind, dist <span style="color:#f92672">in</span> zip(list(indices[<span style="color:#ae81ff">0</span>]), list(distances[<span style="color:#ae81ff">0</span>]))]
+</code></pre></div><pre><code>[('intelligence', 0.1883161),
  ('artificial', 0.25617576),
  ('information', 0.3256532),
  ('knowledge', 0.336419),
@@ -470,14 +371,10 @@ print(new_vec)
  ('scientific', 0.38513905),
  ('communication', 0.3869152)]
 </code></pre>
-
 <p>You can even move from one place to another in the vector space. Beware of bias taking you in unintended directions though. Here&rsquo;s the general sense of the word &ldquo;programmer&rdquo;</p>
-
-<pre><code class="language-python">distances, indices = neigh.kneighbors([vecs[wordidx[&quot;programmer&quot;]]])
-[(words[int(ind)], dist) for ind, dist in zip(list(indices[0]), list(distances[0]))]
-</code></pre>
-
-<pre><code>[('programmer', 0.0),
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">distances, indices <span style="color:#f92672">=</span> neigh<span style="color:#f92672">.</span>kneighbors([vecs[wordidx[<span style="color:#e6db74">&#34;programmer&#34;</span>]]])
+[(words[int(ind)], dist) <span style="color:#66d9ef">for</span> ind, dist <span style="color:#f92672">in</span> zip(list(indices[<span style="color:#ae81ff">0</span>]), list(distances[<span style="color:#ae81ff">0</span>]))]
+</code></pre></div><pre><code>[('programmer', 0.0),
  ('programmers', 0.32259798),
  ('animator', 0.36951017),
  ('software', 0.38250887),
@@ -488,15 +385,11 @@ print(new_vec)
  ('translator', 0.43721014),
  ('linguist', 0.44948018)]
 </code></pre>
-
 <p>Here&rsquo;s the masculine sense of the word &ldquo;programmer&rdquo;</p>
-
-<pre><code class="language-python">new_vec = vecs[wordidx[&quot;programmer&quot;]] + vecs[wordidx[&quot;he&quot;]] - vecs[wordidx[&quot;she&quot;]]
-distances, indices = neigh.kneighbors([new_vec])
-[(words[int(ind)], dist) for ind, dist in zip(list(indices[0]), list(distances[0]))]
-</code></pre>
-
-<pre><code>[('programmer', 0.17419636),
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">new_vec <span style="color:#f92672">=</span> vecs[wordidx[<span style="color:#e6db74">&#34;programmer&#34;</span>]] <span style="color:#f92672">+</span> vecs[wordidx[<span style="color:#e6db74">&#34;he&#34;</span>]] <span style="color:#f92672">-</span> vecs[wordidx[<span style="color:#e6db74">&#34;she&#34;</span>]]
+distances, indices <span style="color:#f92672">=</span> neigh<span style="color:#f92672">.</span>kneighbors([new_vec])
+[(words[int(ind)], dist) <span style="color:#66d9ef">for</span> ind, dist <span style="color:#f92672">in</span> zip(list(indices[<span style="color:#ae81ff">0</span>]), list(distances[<span style="color:#ae81ff">0</span>]))]
+</code></pre></div><pre><code>[('programmer', 0.17419636),
  ('programmers', 0.4133587),
  ('engineer', 0.46376407),
  ('compiler', 0.46731704),
@@ -507,15 +400,11 @@ distances, indices = neigh.kneighbors([new_vec])
  ('setup', 0.51882535),
  ('developer', 0.51953185)]
 </code></pre>
-
 <p>Here&rsquo;s the feminine sense of the word &ldquo;programmer&rdquo;</p>
-
-<pre><code class="language-python">new_vec = vecs[wordidx[&quot;programmer&quot;]] - vecs[wordidx[&quot;he&quot;]] + vecs[wordidx[&quot;she&quot;]]
-distances, indices = neigh.kneighbors([new_vec])
-[(words[int(ind)], dist) for ind, dist in zip(list(indices[0]), list(distances[0]))]
-</code></pre>
-
-<pre><code>[('programmer', 0.19503415),
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">new_vec <span style="color:#f92672">=</span> vecs[wordidx[<span style="color:#e6db74">&#34;programmer&#34;</span>]] <span style="color:#f92672">-</span> vecs[wordidx[<span style="color:#e6db74">&#34;he&#34;</span>]] <span style="color:#f92672">+</span> vecs[wordidx[<span style="color:#e6db74">&#34;she&#34;</span>]]
+distances, indices <span style="color:#f92672">=</span> neigh<span style="color:#f92672">.</span>kneighbors([new_vec])
+[(words[int(ind)], dist) <span style="color:#66d9ef">for</span> ind, dist <span style="color:#f92672">in</span> zip(list(indices[<span style="color:#ae81ff">0</span>]), list(distances[<span style="color:#ae81ff">0</span>]))]
+</code></pre></div><pre><code>[('programmer', 0.19503415),
  ('stylist', 0.42715955),
  ('animator', 0.4820645),
  ('programmers', 0.48337305),

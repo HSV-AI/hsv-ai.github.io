@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Huntsville AI  | Doc2Vec Update</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.78.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.d98f2eb6bcd1eaedb7edf166bd16af26.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Doc2Vec Update" />
+<meta property="og:description" content="This notebook is a demonstration of using Doc2Vec as an approach to compare the text of bug reports from an open source Bugzilla project. The Doc2Vec model from gensim is based on the word2vec paper but includes an additional input that identifies the document in the input." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hsv-ai.com/meetups/200819_doc2vec/" />
+<meta property="article:published_time" content="2020-07-29T22:40:19-05:00" />
+<meta property="article:modified_time" content="2020-07-29T22:40:19-05:00" />
+<meta itemprop="name" content="Doc2Vec Update">
+<meta itemprop="description" content="This notebook is a demonstration of using Doc2Vec as an approach to compare the text of bug reports from an open source Bugzilla project. The Doc2Vec model from gensim is based on the word2vec paper but includes an additional input that identifies the document in the input.">
+<meta itemprop="datePublished" content="2020-07-29T22:40:19-05:00" />
+<meta itemprop="dateModified" content="2020-07-29T22:40:19-05:00" />
+<meta itemprop="wordCount" content="4947">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Doc2Vec Update"/>
+<meta name="twitter:description" content="This notebook is a demonstration of using Doc2Vec as an approach to compare the text of bug reports from an open source Bugzilla project. The Doc2Vec model from gensim is based on the word2vec paper but includes an additional input that identifies the document in the input."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      
+
+<nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://hsv-ai.com" class="f3 fw2 hover-white no-underline white-90 dib">
+	<img src="https://hsv-ai.com/images/HSVAI_LOGOART_v5.png" style="height:50px;"></img>
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/meetups/" title="Meetups page">
+              Meetups
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/neurips/" title="NeurIPS page">
+              NeurIPS
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/projects/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+<a href="https://www.facebook.com/groups/390465874745286/" target="_blank" class="link-transition facebook link dib z-999 pt3 pt0-l mr1" title="Facebook link" rel="noopener" aria-label="follow on Facebook——Opens in a new window">
+  <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+<a href="https://www.linkedin.com/groups/12177562/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/HSV-AI" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        MEETUPS
+      </p>
+      <h1 class="f1 athelas mb1">Doc2Vec Update</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-07-29T22:40:19-05:00">July 29, 2020</time>      
+      
+      
+    </header>
+
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>This notebook is a demonstration of using Doc2Vec as an approach to compare the text of bug reports from an open source Bugzilla project. The Doc2Vec model from gensim is based on the word2vec paper but includes an additional input that identifies the document in the input.</p>
+<p><img src="https://github.com/HSV-AI/hugo-website/blob/master/static/images/logo_v9.png?raw=true" alt="HSV-AI Logo"></p>
+<!-- raw HTML omitted -->
+<p>Personal opinion is that the API is difficult to understand with little tutorial material avaialble for how to implement this model in a practical solution.</p>
+<p>API doc <a href="https://radimrehurek.com/gensim/models/doc2vec.html">here</a></p>
+<p>Based on the paper <a href="https://arxiv.org/pdf/1405.4053v2.pdf">Distributed Representations of Sentences and Documents</a> by Quoc Le and Tomas Mikolov.</p>
+<h1 id="experiments">Experiments</h1>
+<ol>
+<li>
+<p>stop words vs no stop words</p>
+</li>
+<li>
+<p>Try different instantiations of the Doc2Vec</p>
+</li>
+<li>
+<p>Try training pre-trained wikipedia version</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#Global Imports</span>
+<span style="color:#f92672">import</span> re
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#f92672">import</span> random
+<span style="color:#f92672">import</span> spacy
+<span style="color:#f92672">import</span> gensim
+<span style="color:#f92672">import</span> collections
+<span style="color:#f92672">import</span> statistics
+</code></pre></div><h1 id="loading-bugzilla-data">Loading Bugzilla Data</h1>
+<p>The data for this notebook was put together from the Eclipse XText project Bugzilla. You can find a link <a href="https://bugs.eclipse.org/bugs/buglist.cgi?component=Xtext&amp;product=TMF">here</a></p>
+<p>The bugs and associated comments were loaded into a pandas dataframe and stored in parquet format.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://github.com/HSV-AI/bug-analysis/raw/master/data/df-xtext.parquet.gzip&#39;</span>
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_parquet(url)
+</code></pre></div><h1 id="creating-a-tokenize-method">Creating a Tokenize Method</h1>
+<p>The tokenize method is used by the Doc2Vec model to extract a list of words from a document. This method can have major impacts on the performance of the model based on how it is configured. There are different approaches for TF-IDF that drop out many of the words that do not work for the Doc2Vec approach where the order of the words matters.</p>
+<p>Other things that work well with probabilistic approaches like capturing the lemma of the word instead of the actual word may actually reduce the accuracy of the Doc2Vec model.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;    java.lang.ClassCastException: HIDDEN
+</span><span style="color:#e6db74">    at org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointDetailPaneFactory.getDetailPaneTypes(XbaseBreakpointDetailPaneFactory.java:42)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager$DetailPaneFactoryExtension.getDetailPaneTypes(DetailPaneManager.java:94)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager.getPossiblePaneIDs(DetailPaneManager.java:385)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager.getPreferredPaneFromSelection(DetailPaneManager.java:285)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneProxy.display(DetailPaneProxy.java:109)
+</span><span style="color:#e6db74">    at org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl$2.updateComplete(ExpressionInformationControlCreator.java:344)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider$4.run(TreeModelContentProvider.java:751)
+</span><span style="color:#e6db74">    at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.notifyUpdate(TreeModelContentProvider.java:737)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.updatesComplete(TreeModelContentProvider.java:653)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.performUpdates(TreeModelContentProvider.java:1747)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.access$10(TreeModelContentProvider.java:1723)
+</span><span style="color:#e6db74">    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider$6.run(TreeModelContentProvider.java:1703)
+</span><span style="color:#e6db74">    at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+</span><span style="color:#e6db74">    at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+</span><span style="color:#e6db74">    at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4147)
+</span><span style="color:#e6db74">    at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3764)
+</span><span style="color:#e6db74">    at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+</span><span style="color:#e6db74">    at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+</span><span style="color:#e6db74">    at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+</span><span style="color:#e6db74">    at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+</span><span style="color:#e6db74">    at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:648)
+</span><span style="color:#e6db74">    at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+</span><span style="color:#e6db74">    at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:592)
+</span><span style="color:#e6db74">    at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+</span><span style="color:#e6db74">    at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:138)
+</span><span style="color:#e6db74">    at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+</span><span style="color:#e6db74">    at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+</span><span style="color:#e6db74">    at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+</span><span style="color:#e6db74">    at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+</span><span style="color:#e6db74">    at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+</span><span style="color:#e6db74">    at sun.reflect.NativeMethodAccessorImpl.invoke0(null:-2)
+</span><span style="color:#e6db74">    at sun.reflect.NativeMethodAccessorImpl.invoke(null:-1)
+</span><span style="color:#e6db74">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(null:-1)
+</span><span style="color:#e6db74">    at java.lang.reflect.Method.invoke(null:-1)
+</span><span style="color:#e6db74">    at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+</span><span style="color:#e6db74">    at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+</span><span style="color:#e6db74">    at org.eclipse.equinox.launcher.Main.run(Main.java:1465)&#34;&#34;&#34;</span>
+
+exception_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(?m)^.*?Exception.*(?:[\r\n]+^\s*at .*)+&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+exception_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+</code></pre></div><pre><code>''
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">nlp <span style="color:#f92672">=</span> spacy<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#34;en_core_web_sm&#34;</span>)
+
+exception_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;.+Exception[^\n].*\s+at&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+greater_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;^&gt; .*$&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+gerrit_created_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;New Gerrit change created: [^\ ]+&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+gerrit_merge_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;Gerrit change [^\s]+ was merged to [^\.]+\.&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+gerrit_commit_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;Commit: [^\ ]+&#34;</span>, re<span style="color:#f92672">.</span>MULTILINE <span style="color:#f92672">|</span> re<span style="color:#f92672">.</span>IGNORECASE)
+
+filter <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;VERB&#39;</span>, <span style="color:#e6db74">&#39;NOUN&#39;</span>, <span style="color:#e6db74">&#39;PROPN&#39;</span>]
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tokenize_spacy</span>(text):
+    text <span style="color:#f92672">=</span> greater_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+    text <span style="color:#f92672">=</span> exception_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+    text <span style="color:#f92672">=</span> gerrit_created_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+    text <span style="color:#f92672">=</span> gerrit_merge_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+    text <span style="color:#f92672">=</span> gerrit_commit_regex<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#34;&#34;</span>, text)
+    filtered_tokens <span style="color:#f92672">=</span> []
+    
+    doc <span style="color:#f92672">=</span> nlp(text)
+    <span style="color:#66d9ef">for</span> sent <span style="color:#f92672">in</span> doc<span style="color:#f92672">.</span>sents:
+        <span style="color:#66d9ef">for</span> token <span style="color:#f92672">in</span> sent:
+<span style="color:#75715e">#            if re.fullmatch(&#39;[a-zA-Z]+&#39;, token.text) and not token.is_stop:</span>
+<span style="color:#75715e">#            if token.pos_ in filter and re.fullmatch(&#39;[a-zA-Z]+&#39;, token.text):</span>
+            <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>fullmatch(<span style="color:#e6db74">&#39;[a-zA-Z]+&#39;</span>, token<span style="color:#f92672">.</span>text):
+<span style="color:#75715e">#                 filtered_tokens.append(token.lemma_)</span>
+                filtered_tokens<span style="color:#f92672">.</span>append(token<span style="color:#f92672">.</span>text)
+    <span style="color:#66d9ef">return</span> filtered_tokens
+
+</code></pre></div><h1 id="taggeddocument">TaggedDocument</h1>
+<p>The Word2Vec model uses an array of TaggedDocuments as input for training. The TaggedDocument consists of an array of words/tokens (from our tokenizer) and a list of tags. In our case, the tags used only includes the ID of the bug.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_corpus</span>():
+  <span style="color:#66d9ef">for</span> i, row <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>iterrows():
+    <span style="color:#66d9ef">yield</span> gensim<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>doc2vec<span style="color:#f92672">.</span>TaggedDocument(tokenize_spacy(row[<span style="color:#e6db74">&#39;text&#39;</span>]), [row[<span style="color:#e6db74">&#39;id&#39;</span>]])
+
+train_corpus <span style="color:#f92672">=</span> list(read_corpus())
+</code></pre></div><p>Let&rsquo;s take a look at a random TaggedDocument in the corpus. This is a good check to see what the tokenizer is providing based on the text of the bug.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">doc_id <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, len(train_corpus) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+doc <span style="color:#f92672">=</span> train_corpus[doc_id]
+tag <span style="color:#f92672">=</span> doc<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>]
+<span style="color:#66d9ef">print</span>(tag,doc<span style="color:#f92672">.</span>words)
+text <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[doc_id][<span style="color:#e6db74">&#39;text&#39;</span>]
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,text)
+</code></pre></div><pre><code>363914 ['Check', 'that', 'you', 'can', 'not', 'append', 'a', 'null', 'segment', 'to', 'a', 'QualifiedName', 'Build', 'Identifier', 'Just', 'a', 'minor', 'enhancement', 'The', 'factory', 'checks', 'that', 'you', 'can', 'not', 'create', 'a', 'qualified', 'name', 'with', 'a', 'null', 'segment', 'However', 'the', 'function', 'does', 'not', 'Would', 'be', 'better', 'to', 'always', 'guarantee', 'the', 'non', 'null', 'invariant', 'and', 'also', 'check', 'the', 'parameter', 'of', 'the', 'append', 'operation', 'Reproducible', 'Always', 'fixed', 'pushed', 'to', 'master', 'We', 'have', 'to', 'make', 'sure', 'that', 'no', 'client', 'code', 'in', 'the', 'frameworks', 'passes', 'null', 'to', 'As', 'as', 'discussed', 'internally', 'I', 'removed', 'the', 'null', 'check', 'for', 'now', 'since', 'it', 'might', 'lead', 'to', 'new', 'exceptions', 'in', 'clients', 'The', 'plan', 'is', 'to', 'apply', 'the', 'apply', 'the', 'null', 'check', 'again', 'right', 'after', 'we', 'have', 'release', 'Xtext', 'This', 'will', 'allow', 'us', 'to', 'do', 'more', 'thorough', 'testing', 'The', 'commit', 'can', 'be', 're', 'applied', 'via', 'git', 'cherry', 'pick', 'cherry', 'picked', 'and', 'pushed', 'Requested', 'via', 'bug', 'Requested', 'via', 'bug']
+
+ Check that you cannot append a null segment to a QualifiedName  Build Identifier: 20110916-0149
+
+Just a minor enhancement.  The factory org.eclipse.xtext.naming.QualifiedName.create(String...) checks that you cannot create a qualified name with a &quot;null&quot; segment.  However, the org.eclipse.xtext.naming.QualifiedName.append(String) function does not.  Would be better to always guarantee the non-null invariant and also check the parameter of the append operation.
+
+Reproducible: Always fixed; pushed to 'master'. We have to make sure that no client code in the frameworks passes null to QualifiedName#append As as discussed internally, I've removed the null-check for now since it might lead to new exceptions in clients. 
+
+The plan is to apply the apply the null-check again right after we have release Xtext 2.2. This will allow us to do more thorough testing. 
+
+The commit can be re-applied via &quot;git cherry-pick -x b74a06f705a9a0750289e2152d49941f4727e756&quot; cherry-picked and pushed. Requested via bug 522520.
+
+-M. Requested via bug 522520.
+
+-M.
+</code></pre>
+<h1 id="doc2vec-model">Doc2Vec Model</h1>
+<p>Believe it or not, there are 22 available parameters for use in the constructor with 21 being optional. The API also does not list the defaults for the optional parameters.</p>
+<p>The required parameter is the vector of tagged documents to use for training.</p>
+<p>The best way to figure this out is to use</p>
+<p><code>??gensim.models.doc2vec.Doc2Vec()</code></p>
+<p>in a notebook cell.</p>
+<p>Copying the text of the method headers gives us:</p>
+<pre><code>Doc2Vec(documents=None, dm_mean=None, dm=1, dbow_words=0, dm_concat=0, dm_tag_count=1, docvecs=None, docvecs_mapfile=None, comment=None, trim_rule=None, callbacks=(), **kwargs)
+
+BaseWordEmbeddingsModel(sentences=None, workers=3, vector_size=100, epochs=5, callbacks=(), batch_words=10000, trim_rule=None, sg=0, alpha=0.025, window=5, seed=1, hs=0, negative=5, cbow_mean=1, min_alpha=0.0001, compute_loss=False, fast_version=0, **kwargs)
+</code></pre>
+<p>dm ({1,0}, optional) – Defines the training algorithm.</p>
+<p>If dm=1, ‘distributed memory’ (PV-DM) is used. Otherwise, distributed bag of words (PV-DBOW) is employed.</p>
+<p>This is similar to the skip-gram method vs DBOW method for word vectors.</p>
+<p>The Distributed Memory version takes the order of the words into account when categorizing the document vectors, so we will use that version.</p>
+<h2 id="building-vocabulary">Building Vocabulary</h2>
+<p>The first step in setting up the model is to build the vocabulary using the list of tagged documents.</p>
+<pre><code>model.build_vocab(documents, update=False, progress_per=10000, keep_raw_vocab=False, trim_rule=None, **kwargs)
+</code></pre>
+<h2 id="training-the-model">Training the model</h2>
+<p>The final step is training the model.</p>
+<pre><code> model.train(documents, total_examples=None, total_words=None, epochs=None, start_alpha=None, end_alpha=None, word_count=0, queue_factor=2, report_delay=1.0, callbacks=())
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model <span style="color:#f92672">=</span> gensim<span style="color:#f92672">.</span>models<span style="color:#f92672">.</span>doc2vec<span style="color:#f92672">.</span>Doc2Vec(min_count<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">40</span>)
+<span style="color:#f92672">%</span>time model<span style="color:#f92672">.</span>build_vocab(train_corpus)
+<span style="color:#f92672">%</span>time model<span style="color:#f92672">.</span>train(train_corpus, total_examples<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>corpus_count, epochs<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>epochs)
+
+</code></pre></div><pre><code>CPU times: user 5.68 s, sys: 56.1 ms, total: 5.73 s
+Wall time: 5.27 s
+CPU times: user 1min 7s, sys: 655 ms, total: 1min 8s
+Wall time: 26.9 s
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;bugzilla.doc2vec&#39;</span>)
+
+<span style="color:#960050;background-color:#1e0010">??</span>model<span style="color:#f92672">.</span>save()
+</code></pre></div><h1 id="using-the-doc2vec-model">Using the Doc2Vec Model</h1>
+<p>The easiest way to use the model is with the <em>most_similar</em> method. This method will return a list of the most similar tagged documents based on the label passed into the method. For our use, we pass in the ID of the bug that we want to find a similar bug for.</p>
+<pre><code>model.docvecs.most_similar(positive=None, negative=None, topn=10, clip_start=0, clip_end=None, indexer=None)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar(<span style="color:#ae81ff">231773</span>)
+</code></pre></div><pre><code>[(348199, 0.6316051483154297),
+ (287550, 0.6027359962463379),
+ (266427, 0.588177502155304),
+ (287071, 0.5791216492652893),
+ (266426, 0.576055109500885),
+ (362787, 0.5739638805389404),
+ (366414, 0.5676364898681641),
+ (288103, 0.5655356645584106),
+ (298734, 0.5629502534866333),
+ (457006, 0.5558722019195557)]
+</code></pre>
+<p>The previous method only works from a previously known (and trained) label from a tagged document. The other way to use the model is find the most similar tagged document based on a list of words. In order to do this:</p>
+<ol>
+<li>Get a list of words from a new document</li>
+<li><strong>Important!</strong> Tokenize this list of words using the same tokenizer used when creating the corpus</li>
+<li>Convert the list of tokens to a vector using the <strong>infer_vector</strong> method</li>
+<li>Call the <strong>most_similar</strong> method with the new vector</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> scipy <span style="color:#f92672">import</span> spatial
+
+text1 <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>,:][<span style="color:#e6db74">&#39;text&#39;</span>]
+text2 <span style="color:#f92672">=</span> tokenize_spacy(text1)
+vector <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>infer_vector(text2)
+
+similar <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar([vector])
+<span style="color:#66d9ef">print</span>(similar)
+
+</code></pre></div><pre><code>[(231773, 0.8523540496826172), (266426, 0.6661572456359863), (287550, 0.6446412801742554), (476754, 0.6223310828208923), (266427, 0.6220518350601196), (312276, 0.6161692142486572), (473712, 0.613205075263977), (348199, 0.6111923456192017), (402990, 0.6109021902084351), (529006, 0.6108258366584778)]
+</code></pre>
+<h1 id="evaluating-the-doc2vec-model">Evaluating the Doc2Vec Model</h1>
+<p>Of course, it is helpful that our model returned the ID of the document that we vectorized and passed into the most_similar method. If this model is to be useful, each document in the corpus should be similar to itself. Using a cosine similarity metric, we can calculate the self-similarity of each document.</p>
+<p>We&rsquo;ll calculate the self-similarity below and graph the distribution to see what we have.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">similarities <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> doc_id <span style="color:#f92672">in</span> range(len(train_corpus)):
+    learned_vector <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>docvecs[train_corpus[doc_id]<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>]]
+    inferred_vector <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>infer_vector(train_corpus[doc_id]<span style="color:#f92672">.</span>words)
+    distance <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> spatial<span style="color:#f92672">.</span>distance<span style="color:#f92672">.</span>cosine(learned_vector, inferred_vector)
+    similarities<span style="color:#f92672">.</span>append(distance)
+    
+sns<span style="color:#f92672">.</span>distplot(similarities, kde<span style="color:#f92672">=</span>False, rug<span style="color:#f92672">=</span>True)
+</code></pre></div><pre><code>/opt/tools/anaconda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc20167fd30&gt;
+</code></pre>
+<p><img src="200819_Doc2Vec_22_2.png" alt="png"></p>
+<h1 id="check-outliers">Check Outliers</h1>
+<p>Let&rsquo;s look at any items that are not self similar based on the model.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(min(similarities))
+index <span style="color:#f92672">=</span> similarities<span style="color:#f92672">.</span>index(min(similarities))
+<span style="color:#66d9ef">print</span>(df<span style="color:#f92672">.</span>iloc[index,:])
+</code></pre></div><pre><code>0.0787610188126564
+component                       Website
+date          2013-07-16 07:03:42+00:00
+id                               413031
+product                             TMF
+reporter        dixit.pawan@hotmail.com
+resolution                   WORKSFORME
+status                           CLOSED
+text                  fgbnghjm  cvbndfh
+title                          fgbnghjm
+year                               2013
+month                            2013-7
+day                          2013-07-16
+Name: 3581, dtype: object
+</code></pre>
+<p>Given that the text consists of &ldquo;fgbnghjm  cvbndfh&rdquo;, you can see why this bug is not handled well by the model.</p>
+<p>We can also look at the distribution of the next similar document probabililties.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">next_similar <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> doc_id <span style="color:#f92672">in</span> range(len(train_corpus)):
+    sims <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar(train_corpus[doc_id]<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>])
+    next_similar<span style="color:#f92672">.</span>append(sims[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>])
+    
+sns<span style="color:#f92672">.</span>distplot(next_similar, kde<span style="color:#f92672">=</span>False, rug<span style="color:#f92672">=</span>True)
+
+<span style="color:#66d9ef">print</span>(statistics<span style="color:#f92672">.</span>mean(next_similar))
+<span style="color:#66d9ef">print</span>(statistics<span style="color:#f92672">.</span>stdev(next_similar))
+</code></pre></div><pre><code>/opt/tools/anaconda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+0.600508476063155
+0.10128021819227365
+</code></pre>
+<p><img src="200819_Doc2Vec_27_2.png" alt="png"></p>
+<h1 id="detecting-near-duplicates">Detecting Near Duplicates</h1>
+<p>Looking into the most similar bugs that have a very high probability (&gt;98%), it appears that we have an issue with the tokenizer when it runs across a Java stack trace.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(max(next_similar))
+index <span style="color:#f92672">=</span> next_similar<span style="color:#f92672">.</span>index(max(next_similar))
+bug_id <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[index,:][<span style="color:#e6db74">&#39;id&#39;</span>]
+<span style="color:#66d9ef">print</span>(bug_id,df<span style="color:#f92672">.</span>iloc[index,:][<span style="color:#e6db74">&#39;text&#39;</span>])
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)
+
+sims <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar(bug_id)
+text <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>loc[df[<span style="color:#e6db74">&#39;id&#39;</span>] <span style="color:#f92672">==</span> sims[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;text&#39;</span>]
+<span style="color:#66d9ef">print</span>(sims[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>],text)
+
+
+</code></pre></div><pre><code>0.9883251190185547
+461367 CCE in XbaseBreakpointDetailPaneFactory.getDetailPaneTypes (42)  The following incident was reported via the automated error reporting:
+
+
+    code:                   120
+    plugin:                 org.eclipse.debug.ui_3.11.0.v20150116-1131
+    message:                HIDDEN
+    fingerprint:            a8a83b9f
+    exception class:        java.lang.ClassCastException
+    exception message:      HIDDEN
+    number of children:     0
+    
+    java.lang.ClassCastException: HIDDEN
+    at org.eclipse.xtext.xbase.ui.debug.XbaseBreakpointDetailPaneFactory.getDetailPaneTypes(XbaseBreakpointDetailPaneFactory.java:42)
+    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager$DetailPaneFactoryExtension.getDetailPaneTypes(DetailPaneManager.java:94)
+    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager.getPossiblePaneIDs(DetailPaneManager.java:385)
+    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneManager.getPreferredPaneFromSelection(DetailPaneManager.java:285)
+    at org.eclipse.debug.internal.ui.views.variables.details.DetailPaneProxy.display(DetailPaneProxy.java:109)
+    at org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl$2.updateComplete(ExpressionInformationControlCreator.java:344)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider$4.run(TreeModelContentProvider.java:751)
+    at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.notifyUpdate(TreeModelContentProvider.java:737)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.updatesComplete(TreeModelContentProvider.java:653)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.performUpdates(TreeModelContentProvider.java:1747)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider.access$10(TreeModelContentProvider.java:1723)
+    at org.eclipse.debug.internal.ui.viewers.model.TreeModelContentProvider$6.run(TreeModelContentProvider.java:1703)
+    at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+    at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+    at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4147)
+    at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3764)
+    at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+    at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+    at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+    at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+    at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:648)
+    at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+    at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:592)
+    at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+    at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:138)
+    at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+    at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+    at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+    at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+    at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(null:-2)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(null:-1)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(null:-1)
+    at java.lang.reflect.Method.invoke(null:-1)
+    at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+    at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+    at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+   
+  
+
+General Information:
+
+    reported-by:      Serhii Belei
+    anonymous-id:     648982dc-0aba-4421-a13b-c3f08b2cb5aa
+    eclipse-build-id: 4.5.0.I20150203-1300
+    eclipse-product:  org.eclipse.epp.package.jee.product
+    operating system: Windows7 6.1.0 (x86_64) - win32
+    jre-version:      1.8.0_25-b18
+
+The following plug-ins were present on the execution stack (*):
+    1. org.eclipse.core.databinding.observable_1.4.1.v20140910-2107
+    2. org.eclipse.core.databinding_1.4.100.v20141002-1314
+    3. org.eclipse.core.runtime_3.10.0.v20150112-1422
+    4. org.eclipse.debug.ui_3.11.0.v20150116-1131
+    5. org.eclipse.e4.ui.workbench_1.3.0.v20150113-2327
+    6. org.eclipse.e4.ui.workbench.swt_0.12.100.v20150114-0905
+    7. org.eclipse.equinox.app_1.3.200.v20130910-1609
+    8. org.eclipse.equinox.launcher_1.3.0.v20140415-2008
+    9. org.eclipse.jdt.debug.ui_3.6.400.v20150123-1739
+    10. org.eclipse.jdt.debug_3.8.200.v20150116-1130
+    11. org.eclipse.jdt_3.11.0.v20150203-1300
+    12. org.eclipse.swt_3.104.0.v20150203-2243
+    13. org.eclipse.ui_3.107.0.v20150107-0903
+    14. org.eclipse.ui.ide.application_1.0.600.v20150120-1542
+    15. org.eclipse.ui.ide_3.10.100.v20150126-1117
+    16. org.eclipse.xtext.xbase.ui_2.7.2.v201409160908
+    17. org.eclipse.xtext.xbase_2.7.2.v201409160908
+    18. org.eclipse.xtext_2.8.0.v201502030924
+
+Please note that:
+* Messages, stacktraces, and nested status objects may be shortened.
+* Bug fields like status, resolution, and whiteboard are sent
+  back to reporters.
+* The list of present bundles and their respective versions was
+  calculated by package naming heuristics. This may or may not reflect reality.
+
+Other Resources:
+* Report: https://dev.eclipse.org/recommenders/committers/confess/#/problems/54f58a02e4b03058b001ee0f  
+* Manual: https://dev.eclipse.org/recommenders/community/confess/#/guide
+
+
+Thank you for your assistance.
+Your friendly error-reports-inbox.
+
+
+
+463383 JME in JavaElement.newNotPresentException (556)  The following incident was reported via the automated error reporting:
+
+
+    code:                   0
+    plugin:                 org.apache.log4j_1.2.15.v201012070815
+    message:                HIDDEN
+    fingerprint:            f72b76f8
+    exception class:        org.eclipse.emf.common.util.WrappedException
+    exception message:      HIDDEN
+    number of children:     0
+    
+    org.eclipse.emf.common.util.WrappedException: HIDDEN
+    at org.eclipse.xtext.util.Exceptions.throwUncheckedException(Exceptions.java:26)
+    at org.eclipse.xtext.validation.AbstractDeclarativeValidator$MethodWrapper.handleInvocationTargetException(AbstractDeclarativeValidator.java:137)
+    at org.eclipse.xtext.validation.AbstractDeclarativeValidator$MethodWrapper.invoke(AbstractDeclarativeValidator.java:125)
+    at org.eclipse.xtext.validation.AbstractDeclarativeValidator.internalValidate(AbstractDeclarativeValidator.java:312)
+    at org.eclipse.xtext.validation.AbstractInjectableValidator.validate(AbstractInjectableValidator.java:69)
+    at org.eclipse.xtext.validation.CompositeEValidator.validate(CompositeEValidator.java:153)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidate(Diagnostician.java:171)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:158)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:181)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:181)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:185)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:120)
+    at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:148)
+    at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+    at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.access$1(CachingResourceValidatorImpl.java:1)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl$1.get(CachingResourceValidatorImpl.java:78)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl$1.get(CachingResourceValidatorImpl.java:1)
+    at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:77)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:81)
+    at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:33)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:91)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+    at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:26)
+    at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:121)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:512)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:484)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:133)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:86)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:67)
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+caused by: org.eclipse.jdt.core.JavaModelException: HIDDEN
+    at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+    at org.eclipse.jdt.internal.core.Openable.getUnderlyingResource(Openable.java:344)
+    at org.eclipse.jdt.internal.core.CompilationUnit.getUnderlyingResource(CompilationUnit.java:930)
+    at org.eclipse.jdt.internal.core.SourceRefElement.getUnderlyingResource(SourceRefElement.java:226)
+    at org.eclipse.xtend.ide.validator.XtendUIValidator.isSameProject(XtendUIValidator.java:85)
+    at org.eclipse.xtend.ide.validator.XtendUIValidator.checkAnnotationInSameProject(XtendUIValidator.java:72)
+    at sun.reflect.GeneratedMethodAccessor171.invoke(null:-1)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:483)
+    at org.eclipse.xtext.validation.AbstractDeclarativeValidator$MethodWrapper.invoke(AbstractDeclarativeValidator.java:118)
+    at org.eclipse.xtext.validation.AbstractDeclarativeValidator.internalValidate(AbstractDeclarativeValidator.java:312)
+    at org.eclipse.xtext.validation.AbstractInjectableValidator.validate(AbstractInjectableValidator.java:69)
+    at org.eclipse.xtext.validation.CompositeEValidator.validate(CompositeEValidator.java:153)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidate(Diagnostician.java:171)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:158)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:181)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:181)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.doValidateContents(Diagnostician.java:185)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.doValidateContents(CancelableDiagnostician.java:49)
+    at org.eclipse.xtext.xbase.validation.XbaseDiagnostician.doValidateContents(XbaseDiagnostician.java:47)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:161)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:137)
+    at org.eclipse.xtext.validation.CancelableDiagnostician.validate(CancelableDiagnostician.java:37)
+    at org.eclipse.emf.ecore.util.Diagnostician.validate(Diagnostician.java:120)
+    at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:148)
+    at org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.validate(DerivedStateAwareResourceValidator.java:33)
+    at org.eclipse.xtext.validation.ResourceValidatorImpl.validate(ResourceValidatorImpl.java:91)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.access$1(CachingResourceValidatorImpl.java:1)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl$1.get(CachingResourceValidatorImpl.java:78)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl$1.get(CachingResourceValidatorImpl.java:1)
+    at org.eclipse.xtext.util.OnChangeEvictingCache.get(OnChangeEvictingCache.java:77)
+    at org.eclipse.xtend.core.validation.CachingResourceValidatorImpl.validate(CachingResourceValidatorImpl.java:81)
+    at org.eclipse.xtend.ide.validator.XtendResourceValidator.validate(XtendResourceValidator.java:33)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:91)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob$1.exec(ValidationJob.java:1)
+    at org.eclipse.xtext.util.concurrent.CancelableUnitOfWork.exec(CancelableUnitOfWork.java:26)
+    at org.eclipse.xtext.resource.OutdatedStateManager.exec(OutdatedStateManager.java:121)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.internalReadOnly(XtextDocument.java:512)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument$XtextDocumentLocker.readOnly(XtextDocument.java:484)
+    at org.eclipse.xtext.ui.editor.model.XtextDocument.readOnly(XtextDocument.java:133)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob.createIssues(ValidationJob.java:86)
+    at org.eclipse.xtext.ui.editor.validation.ValidationJob.run(ValidationJob.java:67)
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+   
+  
+
+General Information:
+
+    reported-by:      Tobse
+    anonymous-id:     ef35a7d7-0cbe-4995-a50b-ea7da1b26ef1
+    eclipse-build-id: 4.5.0.I20150203-1300
+    eclipse-product:  org.eclipse.epp.package.dsl.product
+    operating system: Windows7 6.1.0 (x86_64) - win32
+    jre-version:      1.8.0_25-b18
+
+The following plug-ins were present on the execution stack (*):
+    1. org.eclipse.core.jobs_3.7.0.v20150115-2226
+    2. org.eclipse.emf.ecore_2.11.0.v20150325-0930
+    3. org.eclipse.emf_2.6.0.v20150325-0933
+    4. org.eclipse.jdt.core_3.11.0.v20150126-2015
+    5. org.eclipse.jdt_3.11.0.v20150203-1300
+    6. org.eclipse.xtend.core_2.9.0.v201503270548
+    7. org.eclipse.xtend_2.1.0.v201503260847
+    8. org.eclipse.xtend.ide_2.9.0.v201503270548
+    9. org.eclipse.xtext_2.9.0.v201503270548
+    10. org.eclipse.xtext.ui_2.9.0.v201503270548
+    11. org.eclipse.xtext.util_2.9.0.v201503270548
+    12. org.eclipse.xtext.xbase_2.9.0.v201503270548
+
+Please note that:
+* Messages, stacktraces, and nested status objects may be shortened.
+* Bug fields like status, resolution, and whiteboard are sent
+  back to reporters.
+* The list of present bundles and their respective versions was
+  calculated by package naming heuristics. This may or may not reflect reality.
+
+Other Resources:
+* Report: https://dev.eclipse.org/recommenders/committers/confess/#/problems/55155bfde4b026254edfe60d  
+* Manual: https://dev.eclipse.org/recommenders/community/confess/#/guide
+
+
+Thank you for your assistance.
+Your friendly error-reports-inbox. PR: https://github.com/eclipse/xtext/pull/105 Reviewed commit
+https://github.com/eclipse/xtext/commit/5da237c2a4a57e4ca2da32dc28f5a3152c1f1eba
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.metrics.pairwise <span style="color:#f92672">import</span> cosine_similarity
+
+X <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> doc_id <span style="color:#f92672">in</span> range(len(train_corpus)):
+    inferred_vector <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>infer_vector(train_corpus[doc_id]<span style="color:#f92672">.</span>words)
+    X<span style="color:#f92672">.</span>append(inferred_vector)
+    
+matrix <span style="color:#f92672">=</span> cosine_similarity(X)
+ 
+fig, ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>subplots(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">10</span>))
+cax <span style="color:#f92672">=</span> ax<span style="color:#f92672">.</span>matshow(matrix, interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>)
+fig<span style="color:#f92672">.</span>colorbar(cax, ticks<span style="color:#f92672">=</span>[<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.3</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.7</span>, <span style="color:#f92672">.</span><span style="color:#ae81ff">75</span>,<span style="color:#f92672">.</span><span style="color:#ae81ff">8</span>,<span style="color:#f92672">.</span><span style="color:#ae81ff">85</span>,<span style="color:#f92672">.</span><span style="color:#ae81ff">90</span>,<span style="color:#f92672">.</span><span style="color:#ae81ff">95</span>,<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="200819_Doc2Vec_30_0.png" alt="png"></p>
+<h1 id="finding-similar-bugs">Finding Similar Bugs</h1>
+<p>Of course, the final test to see if this model will provide a useful return value is to do a random sample and then find the most similar bug.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Pick a random document from the test corpus and infer a vector from the model</span>
+doc_id <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">0</span>, len(train_corpus) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+doc <span style="color:#f92672">=</span> train_corpus[doc_id]
+
+text <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>loc[df[<span style="color:#e6db74">&#39;id&#39;</span>] <span style="color:#f92672">==</span> doc<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;text&#39;</span>]
+<span style="color:#66d9ef">print</span>(doc<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>],text)
+
+inferred_vector <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>infer_vector(doc<span style="color:#f92672">.</span>words)
+
+sims <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar([inferred_vector], topn<span style="color:#f92672">=</span>len(model<span style="color:#f92672">.</span>docvecs))
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">Document that is&#34;</span>,sims[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>],<span style="color:#e6db74">&#34; similar below</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
+
+text <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>loc[df[<span style="color:#e6db74">&#39;id&#39;</span>] <span style="color:#f92672">==</span> sims[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">.</span>iloc[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;text&#39;</span>]
+<span style="color:#66d9ef">print</span>(sims[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>],text)
+
+</code></pre></div><pre><code>288444 [validation] quickfixes for unresolved references  A common use case for quickfixes will be to create an object corresponding to an unresolved cross reference. In order for Xtext to support this use case the following changes should be made:
+
+1. The Xtext resource diagnostic interface (org.eclipse.xtext.diagnostics.Diagnostic) should provide some kind of getCode() method similar to what the TransformationDiagnostic implementation already has. Possibly it should also provide getters for the triggering AbstractNode, EObject, and StructuralFeature (allthough it should be possible to derive this from the offset and length) as this may be required to implement a corresponding quickfix.
+
+2. Using the resource diagnostic's code the IXtextResourceChecker (and ValidationJob) can produce an Eclipse marker having a corresponding code attribute set accordingly. This however also requires investigating the marker type to use for resource diagnostics.
+
+3. AbstractDeclarativeQuickfixProvider should also simplify the implementation of fixes for unresolved references. This would be difficult to achieve using the existing @Fix annotation because (a) the marker's code is fixed (unless my some other means overridden by the user) and (b) the type of object to create  cannot be declared (only that of the context object). A possibility would be to add another dedicated annotation. E.g.
+
+  @FixReference(type=Bar.class, label=&quot;Create Bar '${name}'&quot;)
+  public void createNewBar(Foo context, IMarker marker) {...} A currently possible workaround is for a subclass to override the AbstractDeclarativeQuickfixProvider behavior to:
+
+- use the marker's message to check whether it is an unresolved cross reference
+- derive the context object and reference (and thus also type of object to create) using the marker's offset and length *** Bug 283439 has been marked as a duplicate of this bug. *** Adding such quickfixed is possible with the new API. Please have a look at 
+  org.eclipse.xtext.example.ui.quickfix.DomainmodelQuickfixProvider
+for an example. You also have to override
+  org.eclipse.xtext.example.ui.linking.DomainmodelLinkingDiagnosticMessageProvider
+to return individual issue codes and issue data for different linking problems.
+
+Having worked out the example, I don't think we should offer more simplistic API for these kinds of quickfixes, as there are too many tweaking points
+
+- the EClass of the element to be created, which is not always the eReferenceType of the EReference. In the domainmodel it depends on the type of the container's container (Attribute or Reference)
+- attribute initialisation, partly extracted at linking time and provided by means of issue data
+- the eContainer for the new element, which is not necessarily the container of the referring element
+- formatting Closing bug which were set to RESOLVED before Eclipse Neon.0.
+
+
+Document that is 0.5803667306900024  similar below
+
+
+263793 [Editor] Add quick fix support  Created attachment 124816
+quick fix proof of concept
+
+The subject of this feature request is support for quick fixes (i.e. Ctrl+1) in the Xtext editor. In particular it should also be possible to implement quick fixes for user defined Check constraint violations.
+
+Terminology
+===========
+Quick fix : A quick fix is the means of accessing in invoking a marker resolution (see extension point org.eclipse.ui.ide.markerResolution) in the editor using the Ctrl+1 keybinding (default).
+
+Marker resolution : A marker resolution is a runnable object (instance of IMarkerResolution) whose purpose is to solve the problem annotated by a particular marker. A marker resolution is created by a IMarkerResolutionGenerator registered using the extension point org.eclipse.ui.ide.markerResolution).
+
+Check constraint violation : By this we mean the event of a particular model object violating a given Check constraint. This violation will be represented by a marker in the Xtext editor.
+
+Implementation constraints
+==========================
+The current Check language should not be modified.
+
+Proposed design and implementation
+==================================
+The Xtext editor is already capable of displaying markers pertaining to the resource being edited. We now also want to be able to access any marker resolutions registered against the markers using the Ctrl+1 key binding (Quick Fix). This involves enhancing XtextSourceViewerConfiguration and implementing a custom QuickAssistAssistant (see patch). This part can IMHO safely be added.
+
+Additionally we want to be able to implement quick fixes for specific Check constraints. Here I propose that the Check constraint should not simply return an error message, but something structured (when the quick fix needs to be adviced). E.g.
+
+context Foo#name WARNING fooName() :
+    name != &quot;FOO&quot;
+;
+
+With the following extensions (the second would be part of an Xtext library):
+
+fooName(Foo this) :
+    error(&quot;Don't use the name FOO&quot;, &quot;illegalId&quot;).addAll({&quot;foo&quot;, this})
+;
+
+error(Object this, String message, String type) :
+    {&quot;message&quot;, message, &quot;type&quot;, type}
+;
+
+The returned data is essentially a map represented as a list (due to oAW expression limitations). Given this list in Check a Diagnostic object will be created with corresponding data (Diagnostic#getData()). In XtextResourceChecker (and XtextDocument) these same properties will be set on the corresponding created Marker objects. If no list is returned by the check constraint the original behavior will be employed.
+
+The &quot;message&quot; (mapped to &quot;message&quot; attribute of marker) and &quot;type&quot; (mapped to markerType of marker!) properties are predefined but it is also important to note that the user has the ability to add any other custom properties which will automatically be attached to the Diagnostic and eventually the marker (as with &quot;foo&quot; in the example).
+
+The marker resolution generator can in turn use these marker attributes to decide if it can create a corresponding marker resolution (actually a lot of this filtering can already be done in the plugin.xml extension).
+
+Additionally the attributes could also represent hints for the actual marker resolution. For example: The Check constraint could set an &quot;resolutionExpr&quot; property to &quot;setName('FOOBAR')&quot; and a corresponding generic marker resolution generator (expecting this property to be set) could then evaluate the given expression when the quick fix is run.
+
+The attached patch implements this described design. Note that it's a proof of concept only!
+
+Alternatives
+============
+The interface for passing data from the Check constraint to be associated with the corresponding Diagnostic could instead be implemented using a JAVA extension. In this case the Check constraint would just return a String (business as usual). E.g.
+
+context Foo#name WARNING fooName() :
+    name != &quot;FOO&quot;
+;
+
+String fooName(Foo this) :
+    error(&quot;Don't use the name FOO&quot;, &quot;illegalId&quot;)
+;
+
+String error(Object this, String message, String type) :
+    internalError(message, type) -&gt; message
+;
+
+private internalError(Object this, String message, String type) :
+    JAVA org.eclipse.xtext...
+;
+
+The mechanism for making this data available to the marker resolution generators could also be a dedicated Java API (instead of attaching the data to the marker directly). But this way there is not the possibility of filtering using the &lt;attribute/&gt; element in plugin.xml. Created attachment 126171
+quick assist assistant patch
+
+If you agree I'd like to propose the attached patch to enable the Xtext editor to run any available marker resolutions enabled for the displayed markers. Actually there is already an action XtextMarkerRulerAction to support this, but the required QuickAssistAssistant implementation was still missing.
+
+I think the API outlined in the description (for integration of Check etc.) requires some more thinking. This is something I'm working on. But what's in the patch is a necessary first step. Created attachment 140346
+simple quickfix generator fragment
+
+The attachment demonstrates a simplistic quickfix generator fragment complete with the supporting changes to the Xtext editor.
+
+As demonstrated in the Domainmodel example a fix can then be declared by a method like this:
+
+    @Fix(code = DomainmodelJavaValidator.CAPITAL_TYPE_NAME, label = &quot;Capitalize name&quot;, description = &quot;Capitalize name of type&quot;)
+    public void fixNameCase(Type type, IMarker marker) {
+        type.setName(type.getName().toUpperCase());
+    }
+
+The &quot;code&quot; attribute matches up against a corresponding Java check:
+
+    @Check
+    public void checkTypeNameStartsWithCapital(Type type) {
+        if (!Character.isUpperCase(type.getName().charAt(0))) {
+            warning(&quot;Name should start with a capital&quot;, DomainmodelPackage.TYPE__NAME, CAPITAL_TYPE_NAME);
+        }
+    } +1 for this RFE. This would be great! Are there any plans about the target milestone? (In reply to comment #3)
+&gt; +1 for this RFE. This would be great! Are there any plans about the target
+&gt; milestone?
+&gt; 
+
+No not yet, we'll update the property accordingly as soon as we have concrete plans. I also like it very much.
+Shouldn't we allow a list of codes per diagnostic? There might be multiple alternative ways to fix an issue. 
+In AbstractDeclarativeMarkerResolutionGenerator you pass the context EObject out of the read transaction in order to pass it into a modify transaction later. This could cause problems in cases where another write operation has changed or removed that object. I think the context object should be obtained within the modify transaction. 
+Some tests would be very nice. :-) (In reply to comment #5)
+&gt; I also like it very much.
+&gt; Shouldn't we allow a list of codes per diagnostic? There might be multiple
+&gt; alternative ways to fix an issue. 
+
+The code simply identifies the problem, so one code per diagnostic should be enough. But we would then like to associate multiple fixes with the problem. Using a declarative approach we would want all @Fix annotated methods referring to that code to match. Thus something similar to the AbstractDeclarativeValidator.
+
+In my patch I use the PolymorphicDispatcher, but I've come to realize that this doesn't make sense here, as we want to match multiple methods, just like the AbstractDeclarativeValidator.
+
+The declarative base class supports @Fix annotated methods where the fix details (label, description, and icon) are in the annotation parameters and the method body simply represents the fix implementation. E.g.
+
+@Fix(code = 42, label = &quot;Capitalize name&quot;, description = &quot;Capitalize name of type&quot;)
+public void fixSomething(Foo foo, IMarker marker) {
+   return ...;
+}
+
+In addition we may also want to allow a method to return the IMarkerResolution object describing the fix. This would allow for more conditional logic. E.g.
+
+@Fix(code=42)
+public IMarkerResolution fixSomething(Foo foo, IMarker marker) {
+   return ...;
+}
+
+Any thoughts on this?
+
+&gt; In AbstractDeclarativeMarkerResolutionGenerator you pass the context EObject
+&gt; out of the read transaction in order to pass it into a modify transaction
+&gt; later. This could cause problems in cases where another write operation has
+&gt; changed or removed that object. I think the context object should be obtained
+&gt; within the modify transaction. 
+&gt; Some tests would be very nice. :-)
+&gt; 
+
+I agree. (In reply to comment #6)
+&gt; (In reply to comment #5)
+&gt; &gt; I also like it very much.
+&gt; &gt; Shouldn't we allow a list of codes per diagnostic? There might be multiple
+&gt; &gt; alternative ways to fix an issue. 
+&gt; 
+&gt; The code simply identifies the problem, so one code per diagnostic should be
+&gt; enough. But we would then like to associate multiple fixes with the problem.
+&gt; Using a declarative approach we would want all @Fix annotated methods referring
+&gt; to that code to match. Thus something similar to the
+&gt; AbstractDeclarativeValidator.
+&gt; 
+&gt; In my patch I use the PolymorphicDispatcher, but I've come to realize that this
+&gt; doesn't make sense here, as we want to match multiple methods, just like the
+&gt; AbstractDeclarativeValidator.
+&gt; 
+&gt; The declarative base class supports @Fix annotated methods where the fix
+&gt; details (label, description, and icon) are in the annotation parameters and the
+&gt; method body simply represents the fix implementation. E.g.
+&gt; 
+&gt; @Fix(code = 42, label = &quot;Capitalize name&quot;, description = &quot;Capitalize name of
+&gt; type&quot;)
+&gt; public void fixSomething(Foo foo, IMarker marker) {
+&gt;    return ...;
+&gt; }
+&gt; 
+&gt; In addition we may also want to allow a method to return the IMarkerResolution
+&gt; object describing the fix. This would allow for more conditional logic. E.g.
+&gt; 
+&gt; @Fix(code=42)
+&gt; public IMarkerResolution fixSomething(Foo foo, IMarker marker) {
+&gt;    return ...;
+&gt; }
+&gt; 
+&gt; Any thoughts on this?
+&gt; 
+
+Sounds reasonable. I thought that the id identifies a fix not a problem.
+Of course what you described makes much more sense. :-)
+ Fixed in CVS HEAD. &gt; &gt; In addition we may also want to allow a method to return the IMarkerResolution
+&gt; &gt; object describing the fix. This would allow for more conditional logic. E.g.
+&gt; &gt; 
+&gt; &gt; @Fix(code=42)
+&gt; &gt; public IMarkerResolution fixSomething(Foo foo, IMarker marker) {
+&gt; &gt;    return ...;
+&gt; &gt; }
+&gt; &gt; 
+&gt; &gt; Any thoughts on this?
+&gt; &gt; 
+&gt; 
+&gt; Sounds reasonable.
+
+As I couldn't yet find a concrete use case for this I decided to wait with this enhancement. We can always file a new bug later on.
+
+Also note that the documentation hasn't been written yet. I reopen this so we don't forget the documentation. Thanks Knut :-) Closing all bugs that were set to RESOLVED before Neon.0 Closing all bugs that were set to RESOLVED before Neon.0
+</code></pre>
+<h1 id="clustering-the-embedding-space">Clustering the Embedding Space</h1>
+<p>We can use KMeans to divide the embeddings into clusters based on cosine similarity.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> cluster
+<span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> metrics
+kmeans <span style="color:#f92672">=</span> cluster<span style="color:#f92672">.</span>KMeans(n_clusters<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>)
+kmeans<span style="color:#f92672">.</span>fit(X)
+
+</code></pre></div><pre><code>KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
+    n_clusters=10, n_init=10, n_jobs=None, precompute_distances='auto',
+    random_state=None, tol=0.0001, verbose=0)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(kmeans<span style="color:#f92672">.</span>cluster_centers_<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(kmeans<span style="color:#f92672">.</span>labels_<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(kmeans<span style="color:#f92672">.</span>labels_)
+
+clusters <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>labels_<span style="color:#f92672">.</span>tolist()
+df[<span style="color:#e6db74">&#39;cluster&#39;</span>] <span style="color:#f92672">=</span> clusters
+<span style="color:#75715e"># print(train_corpus)</span>
+<span style="color:#75715e"># l = kmeans.fit_predict(model.docvecs.vectors_docs)</span>
+</code></pre></div><pre><code>(10, 100)
+(5415,)
+[9 1 1 ... 6 7 2]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">labels <span style="color:#f92672">=</span> kmeans<span style="color:#f92672">.</span>labels_
+<span style="color:#66d9ef">print</span>(kmeans<span style="color:#f92672">.</span>labels_)
+
+bugs <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#39;id&#39;</span>: df<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74">&#39;id&#39;</span>], <span style="color:#e6db74">&#39;cluster&#39;</span>: clusters }
+frame <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(bugs)
+temp <span style="color:#f92672">=</span> frame<span style="color:#f92672">.</span>loc[:,[<span style="color:#e6db74">&#39;id&#39;</span>,<span style="color:#e6db74">&#39;cluster&#39;</span>]]<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;cluster&#39;</span>)<span style="color:#f92672">.</span>count()<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>bar()
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><pre><code>[9 1 1 ... 6 7 2]
+</code></pre>
+<p><img src="200819_Doc2Vec_36_1.png" alt="png"></p>
+<h1 id="visualizing-the-embedding-space">Visualizing the Embedding Space</h1>
+<p>To visualize the space of the embedding, we will use TSNE to reduce from 100 to 2 dimensions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Creating and fitting the tsne model to the document embeddings</span>
+<span style="color:#f92672">from</span> MulticoreTSNE <span style="color:#f92672">import</span> MulticoreTSNE <span style="color:#66d9ef">as</span> TSNE
+tsne_model <span style="color:#f92672">=</span> TSNE(n_jobs<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,
+                  early_exaggeration<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,
+                  n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>,
+                  verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+                  random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">2018</span>,
+                  n_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)
+tsne_d2v <span style="color:#f92672">=</span> tsne_model<span style="color:#f92672">.</span>fit_transform(np<span style="color:#f92672">.</span>array(X))
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#e6db74">&#39;x&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">0</span>]
+df[<span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">1</span>]
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">10</span>))
+sns<span style="color:#f92672">.</span>scatterplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cluster&#34;</span>, palette<span style="color:#f92672">=</span>sns<span style="color:#f92672">.</span>color_palette(<span style="color:#e6db74">&#34;hls&#34;</span>, <span style="color:#ae81ff">10</span>), legend<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, data<span style="color:#f92672">=</span>df)
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc1f22e84a8&gt;
+</code></pre>
+<p><img src="200819_Doc2Vec_39_1.png" alt="png"></p>
+<p>Now how about doing it in 3D?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tsne_model <span style="color:#f92672">=</span> TSNE(n_jobs<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,
+                  early_exaggeration<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>,
+                  n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>,
+                  verbose<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>,
+                  random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">2018</span>,
+                  n_iter<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)
+tsne_d2v <span style="color:#f92672">=</span> tsne_model<span style="color:#f92672">.</span>fit_transform(np<span style="color:#f92672">.</span>array(X))
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> mpl_toolkits.mplot3d <span style="color:#f92672">import</span> Axes3D
+
+df[<span style="color:#e6db74">&#39;x&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">0</span>]
+df[<span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">1</span>]
+df[<span style="color:#e6db74">&#39;z&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">2</span>]
+
+ax <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>gca(projection<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;3d&#39;</span>)
+ax<span style="color:#f92672">.</span>scatter( xs<span style="color:#f92672">=</span>df<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74">&#34;x&#34;</span>], ys<span style="color:#f92672">=</span>df<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74">&#34;y&#34;</span>], zs<span style="color:#f92672">=</span>df<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74">&#34;z&#34;</span>], c<span style="color:#f92672">=</span>df<span style="color:#f92672">.</span>loc[:,<span style="color:#e6db74">&#34;cluster&#34;</span>])
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="200819_Doc2Vec_42_0.png" alt="png"></p>
+<p>Another method that I&rsquo;ve seen used is to use PCA to perform an initial reduction in dimension and then TSNE to get the dimensions down to 2.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> PCA
+
+pca_20 <span style="color:#f92672">=</span> PCA(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+pca_result_20 <span style="color:#f92672">=</span> pca_20<span style="color:#f92672">.</span>fit_transform(X)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tsne_d2v <span style="color:#f92672">=</span> tsne_model<span style="color:#f92672">.</span>fit_transform(np<span style="color:#f92672">.</span>array(pca_result_20))
+df[<span style="color:#e6db74">&#39;x&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">0</span>]
+df[<span style="color:#e6db74">&#39;y&#39;</span>] <span style="color:#f92672">=</span> tsne_d2v[:,<span style="color:#ae81ff">1</span>]
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">10</span>))
+sns<span style="color:#f92672">.</span>scatterplot( x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;y&#39;</span>, hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cluster&#34;</span>, palette<span style="color:#f92672">=</span>sns<span style="color:#f92672">.</span>color_palette(<span style="color:#e6db74">&#34;hls&#34;</span>, <span style="color:#ae81ff">10</span>), legend<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;full&#34;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, data<span style="color:#f92672">=</span>df )
+</code></pre></div><pre><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc1f1b525f8&gt;
+</code></pre>
+<p><img src="200819_Doc2Vec_45_1.png" alt="png"></p>
+<h1 id="transfer-learning">Transfer Learning</h1>
+<p>Now that we have some idea of what we&rsquo;re working with, let&rsquo;s see if transfer learning is an option with Doc2Vec. To do this, we&rsquo;ll start with a distributed memory Doc2Vec model that was trained on the WikiPedia corpus. Then we will further train the model on our bug corpus and see what the results are.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> gensim.models.doc2vec <span style="color:#f92672">import</span> Doc2Vec
+loadedModel <span style="color:#f92672">=</span> Doc2Vec<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;PV-DBOW.doc2vec&#39;</span>)
+<span style="color:#66d9ef">print</span>(loadedModel<span style="color:#f92672">.</span>corpus_count)
+</code></pre></div><pre><code>4841417
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span>time loadedModel<span style="color:#f92672">.</span>train(train_corpus, total_examples<span style="color:#f92672">=</span>model<span style="color:#f92672">.</span>corpus_count, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+
+</code></pre></div><pre><code>CPU times: user 6min 47s, sys: 1.91 s, total: 6min 49s
+Wall time: 1min 3s
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">similarities <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> doc_id <span style="color:#f92672">in</span> range(len(train_corpus)):
+    learned_vector <span style="color:#f92672">=</span> loadedModel<span style="color:#f92672">.</span>docvecs[train_corpus[doc_id]<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>]]
+    inferred_vector <span style="color:#f92672">=</span> loadedModel<span style="color:#f92672">.</span>infer_vector(train_corpus[doc_id]<span style="color:#f92672">.</span>words)
+    distance <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> spatial<span style="color:#f92672">.</span>distance<span style="color:#f92672">.</span>cosine(learned_vector, inferred_vector)
+    similarities<span style="color:#f92672">.</span>append(distance)
+    
+sns<span style="color:#f92672">.</span>distplot(similarities, kde<span style="color:#f92672">=</span>False, rug<span style="color:#f92672">=</span>True)
+</code></pre></div><pre><code>/opt/tools/anaconda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc18fb6beb8&gt;
+</code></pre>
+<p><img src="200819_Doc2Vec_49_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">next_similar <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">for</span> doc_id <span style="color:#f92672">in</span> range(len(train_corpus)):
+    sims <span style="color:#f92672">=</span> loadedModel<span style="color:#f92672">.</span>docvecs<span style="color:#f92672">.</span>most_similar(train_corpus[doc_id]<span style="color:#f92672">.</span>tags[<span style="color:#ae81ff">0</span>])
+    next_similar<span style="color:#f92672">.</span>append(sims[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>])
+    
+sns<span style="color:#f92672">.</span>distplot(next_similar, kde<span style="color:#f92672">=</span>False, rug<span style="color:#f92672">=</span>True)
+</code></pre></div><pre><code>/opt/tools/anaconda/lib/python3.6/site-packages/scipy/stats/stats.py:1713: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+  return np.add.reduce(sorted[indexer] * weights, axis=axis) / sumval
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc17b6532e8&gt;
+</code></pre>
+<p><img src="200819_Doc2Vec_50_2.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> statistics
+
+<span style="color:#66d9ef">print</span>(statistics<span style="color:#f92672">.</span>mean(next_similar))
+<span style="color:#66d9ef">print</span>(statistics<span style="color:#f92672">.</span>stdev(next_similar))
+</code></pre></div><pre><code>0.6487272019641661
+0.0749555443609924
+</code></pre><ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hsv-ai" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </section>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://hsv-ai.com" >
+    &copy; 2020 Huntsville AI
+  </a>
+    <div>
+
+
+<a href="https://www.facebook.com/groups/390465874745286/" target="_blank" class="link-transition facebook link dib z-999 pt3 pt0-l mr1" title="Facebook link" rel="noopener" aria-label="follow on Facebook——Opens in a new window">
+  <svg height="32px"  style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+
+<a href="https://www.linkedin.com/groups/12177562/" target="_blank" class="link-transition linkedin link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" rel="noopener" aria-label="follow on LinkedIn——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+<a href="https://github.com/HSV-AI" target="_blank" class="link-transition github link dib z-999 pt3 pt0-l mr1" title="Github link" rel="noopener" aria-label="follow on Github——Opens in a new window">
+  <svg  height="32px"  style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000" width="8px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;fill:;"/>
+</svg>
+</span></a>
+
+
+
+
+</div>
+  </div>
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-139852367-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

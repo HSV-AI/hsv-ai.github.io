@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.78.1" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,22 +30,17 @@
 
     <meta property="og:title" content="Recurrent Neural Networks Part 3" />
 <meta property="og:description" content="This week we will be covering the final part of RNN development to predict stock price information using previous values.
-
 This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN with Keras&rdquo; from here. We have modified the approach to use all available values as input instead of averaging the low and high price." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/190626_rnn_timeseries_part3/" />
-<meta property="article:published_time" content="2019-06-26T22:40:19-05:00"/>
-<meta property="article:modified_time" content="2019-06-26T22:40:19-05:00"/>
-
+<meta property="article:published_time" content="2019-06-26T22:40:19-05:00" />
+<meta property="article:modified_time" content="2019-06-26T22:40:19-05:00" />
 <meta itemprop="name" content="Recurrent Neural Networks Part 3">
 <meta itemprop="description" content="This week we will be covering the final part of RNN development to predict stock price information using previous values.
-
 This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN with Keras&rdquo; from here. We have modified the approach to use all available values as input instead of averaging the low and high price.">
-
-
 <meta itemprop="datePublished" content="2019-06-26T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-06-26T22:40:19-05:00" />
-<meta itemprop="wordCount" content="3562">
+<meta itemprop="wordCount" content="3470">
 
 
 
@@ -53,7 +48,6 @@ This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Recurrent Neural Networks Part 3"/>
 <meta name="twitter:description" content="This week we will be covering the final part of RNN development to predict stock price information using previous values.
-
 This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN with Keras&rdquo; from here. We have modified the approach to use all available values as input instead of averaging the low and high price."/>
 
   </head>
@@ -98,7 +92,7 @@ This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN 
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/neurips-2019/" title="NeurIPS page">
+            <a class="hover-white no-underline white-90" href="/neurips/" title="NeurIPS page">
               NeurIPS
             </a>
           </li>
@@ -178,139 +172,54 @@ This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN 
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>This week we will be covering the final part of RNN development to predict stock price information using previous values.</p>
-
 <p>This notebook is based on a tutorial: &ldquo;Multivariate Time Series using RNN with Keras&rdquo; from <a href="https://medium.com/datadriveninvestor/multivariate-time-series-using-rnn-with-keras-7f78f4488679">here</a>. We have modified the approach to use all available values as input instead of averaging the low and high price.</p>
-
 <p>View the IPython notebook for this session on Github [here](<a href="https://github.com/HSV-AI/presentations/blob/master//2019/190626_RNN_TimeSeries_Part3.ipynb">https://github.com/HSV-AI/presentations/blob/master//2019/190626_RNN_TimeSeries_Part3.ipynb</a></p>
-
 <p>Or launch the notebook in Google Colab or MyBinder:</p>
-
-<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190626_RNN_TimeSeries_Part3.ipynb"><img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab" /></a></p>
-
-<p><a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190626_RNN_TimeSeries_Part3.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
-
+<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190626_RNN_TimeSeries_Part3.ipynb"><img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab"></a></p>
+<p><a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190626_RNN_TimeSeries_Part3.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
 <h2 id="meeting-agenda">Meeting Agenda</h2>
-
 <ol>
 <li>Introduction</li>
 <li>Project Updates</li>
 <li>RNN Code Walkthrough</li>
 <li>AI Model Deployment</li>
 </ol>
-
 <h2 id="rnn-example-code">RNN Example Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#f92672">import</span> math
+<span style="color:#f92672">from</span> keras <span style="color:#f92672">import</span> Sequential
+<span style="color:#f92672">from</span> keras.layers <span style="color:#f92672">import</span> Dense, LSTM
+<span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> MinMaxScaler
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">%</span>matplotlib inline
 
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-import math
-from keras import Sequential
-from keras.layers import Dense, LSTM
-from sklearn.preprocessing import MinMaxScaler
-import matplotlib.pyplot as plt
-%matplotlib inline
-
-from sklearn.model_selection import train_test_split
-total_training = []
-total_validation = []
+<span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+total_training <span style="color:#f92672">=</span> []
+total_validation <span style="color:#f92672">=</span> []
 
 
-</code></pre>
-
-<p>First, we download a csv export of the Google stock from <a href="https://www.nasdaq.com/symbol/goog/historical">here</a>.</p>
-
+</code></pre></div><p>First, we download a csv export of the Google stock from <a href="https://www.nasdaq.com/symbol/goog/historical">here</a>.</p>
 <p>For convenience, this is saved in the presentations repository and can be access by URL.</p>
-
 <p><strong>Note:</strong></p>
-
-<p>We need to use the thousands=&lsquo;,&rsquo; parameter in order to ignore the commas in the numbers when converting to floats.</p>
-
+<p>We need to use the thousands=',' parameter in order to ignore the commas in the numbers when converting to floats.</p>
 <p>We&rsquo;ll use the head() method to get a look at what the dataframe looks like.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fileURL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://github.com/HSV-AI/presentations/raw/master/2019/190619/HistoricalQuotes.csv&#34;</span>
+stock_data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(fileURL, thousands<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;,&#39;</span>)
+stock_data<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">5</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<pre><code class="language-python">fileURL = &quot;https://github.com/HSV-AI/presentations/raw/master/2019/190619/HistoricalQuotes.csv&quot;
-stock_data = pd.read_csv(fileURL, thousands=',')
-stock_data.head(5)
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>close</th>
-      <th>volume</th>
-      <th>open</th>
-      <th>high</th>
-      <th>low</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>16:00</td>
-      <td>1103.60</td>
-      <td>1386584.0</td>
-      <td>1107.82</td>
-      <td>1116.39</td>
-      <td>1098.9900</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2019/06/18</td>
-      <td>1103.60</td>
-      <td>1386684.0</td>
-      <td>1109.69</td>
-      <td>1116.39</td>
-      <td>1098.9900</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2019/06/17</td>
-      <td>1092.50</td>
-      <td>941602.0</td>
-      <td>1086.28</td>
-      <td>1099.18</td>
-      <td>1086.2800</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2019/06/14</td>
-      <td>1085.35</td>
-      <td>1111643.0</td>
-      <td>1086.42</td>
-      <td>1092.69</td>
-      <td>1080.1721</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2019/06/13</td>
-      <td>1088.77</td>
-      <td>1058000.0</td>
-      <td>1083.64</td>
-      <td>1094.17</td>
-      <td>1080.1500</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">stock_data.info()
-</code></pre>
-
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">stock_data<span style="color:#f92672">.</span>info()
+</code></pre></div><pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
 RangeIndex: 1260 entries, 0 to 1259
 Data columns (total 6 columns):
 date      1260 non-null object
@@ -322,156 +231,77 @@ low       1260 non-null float64
 dtypes: float64(5), object(1)
 memory usage: 59.1+ KB
 </code></pre>
-
 <p>The example showed how to use 2 values as input - the volume and an average of the high/low price. I&rsquo;ve changed this to just use the 5 values individually and let the network figure out how they might be related when predicting an output.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">input_feature<span style="color:#f92672">=</span> stock_data<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">1</span>:]<span style="color:#f92672">.</span>values
+input_data <span style="color:#f92672">=</span> input_feature
+input_feature<span style="color:#f92672">.</span>shape
 
-<pre><code class="language-python">input_feature= stock_data.iloc[:,1:].values
-input_data = input_feature
-input_feature.shape
+output_feature <span style="color:#f92672">=</span> stock_data<span style="color:#f92672">.</span>iloc[:,[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">3</span>]]<span style="color:#f92672">.</span>values
 
-output_feature = stock_data.iloc[:,[1,3]].values
-
-print(input_feature.shape)
-print(output_feature.shape)
-stock_data.iloc[:,1:].head(5)
-</code></pre>
-
-<pre><code>(1260, 5)
+<span style="color:#66d9ef">print</span>(input_feature<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(output_feature<span style="color:#f92672">.</span>shape)
+stock_data<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">1</span>:]<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">5</span>)
+</code></pre></div><pre><code>(1260, 5)
 (1260, 2)
 </code></pre>
+<!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>close</th>
-      <th>volume</th>
-      <th>open</th>
-      <th>high</th>
-      <th>low</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1103.60</td>
-      <td>1386584.0</td>
-      <td>1107.82</td>
-      <td>1116.39</td>
-      <td>1098.9900</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1103.60</td>
-      <td>1386684.0</td>
-      <td>1109.69</td>
-      <td>1116.39</td>
-      <td>1098.9900</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1092.50</td>
-      <td>941602.0</td>
-      <td>1086.28</td>
-      <td>1099.18</td>
-      <td>1086.2800</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1085.35</td>
-      <td>1111643.0</td>
-      <td>1086.42</td>
-      <td>1092.69</td>
-      <td>1080.1721</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1088.77</td>
-      <td>1058000.0</td>
-      <td>1083.64</td>
-      <td>1094.17</td>
-      <td>1080.1500</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<pre><code class="language-python">plt.figure(figsize=(10,8))
-plt.plot(input_feature[:,1])
-plt.title(&quot;Volume of stocks sold&quot;)
-plt.xlabel(&quot;Time (latest-&gt; oldest)&quot;)
-plt.ylabel(&quot;Volume of stocks traded&quot;)
-plt.show()
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(input_feature[:,<span style="color:#ae81ff">1</span>])
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Volume of stocks sold&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (latest-&gt; oldest)&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Volume of stocks traded&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="190626_RNN_TimeSeries_Part3_9_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(input_feature[:,<span style="color:#ae81ff">2</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;blue&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Google Stock Prices&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (latest-&gt; oldest)&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Stock Open Price&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="190626_RNN_TimeSeries_Part3_10_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">input_scaler <span style="color:#f92672">=</span> MinMaxScaler(feature_range<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>))
+input_data[:,:] <span style="color:#f92672">=</span> input_scaler<span style="color:#f92672">.</span>fit_transform(input_feature[:,:])
 
-<p><img src="190626_RNN_TimeSeries_Part3_9_0.png" alt="png" /></p>
+output_scaler <span style="color:#f92672">=</span> MinMaxScaler(feature_range<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>))
+<span style="color:#75715e"># output_feature = output_feature.reshape(-1, 1)</span>
+output_data <span style="color:#f92672">=</span> output_scaler<span style="color:#f92672">.</span>fit_transform(output_feature[:,:])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lookback<span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
 
-<pre><code class="language-python">plt.figure(figsize=(10,8))
-plt.plot(input_feature[:,2], color='blue')
-plt.title(&quot;Google Stock Prices&quot;)
-plt.xlabel(&quot;Time (latest-&gt; oldest)&quot;)
-plt.ylabel(&quot;Stock Open Price&quot;)
-plt.show()
-</code></pre>
+X<span style="color:#f92672">=</span>[]
+y<span style="color:#f92672">=</span>[]
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(stock_data)<span style="color:#f92672">-</span>lookback<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+    t<span style="color:#f92672">=</span>[]
+    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,lookback):
+        t<span style="color:#f92672">.</span>append(input_data[[(i<span style="color:#f92672">+</span>j)], :])
 
-<p><img src="190626_RNN_TimeSeries_Part3_10_0.png" alt="png" /></p>
+    X<span style="color:#f92672">.</span>append(t)
+    y<span style="color:#f92672">.</span>append(output_data[i<span style="color:#f92672">+</span> lookback])
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">X, y<span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(X), np<span style="color:#f92672">.</span>array(y)
+X <span style="color:#f92672">=</span> X<span style="color:#f92672">.</span>reshape(X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>],lookback, <span style="color:#ae81ff">5</span>)
 
-<pre><code class="language-python">input_scaler = MinMaxScaler(feature_range=(0,1))
-input_data[:,:] = input_scaler.fit_transform(input_feature[:,:])
-
-output_scaler = MinMaxScaler(feature_range=(0,1))
-# output_feature = output_feature.reshape(-1, 1)
-output_data = output_scaler.fit_transform(output_feature[:,:])
-</code></pre>
-
-<pre><code class="language-python">lookback= 50
-
-X=[]
-y=[]
-for i in range(len(stock_data)-lookback-1):
-    t=[]
-    for j in range(0,lookback):
-        t.append(input_data[[(i+j)], :])
-
-    X.append(t)
-    y.append(output_data[i+ lookback])
-</code></pre>
-
-<pre><code class="language-python">X, y= np.array(X), np.array(y)
-X = X.reshape(X.shape[0],lookback, 5)
-
-print(X.shape)
-print(y.shape)
-</code></pre>
-
-<pre><code>(1209, 50, 5)
+<span style="color:#66d9ef">print</span>(X<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(y<span style="color:#f92672">.</span>shape)
+</code></pre></div><pre><code>(1209, 50, 5)
 (1209, 2)
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model <span style="color:#f92672">=</span> Sequential()
+model<span style="color:#f92672">.</span>add(LSTM(units<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, return_sequences<span style="color:#f92672">=</span> True, input_shape<span style="color:#f92672">=</span>(X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>],<span style="color:#ae81ff">5</span>)))
+model<span style="color:#f92672">.</span>add(LSTM(units<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>, return_sequences<span style="color:#f92672">=</span>True))
+model<span style="color:#f92672">.</span>add(LSTM(units<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>))
+model<span style="color:#f92672">.</span>add(Dense(units<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>))
+model<span style="color:#f92672">.</span>summary()
 
-<pre><code class="language-python">model = Sequential()
-model.add(LSTM(units=30, return_sequences= True, input_shape=(X.shape[1],5)))
-model.add(LSTM(units=30, return_sequences=True))
-model.add(LSTM(units=30))
-model.add(Dense(units=2))
-model.summary()
-
-</code></pre>
-
-<pre><code>_________________________________________________________________
+</code></pre></div><pre><code>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
 lstm_4 (LSTM)                (None, 50, 30)            4320      
@@ -487,68 +317,52 @@ Trainable params: 19,022
 Non-trainable params: 0
 _________________________________________________________________
 </code></pre>
-
-<pre><code class="language-python">model.compile(optimizer='adam', loss='mean_squared_error')
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;adam&#39;</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mean_squared_error&#39;</span>)
+</code></pre></div><pre><code>W0626 22:12:08.926577 140698563360640 deprecation_wrapper.py:119] From /usr/local/lib/python3.6/dist-packages/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
 </code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> IPython.display <span style="color:#f92672">import</span> SVG
+<span style="color:#f92672">from</span> keras.utils.vis_utils <span style="color:#f92672">import</span> model_to_dot
 
-<pre><code>W0626 22:12:08.926577 140698563360640 deprecation_wrapper.py:119] From /usr/local/lib/python3.6/dist-packages/keras/optimizers.py:790: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
-</code></pre>
+SVG(model_to_dot(model, show_shapes<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>create(prog<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dot&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;svg&#39;</span>))
+</code></pre></div><p><img src="190626_RNN_TimeSeries_Part3_16_0.svg" alt="svg"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_loss</span>(history):
 
-<pre><code class="language-python">from IPython.display import SVG
-from keras.utils.vis_utils import model_to_dot
+  length <span style="color:#f92672">=</span> len(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+  rng <span style="color:#f92672">=</span> range(length)
 
-SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-</code></pre>
+  training_fit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>polyfit(rng, history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>], <span style="color:#ae81ff">1</span>)
+  training_trend <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>poly1d(training_fit)
 
-<p><img src="190626_RNN_TimeSeries_Part3_16_0.svg" alt="svg" /></p>
+  val_fit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>polyfit(rng, history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>], <span style="color:#ae81ff">1</span>)
+  val_trend <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>poly1d(val_fit)
 
-<pre><code class="language-python">def plot_loss(history):
+  plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+  plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>)
+  plt<span style="color:#f92672">.</span>plot(training_trend(rng), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
+  plt<span style="color:#f92672">.</span>plot(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;orange&#39;</span>)
+  plt<span style="color:#f92672">.</span>plot(val_trend(rng), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;orange&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
 
-  length = len(history.history['loss'])
-  rng = range(length)
+  plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Model loss&#39;</span>)
+  plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Loss&#39;</span>)
+  plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epoch&#39;</span>)
+  plt<span style="color:#f92672">.</span>legend([<span style="color:#e6db74">&#39;Training&#39;</span>, <span style="color:#e6db74">&#39;Training Trend&#39;</span>, <span style="color:#e6db74">&#39;Validation&#39;</span>, <span style="color:#e6db74">&#39;Validation Trend&#39;</span>], loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;lower left&#39;</span>)
+  plt<span style="color:#f92672">.</span>show()
 
-  training_fit = np.polyfit(rng, history.history['loss'], 1)
-  training_trend = np.poly1d(training_fit)
-
-  val_fit = np.polyfit(rng, history.history['val_loss'], 1)
-  val_trend = np.poly1d(val_fit)
-
-  plt.figure(figsize=(10,8))
-  plt.plot(history.history['loss'], color='green')
-  plt.plot(training_trend(rng), color='green', linestyle='--')
-  plt.plot(history.history['val_loss'], color='orange')
-  plt.plot(val_trend(rng), color='orange', linestyle='--')
-
-  plt.title('Model loss')
-  plt.ylabel('Loss')
-  plt.xlabel('Epoch')
-  plt.legend(['Training', 'Training Trend', 'Validation', 'Validation Trend'], loc='lower left')
-  plt.show()
-
-</code></pre>
-
-<p>Originally, we had this line:</p>
-
+</code></pre></div><p>Originally, we had this line:</p>
 <p>history = model.fit(X, y, validation_split=0.30, epochs=50, batch_size=32, verbose=1)</p>
-
 <p>The problem is that the validation split always takes the validation off of the back of the data, instead of randomly selecting 30% for validation.</p>
-
 <p>To change this up, we will use the train_test_split from sklearn to give us a random 30% validation set. Then we will train for 50 epochs and graph the training loss and validation loss to see how we&rsquo;re doing.</p>
-
 <p>We will repeat this for a few times to see how low the error drops.</p>
-
-<pre><code class="language-python">for i in range(4):
-  XTraining, XValidation, YTraining, YValidation = train_test_split(X,y,test_size=0.3) # before model building
-  history = model.fit(XTraining, YTraining, batch_size=32, epochs=50, validation_data=(XValidation,YValidation))
-  total_training.extend(history.history['loss'])
-  total_validation.extend(history.history['val_loss'])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">4</span>):
+  XTraining, XValidation, YTraining, YValidation <span style="color:#f92672">=</span> train_test_split(X,y,test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>) <span style="color:#75715e"># before model building</span>
+  history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit(XTraining, YTraining, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>, epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, validation_data<span style="color:#f92672">=</span>(XValidation,YValidation))
+  total_training<span style="color:#f92672">.</span>extend(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;loss&#39;</span>])
+  total_validation<span style="color:#f92672">.</span>extend(history<span style="color:#f92672">.</span>history[<span style="color:#e6db74">&#39;val_loss&#39;</span>])
   
-  # Plot training &amp; validation loss values
+  <span style="color:#75715e"># Plot training &amp; validation loss values</span>
   plot_loss(history)
 
-</code></pre>
-
-<pre><code>W0626 22:12:19.481230 140698563360640 deprecation.py:323] From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/math_grad.py:1250: add_dispatch_support.&lt;locals&gt;.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
+</code></pre></div><pre><code>W0626 22:12:19.481230 140698563360640 deprecation.py:323] From /usr/local/lib/python3.6/dist-packages/tensorflow/python/ops/math_grad.py:1250: add_dispatch_support.&lt;locals&gt;.wrapper (from tensorflow.python.ops.array_ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use tf.where in 2.0, which has the same broadcast rule as np.where
 W0626 22:12:21.329057 140698563360640 deprecation_wrapper.py:119] From /usr/local/lib/python3.6/dist-packages/keras/backend/tensorflow_backend.py:986: The name tf.assign_add is deprecated. Please use tf.compat.v1.assign_add instead.
@@ -659,9 +473,7 @@ Epoch 49/50
 Epoch 50/50
 846/846 [==============================] - 2s 3ms/step - loss: 8.7380e-04 - val_loss: 7.0381e-04
 </code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_19_2.png" alt="png" /></p>
-
+<p><img src="190626_RNN_TimeSeries_Part3_19_2.png" alt="png"></p>
 <pre><code>Train on 846 samples, validate on 363 samples
 Epoch 1/50
 846/846 [==============================] - 2s 3ms/step - loss: 7.8567e-04 - val_loss: 8.3607e-04
@@ -764,9 +576,7 @@ Epoch 49/50
 Epoch 50/50
 846/846 [==============================] - 2s 3ms/step - loss: 4.1643e-04 - val_loss: 3.9325e-04
 </code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_19_4.png" alt="png" /></p>
-
+<p><img src="190626_RNN_TimeSeries_Part3_19_4.png" alt="png"></p>
 <pre><code>Train on 846 samples, validate on 363 samples
 Epoch 1/50
 846/846 [==============================] - 2s 3ms/step - loss: 3.6714e-04 - val_loss: 4.1345e-04
@@ -869,9 +679,7 @@ Epoch 49/50
 Epoch 50/50
 846/846 [==============================] - 2s 3ms/step - loss: 2.1879e-04 - val_loss: 2.7415e-04
 </code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_19_6.png" alt="png" /></p>
-
+<p><img src="190626_RNN_TimeSeries_Part3_19_6.png" alt="png"></p>
 <pre><code>Train on 846 samples, validate on 363 samples
 Epoch 1/50
 846/846 [==============================] - 2s 3ms/step - loss: 2.3371e-04 - val_loss: 2.1271e-04
@@ -974,58 +782,47 @@ Epoch 49/50
 Epoch 50/50
 846/846 [==============================] - 2s 3ms/step - loss: 2.0695e-04 - val_loss: 2.3324e-04
 </code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_19_8.png" alt="png" /></p>
-
+<p><img src="190626_RNN_TimeSeries_Part3_19_8.png" alt="png"></p>
 <p>Now we&rsquo;ll take a look at the final results of the training/validation error. We throw out the first 10 epochs of training, as they vary wildly before any real training begins.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">length <span style="color:#f92672">=</span> len(total_training[<span style="color:#ae81ff">10</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+rng <span style="color:#f92672">=</span> range(length)
 
-<pre><code class="language-python">length = len(total_training[10:-1])
-rng = range(length)
+training_fit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>polyfit(rng, total_training[<span style="color:#ae81ff">10</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">4</span>)
+training_trend <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>poly1d(training_fit)
 
-training_fit = np.polyfit(rng, total_training[10:-1], 4)
-training_trend = np.poly1d(training_fit)
+val_fit <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>polyfit(rng, total_validation[<span style="color:#ae81ff">10</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">4</span>)
+val_trend <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>poly1d(val_fit)
 
-val_fit = np.polyfit(rng, total_validation[10:-1], 4)
-val_trend = np.poly1d(val_fit)
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(total_training[<span style="color:#ae81ff">10</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(training_trend(rng), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(total_validation[<span style="color:#ae81ff">10</span>:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;orange&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(val_trend(rng), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;orange&#39;</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;--&#39;</span>)
 
-plt.figure(figsize=(10,8))
-plt.plot(total_training[10:-1], color='green')
-plt.plot(training_trend(rng), color='green', linestyle='--')
-plt.plot(total_validation[10:-1], color='orange')
-plt.plot(val_trend(rng), color='orange', linestyle='--')
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Model loss&#39;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Loss&#39;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;Epoch&#39;</span>)
+plt<span style="color:#f92672">.</span>legend([<span style="color:#e6db74">&#39;Training&#39;</span>, <span style="color:#e6db74">&#39;Training Trend&#39;</span>, <span style="color:#e6db74">&#39;Validation&#39;</span>, <span style="color:#e6db74">&#39;Validation Trend&#39;</span>], loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper right&#39;</span>)
+plt<span style="color:#f92672">.</span>show()
 
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Training', 'Training Trend', 'Validation', 'Validation Trend'], loc='upper right')
-plt.show()
+</code></pre></div><p><img src="190626_RNN_TimeSeries_Part3_21_0.png" alt="png"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predicted_value <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(X)
+unscaled_output <span style="color:#f92672">=</span> output_scaler<span style="color:#f92672">.</span>inverse_transform(predicted_value)
+<span style="color:#66d9ef">print</span>(predicted_value<span style="color:#f92672">.</span>shape)
 
+temp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(stock_data<span style="color:#f92672">.</span>open[lookback:<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])<span style="color:#f92672">.</span>reshape(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>)
+
+</code></pre></div><pre><code>(1209, 2)
 </code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_21_0.png" alt="png" /></p>
-
-<pre><code class="language-python">predicted_value = model.predict(X)
-unscaled_output = output_scaler.inverse_transform(predicted_value)
-print(predicted_value.shape)
-
-temp = np.array(stock_data.open[lookback:-1]).reshape(-1,1)
-
-</code></pre>
-
-<pre><code>(1209, 2)
-</code></pre>
-
-<pre><code class="language-python">
-plt.figure(figsize=(10,8))
-plt.plot(unscaled_output[:,0], color= 'red')
-plt.plot(temp, color='green')
-plt.title(&quot;Opening price of stocks sold&quot;)
-plt.xlabel(&quot;Time (latest-&gt; oldest)&quot;)
-plt.ylabel(&quot;Stock Opening Price&quot;)
-plt.show()
-</code></pre>
-
-<p><img src="190626_RNN_TimeSeries_Part3_23_0.png" alt="png" /></p><ul class="pa0">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+plt<span style="color:#f92672">.</span>figure(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">8</span>))
+plt<span style="color:#f92672">.</span>plot(unscaled_output[:,<span style="color:#ae81ff">0</span>], color<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;red&#39;</span>)
+plt<span style="color:#f92672">.</span>plot(temp, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>)
+plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Opening price of stocks sold&#34;</span>)
+plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Time (latest-&gt; oldest)&#34;</span>)
+plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Stock Opening Price&#34;</span>)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img src="190626_RNN_TimeSeries_Part3_23_0.png" alt="png"></p><ul class="pa0">
   
 </ul>
 <div class="mt6">

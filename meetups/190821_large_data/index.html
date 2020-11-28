@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.78.1" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -32,13 +32,10 @@
 <meta property="og:description" content="We talked about approaches to work with large datasets when training deep neural networks. Specifically, using the generator from the Keras package to provide batch-by-batch training data for an LSTM." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/190821_large_data/" />
-<meta property="article:published_time" content="2019-08-21T22:40:19-05:00"/>
-<meta property="article:modified_time" content="2019-08-21T22:40:19-05:00"/>
-
+<meta property="article:published_time" content="2019-08-21T22:40:19-05:00" />
+<meta property="article:modified_time" content="2019-08-21T22:40:19-05:00" />
 <meta itemprop="name" content="Working with Large Datasets">
 <meta itemprop="description" content="We talked about approaches to work with large datasets when training deep neural networks. Specifically, using the generator from the Keras package to provide batch-by-batch training data for an LSTM.">
-
-
 <meta itemprop="datePublished" content="2019-08-21T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-08-21T22:40:19-05:00" />
 <meta itemprop="wordCount" content="2710">
@@ -92,7 +89,7 @@
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/neurips-2019/" title="NeurIPS page">
+            <a class="hover-white no-underline white-90" href="/neurips/" title="NeurIPS page">
               NeurIPS
             </a>
           </li>
@@ -172,11 +169,8 @@
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>We talked about approaches to work with large datasets when training deep neural networks. Specifically, using the generator from the Keras package to provide batch-by-batch training data for an LSTM.</p>
-
-<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190821_Large_Data.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="agenda">Agenda</h2>
-
 <ul>
 <li>Intro &amp; Welcome</li>
 <li>Project Updates
@@ -185,27 +179,16 @@
 <li>Deep Learning with Large Data Sets</li>
 <li>Planning for Fall</li>
 </ul>
-
 <p>Ben to present next week&hellip;</p>
-
 <p>Who does AI for Agriculture</p>
-
 <p>Lightning Talks</p>
-
 <p>Phil writing program for gradient descent</p>
-
 <p>How the post from Grant Silva actualy works (maybe Ben)</p>
-
 <p>September 18&amp;19 - NASA Small Business Workshop</p>
-
 <h2 id="deep-learning-with-large-data-sets">Deep Learning with Large Data Sets</h2>
-
 <p>There are times when you will need to be able to train a neural network with a dataset that is larger than can fit into the available memory of a machine.</p>
-
 <p>So far, the first time I have encountered this issue is with an RNN that takes a sequence of input data.</p>
-
 <p>For example, the project that I&rsquo;m working with Radar and Satellite data has the following input structure:</p>
-
 <pre><code>year/month/day/
     radar/
         images (720x1832 float64) ~= 10MB (average ~150-300 scans per day)
@@ -213,40 +196,23 @@
         band/
             images (each band scanned every 5 minutes)
     rain.csv
-</code></pre>
-
-<p>Assuming that the sat images are similar to the radar images, that gives us around 10GB of data per day.</p>
-
+</code></pre><p>Assuming that the sat images are similar to the radar images, that gives us around 10GB of data per day.</p>
 <p>The approach with Keras is to use a Data Generator to load the data incrementally when training the model.</p>
-
 <h2 id="references">References:</h2>
-
 <p><a href="https://medium.com/datadriveninvestor/keras-imagedatagenerator-methods-an-easy-guide-550ecd3c0a92">ImageDataGenerator</a>  [<a href="https://github.com/keras-team/keras/blob/master/keras/preprocessing/image.py#L233">source</a>]</p>
-
 <p><a href="https://github.com/stratospark/keras-multiprocess-image-data-generator">Multiprocess ImageDataGenerator</a></p>
-
 <p><a href="https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly">Stanford Tutorial</a></p>
-
 <p><a href="https://medium.com/datadriveninvestor/keras-training-on-large-datasets-3e9d9dbc09d4">Loading Large Data</a></p>
-
 <p><a href="https://machinelearningmastery.com/how-to-load-large-datasets-from-directories-for-deep-learning-with-keras/">More Loading Large Datasets</a></p>
-
 <p><a href="https://www.pyimagesearch.com/2019/05/27/keras-feature-extraction-on-large-datasets-with-deep-learning/">Keras Feature extraction on large data</a></p>
-
 <p><a href="https://www.pyimagesearch.com/2018/12/24/how-to-use-keras-fit-and-fit_generator-a-hands-on-tutorial/">Keras Fit vs Fit_Generator</a></p>
-
 <h2 id="keras-example">Keras Example</h2>
-
 <p>Here&rsquo;s an example from the Keras codebase that uses the ImageDataGenerator. You can think of this as a different approach that takes a given set of images and increases the data size by applying transformations to create new images based off of existing data.</p>
-
 <pre><code>import multiprocessing
 
 multiprocessing.cpu_count()
+</code></pre><pre><code>2
 </code></pre>
-
-<pre><code>2
-</code></pre>
-
 <pre><code>'''
 #Train a simple deep CNN on the CIFAR10 small images dataset.
 It gets to 75% validation accuracy in 25 epochs, and 79% after 50 epochs.
@@ -386,9 +352,7 @@ print('Saved trained model at %s ' % model_path)
 scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
-</code></pre>
-
-<pre><code>x_train shape: (50000, 32, 32, 3)
+</code></pre><pre><code>x_train shape: (50000, 32, 32, 3)
 50000 train samples
 10000 test samples
 Using real-time data augmentation.

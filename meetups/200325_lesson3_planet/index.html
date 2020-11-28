@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.55.5" />
+    <meta name="generator" content="Hugo 0.78.1" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -32,16 +32,13 @@
 <meta property="og:description" content="For this session, we covered the results of the Fast.AI Lesson 3 and learned about multi-label classification with a CNN. The full notebook is included in this post." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/200325_lesson3_planet/" />
-<meta property="article:published_time" content="2020-03-25T22:40:19-05:00"/>
-<meta property="article:modified_time" content="2020-03-25T22:40:19-05:00"/>
-
+<meta property="article:published_time" content="2020-03-25T22:40:19-05:00" />
+<meta property="article:modified_time" content="2020-03-25T22:40:19-05:00" />
 <meta itemprop="name" content="Fast.AI Lesson 3">
 <meta itemprop="description" content="For this session, we covered the results of the Fast.AI Lesson 3 and learned about multi-label classification with a CNN. The full notebook is included in this post.">
-
-
 <meta itemprop="datePublished" content="2020-03-25T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2020-03-25T22:40:19-05:00" />
-<meta itemprop="wordCount" content="1645">
+<meta itemprop="wordCount" content="1484">
 
 
 
@@ -92,7 +89,7 @@
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/neurips-2019/" title="NeurIPS page">
+            <a class="hover-white no-underline white-90" href="/neurips/" title="NeurIPS page">
               NeurIPS
             </a>
           </li>
@@ -172,36 +169,21 @@
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>For this session, we covered the results of the Fast.AI Lesson 3 and learned about multi-label classification with a CNN. The full notebook is included in this post.</p>
-
-<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2020/200325_lesson3_planet.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="multi-label-prediction-with-planet-amazon-dataset">Multi-label prediction with Planet Amazon dataset</h2>
-
 <pre><code>%reload_ext autoreload
 %autoreload 2
 %matplotlib inline
-</code></pre>
-
-<pre><code>!curl -s https://course.fast.ai/setup/colab | bash
-</code></pre>
-
-<pre><code>Updating fastai...
+</code></pre><pre><code>!curl -s https://course.fast.ai/setup/colab | bash
+</code></pre><pre><code>Updating fastai...
 Done.
 </code></pre>
-
 <pre><code>from fastai.vision import *
-</code></pre>
-
-<h2 id="getting-the-data">Getting the data</h2>
-
+</code></pre><h2 id="getting-the-data">Getting the data</h2>
 <p>The planet dataset isn&rsquo;t available on the <a href="https://course.fast.ai/datasets">fastai dataset page</a> due to copyright restrictions. You can download it from Kaggle however. Let&rsquo;s see how to do this by using the <a href="https://github.com/Kaggle/kaggle-api">Kaggle API</a> as it&rsquo;s going to be pretty useful to you if you want to join a competition or use other Kaggle datasets later on.</p>
-
 <p>First, install the Kaggle API by uncommenting the following line and executing it, or by executing it in your terminal (depending on your platform you may need to modify this slightly to either add <code>source activate fastai</code> or similar, or prefix <code>pip</code> with a path. Have a look at how <code>conda install</code> is called for your platform in the appropriate <em>Returning to work</em> section of <a href="https://course.fast.ai/">https://course.fast.ai/</a>. (Depending on your environment, you may also need to append &ldquo;&ndash;user&rdquo; to the command.)</p>
-
 <pre><code>! {sys.executable} -m pip install kaggle --upgrade
-</code></pre>
-
-<pre><code>Requirement already up-to-date: kaggle in /usr/local/lib/python3.6/dist-packages (1.5.6)
+</code></pre><pre><code>Requirement already up-to-date: kaggle in /usr/local/lib/python3.6/dist-packages (1.5.6)
 Requirement already satisfied, skipping upgrade: six&gt;=1.10 in /usr/local/lib/python3.6/dist-packages (from kaggle) (1.12.0)
 Requirement already satisfied, skipping upgrade: certifi in /usr/local/lib/python3.6/dist-packages (from kaggle) (2019.11.28)
 Requirement already satisfied, skipping upgrade: requests in /usr/local/lib/python3.6/dist-packages (from kaggle) (2.21.0)
@@ -213,150 +195,67 @@ Requirement already satisfied, skipping upgrade: chardet&lt;3.1.0,&gt;=3.0.2 in 
 Requirement already satisfied, skipping upgrade: idna&lt;2.9,&gt;=2.5 in /usr/local/lib/python3.6/dist-packages (from requests-&gt;kaggle) (2.8)
 Requirement already satisfied, skipping upgrade: text-unidecode&gt;=1.3 in /usr/local/lib/python3.6/dist-packages (from python-slugify-&gt;kaggle) (1.3)
 </code></pre>
-
 <p>Then you need to upload your credentials from Kaggle on your instance. Login to kaggle and click on your profile picture on the top left corner, then &lsquo;My account&rsquo;. Scroll down until you find a button named &lsquo;Create New API Token&rsquo; and click on it. This will trigger the download of a file named &lsquo;kaggle.json&rsquo;.</p>
-
 <p>Upload this file to the directory this notebook is running in, by clicking &ldquo;Upload&rdquo; on your main Jupyter page, then uncomment and execute the next two commands (or run them in a terminal). For Windows, uncomment the last two commands.</p>
-
 <pre><code>! mkdir -p ~/.kaggle/
 ! mv kaggle.json ~/.kaggle/
 ! chmod 600 ~/.kaggle/kaggle.json
 # For Windows, uncomment these two commands
 # ! mkdir %userprofile%\.kaggle
 # ! move kaggle.json %userprofile%\.kaggle
-</code></pre>
-
-<p>You&rsquo;re all set to download the data from <a href="https://www.kaggle.com/c/planet-understanding-the-amazon-from-space">planet competition</a>. You <strong>first need to go to its main page and accept its rules</strong>, and run the two cells below (uncomment the shell commands to download and unzip the data). If you get a <code>403 forbidden</code> error it means you haven&rsquo;t accepted the competition rules yet (you have to go to the competition page, click on <em>Rules</em> tab, and then scroll to the bottom to find the <em>accept</em> button).</p>
-
+</code></pre><p>You&rsquo;re all set to download the data from <a href="https://www.kaggle.com/c/planet-understanding-the-amazon-from-space">planet competition</a>. You <strong>first need to go to its main page and accept its rules</strong>, and run the two cells below (uncomment the shell commands to download and unzip the data). If you get a <code>403 forbidden</code> error it means you haven&rsquo;t accepted the competition rules yet (you have to go to the competition page, click on <em>Rules</em> tab, and then scroll to the bottom to find the <em>accept</em> button).</p>
 <pre><code>path = 'planet/planet'
-</code></pre>
-
-<pre><code>!kaggle datasets download nikitarom/planets-dataset
+</code></pre><pre><code>!kaggle datasets download nikitarom/planets-dataset
 !unzip planets-dataset.zip
 # ! kaggle competitions download -c planet-understanding-the-amazon-from-space -f train-jpg.tar.7z -p {path}  
 # ! kaggle competitions download -c planet-understanding-the-amazon-from-space -f train_v2.csv -p {path}  
 # ! unzip -q -n {path}/train_v2.csv.zip -d {path}
-</code></pre>
-
-<p>To extract the content of this file, we&rsquo;ll need 7zip, so uncomment the following line if you need to install it (or run <code>sudo apt install p7zip-full</code> in your terminal).</p>
-
+</code></pre><p>To extract the content of this file, we&rsquo;ll need 7zip, so uncomment the following line if you need to install it (or run <code>sudo apt install p7zip-full</code> in your terminal).</p>
 <pre><code># ! conda install --yes --prefix {sys.prefix} -c haasad eidl7zip
-</code></pre>
-
-<p>And now we can unpack the data (uncomment to run - this might take a few minutes to complete).</p>
-
+</code></pre><p>And now we can unpack the data (uncomment to run - this might take a few minutes to complete).</p>
 <pre><code># ! 7za -bd -y -so x {path}/train-jpg.tar.7z | tar xf - -C {path.as_posix()}
-</code></pre>
-
-<h2 id="multiclassification">Multiclassification</h2>
-
+</code></pre><h2 id="multiclassification">Multiclassification</h2>
 <p>Contrary to the pets dataset studied in last lesson, here each picture can have multiple labels. If we take a look at the csv file containing the labels (in &lsquo;train_v2.csv&rsquo; here) we see that each &lsquo;image_name&rsquo; is associated to several tags separated by spaces.</p>
-
 <pre><code>df = pd.read_csv('planet/planet/train_classes.csv')
 df.head()
+</code></pre><!-- raw HTML omitted -->
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
 </code></pre>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>image_name</th>
-      <th>tags</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>train_0</td>
-      <td>haze primary</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>train_1</td>
-      <td>agriculture clear primary water</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>train_2</td>
-      <td>clear primary</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>train_3</td>
-      <td>clear primary</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>train_4</td>
-      <td>agriculture clear habitation primary road</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>To put this in a <code>DataBunch</code> while using the <a href="https://docs.fast.ai/data_block.html">data block API</a>, we then need to using <code>ImageList</code> (and not <code>ImageDataBunch</code>). This will make sure the model created has the proper loss function to deal with the multiple classes.</p>
-
 <pre><code>tfms = get_transforms(flip_vert=True, max_lighting=0.1, max_zoom=1.05, max_warp=0.)
-</code></pre>
-
-<p>We use parentheses around the data block pipeline below, so that we can use a multiline statement without needing to add &lsquo;\&rsquo;.</p>
-
+</code></pre><p>We use parentheses around the data block pipeline below, so that we can use a multiline statement without needing to add &lsquo;\&rsquo;.</p>
 <pre><code>np.random.seed(42)
 src = (ImageList.from_csv('planet/planet', 'train_classes.csv', folder='train-jpg', suffix='.jpg')
        .split_by_rand_pct(0.2)
        .label_from_df(label_delim=' '))
-</code></pre>
-
-<pre><code>data = (src.transform(tfms, size=128)
+</code></pre><pre><code>data = (src.transform(tfms, size=128)
         .databunch().normalize(imagenet_stats))
-</code></pre>
-
-<p><code>show_batch</code> still works, and show us the different labels separated by <code>;</code>.</p>
-
+</code></pre><p><code>show_batch</code> still works, and show us the different labels separated by <code>;</code>.</p>
 <pre><code>data.show_batch(rows=3, figsize=(12,9))
-</code></pre>
-
-<p><img src="200325_lesson3_planet_26_0.png" alt="png" /></p>
-
+</code></pre><p><img src="200325_lesson3_planet_26_0.png" alt="png"></p>
 <p>To create a <code>Learner</code> we use the same function as in lesson 1. Our base architecture is resnet50 again, but the metrics are a little bit differeent: we use <code>accuracy_thresh</code> instead of <code>accuracy</code>. In lesson 1, we determined the predicition for a given class by picking the final activation that was the biggest, but here, each activation can be 0. or 1. <code>accuracy_thresh</code> selects the ones that are above a certain threshold (0.5 by default) and compares them to the ground truth.</p>
-
 <p>As for Fbeta, it&rsquo;s the metric that was used by Kaggle on this competition. See <a href="https://en.wikipedia.org/wiki/F1_score">here</a> for more details.</p>
-
 <pre><code>arch = models.resnet34
-</code></pre>
-
-<pre><code>acc_02 = partial(accuracy_thresh, thresh=0.2)
+</code></pre><pre><code>acc_02 = partial(accuracy_thresh, thresh=0.2)
 f_score = partial(fbeta, thresh=0.2)
 learn = cnn_learner(data, arch, metrics=[acc_02, f_score])
-</code></pre>
-
-<pre><code>Downloading: &quot;https://download.pytorch.org/models/resnet34-333f7ec4.pth&quot; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
+</code></pre><pre><code>Downloading: &quot;https://download.pytorch.org/models/resnet34-333f7ec4.pth&quot; to /root/.cache/torch/checkpoints/resnet34-333f7ec4.pth
 
 
 
 HBox(children=(IntProgress(value=0, max=87306240), HTML(value='')))
 </code></pre>
-
 <p>We use the LR Finder to pick a good learning rate.</p>
-
 <pre><code>learn.lr_find()
-</code></pre>
-
-<pre><code>&lt;div&gt;
+</code></pre><pre><code>&lt;div&gt;
     &lt;style&gt;
         /* Turns off some styling */
         progress {
@@ -373,134 +272,40 @@ HBox(children=(IntProgress(value=0, max=87306240), HTML(value='')))
   0.00% [0/1 00:00&lt;00:00]
 &lt;/div&gt;
 </code></pre>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy_thresh</th>
-      <th>fbeta</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table><p>
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='92' class='' max='506', style='width:300px; height:20px; vertical-align: middle;'></progress>
-      18.18% [92/506 00:21<01:37 2.6318]
-    </div>
-    
-
-
-    LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
+<!-- raw HTML omitted -->
+<pre><code>&lt;div&gt;
+    &lt;style&gt;
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    &lt;/style&gt;
+  &lt;progress value='92' class='' max='506', style='width:300px; height:20px; vertical-align: middle;'&gt;&lt;/progress&gt;
+  18.18% [92/506 00:21&lt;01:37 2.6318]
+&lt;/div&gt;
 
 
 
-```
-learn.recorder.plot()
-```
-
-
-![png](200325_lesson3_planet_32_0.png)
-
-
-Then we can fit the head of our network.
-
-
-```
-lr = 0.01
-```
-
-
-```
-learn.fit_one_cycle(5, slice(lr))
-```
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy_thresh</th>
-      <th>fbeta</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>0.146025</td>
-      <td>0.122986</td>
-      <td>0.944156</td>
-      <td>0.894195</td>
-      <td>02:20</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0.116038</td>
-      <td>0.103306</td>
-      <td>0.947854</td>
-      <td>0.909214</td>
-      <td>02:20</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0.106912</td>
-      <td>0.096093</td>
-      <td>0.951132</td>
-      <td>0.916606</td>
-      <td>02:20</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>0.099083</td>
-      <td>0.092262</td>
-      <td>0.954177</td>
-      <td>0.918962</td>
-      <td>02:18</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>0.097352</td>
-      <td>0.091227</td>
-      <td>0.953842</td>
-      <td>0.919874</td>
-      <td>02:18</td>
-    </tr>
-  </tbody>
-</table>
-
+LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
+</code></pre>
+<pre><code>learn.recorder.plot()
+</code></pre><p><img src="200325_lesson3_planet_32_0.png" alt="png"></p>
+<p>Then we can fit the head of our network.</p>
+<pre><code>lr = 0.01
+</code></pre><pre><code>learn.fit_one_cycle(5, slice(lr))
+</code></pre><!-- raw HTML omitted -->
 <pre><code>learn.save('stage-1-rn34')
-</code></pre>
-
-<p>&hellip;And fine-tune the whole model:</p>
-
+</code></pre><p>&hellip;And fine-tune the whole model:</p>
 <pre><code>learn.unfreeze()
-</code></pre>
-
-<pre><code>learn.lr_find()
+</code></pre><pre><code>learn.lr_find()
 learn.recorder.plot()
-</code></pre>
-
-<pre><code>&lt;div&gt;
+</code></pre><pre><code>&lt;div&gt;
     &lt;style&gt;
         /* Turns off some styling */
         progress {
@@ -517,304 +322,88 @@ learn.recorder.plot()
   0.00% [0/1 00:00&lt;00:00]
 &lt;/div&gt;
 </code></pre>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy_thresh</th>
-      <th>fbeta</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table><p>
-
-    <div>
-        <style>
-            /* Turns off some styling */
-            progress {
-                /* gets rid of default border in Firefox and Opera. */
-                border: none;
-                /* Needs to be in here for Safari polyfill so background images work as expected. */
-                background-size: auto;
-            }
-            .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-                background: #F44336;
-            }
-        </style>
-      <progress value='85' class='' max='506', style='width:300px; height:20px; vertical-align: middle;'></progress>
-      16.80% [85/506 00:20<01:42 0.2839]
-    </div>
-    
-
-
-    LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
+<!-- raw HTML omitted -->
+<pre><code>&lt;div&gt;
+    &lt;style&gt;
+        /* Turns off some styling */
+        progress {
+            /* gets rid of default border in Firefox and Opera. */
+            border: none;
+            /* Needs to be in here for Safari polyfill so background images work as expected. */
+            background-size: auto;
+        }
+        .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
+            background: #F44336;
+        }
+    &lt;/style&gt;
+  &lt;progress value='85' class='' max='506', style='width:300px; height:20px; vertical-align: middle;'&gt;&lt;/progress&gt;
+  16.80% [85/506 00:20&lt;01:42 0.2839]
+&lt;/div&gt;
 
 
 
-![png](200325_lesson3_planet_39_2.png)
-
-
-
-```
-learn.fit_one_cycle(5, slice(1e-5, lr/5))
-```
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>accuracy_thresh</th>
-      <th>fbeta</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>0.099162</td>
-      <td>0.092750</td>
-      <td>0.950732</td>
-      <td>0.918759</td>
-      <td>02:22</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>0.099836</td>
-      <td>0.092544</td>
-      <td>0.951444</td>
-      <td>0.920035</td>
-      <td>02:22</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>0.094310</td>
-      <td>0.087545</td>
-      <td>0.955041</td>
-      <td>0.923917</td>
-      <td>02:23</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>0.088801</td>
-      <td>0.084848</td>
-      <td>0.957846</td>
-      <td>0.926931</td>
-      <td>02:22</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>0.082217</td>
-      <td>0.084555</td>
-      <td>0.956415</td>
-      <td>0.926193</td>
-      <td>02:26</td>
-    </tr>
-  </tbody>
-</table>
-
-<pre><code>learn.save('stage-2-rn34')
+LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
 </code></pre>
-
-<pre><code>data = (src.transform(tfms, size=256)
+<p><img src="200325_lesson3_planet_39_2.png" alt="png"></p>
+<pre><code>learn.fit_one_cycle(5, slice(1e-5, lr/5))
+</code></pre><!-- raw HTML omitted -->
+<pre><code>learn.save('stage-2-rn34')
+</code></pre><pre><code>data = (src.transform(tfms, size=256)
         .databunch().normalize(imagenet_stats))
 
 learn.data = data
 data.train_ds[0][0].shape
+</code></pre><pre><code>torch.Size([3, 256, 256])
 </code></pre>
-
-<pre><code>torch.Size([3, 256, 256])
-</code></pre>
-
 <pre><code>learn.freeze()
-</code></pre>
-
-<pre><code>learn.lr_find()
+</code></pre><pre><code>learn.lr_find()
 learn.recorder.plot()
+</code></pre><pre><code>LR Finder complete, type {learner_name}.recorder.plot() to see the graph.
 </code></pre>
-
-<pre><code>LR Finder complete, type {learner_name}.recorder.plot() to see the graph.
-</code></pre>
-
-<p><img src="200325_lesson3_planet_44_1.png" alt="png" /></p>
-
+<p><img src="200325_lesson3_planet_44_1.png" alt="png"></p>
 <pre><code>lr=1e-2/2
-</code></pre>
-
-<pre><code>learn.fit_one_cycle(5, slice(lr))
-</code></pre>
-
-<p>Total time: 09:01 <p><table style='width:375px; margin-bottom:10px'>
-  <tr>
-    <th>epoch</th>
-    <th>train_loss</th>
-    <th>valid_loss</th>
-    <th>accuracy_thresh</th>
-    <th>fbeta</th>
-  </tr>
-  <tr>
-    <th>1</th>
-    <th>0.087761</th>
-    <th>0.085013</th>
-    <th>0.958006</th>
-    <th>0.926066</th>
-  </tr>
-  <tr>
-    <th>2</th>
-    <th>0.087641</th>
-    <th>0.083732</th>
-    <th>0.958260</th>
-    <th>0.927459</th>
-  </tr>
-  <tr>
-    <th>3</th>
-    <th>0.084250</th>
-    <th>0.082856</th>
-    <th>0.958485</th>
-    <th>0.928200</th>
-  </tr>
-  <tr>
-    <th>4</th>
-    <th>0.082347</th>
-    <th>0.081470</th>
-    <th>0.960091</th>
-    <th>0.929166</th>
-  </tr>
-  <tr>
-    <th>5</th>
-    <th>0.078463</th>
-    <th>0.080984</th>
-    <th>0.959249</th>
-    <th>0.930089</th>
-  </tr>
-</table></p>
-
+</code></pre><pre><code>learn.fit_one_cycle(5, slice(lr))
+</code></pre><p>Total time: 09:01 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <pre><code>learn.save('stage-1-256-rn50')
-</code></pre>
-
-<pre><code>learn.unfreeze()
-</code></pre>
-
-<pre><code>learn.fit_one_cycle(5, slice(1e-5, lr/5))
-</code></pre>
-
-<p>Total time: 11:25 <p><table style='width:375px; margin-bottom:10px'>
-  <tr>
-    <th>epoch</th>
-    <th>train_loss</th>
-    <th>valid_loss</th>
-    <th>accuracy_thresh</th>
-    <th>fbeta</th>
-  </tr>
-  <tr>
-    <th>1</th>
-    <th>0.082938</th>
-    <th>0.083548</th>
-    <th>0.957846</th>
-    <th>0.927756</th>
-  </tr>
-  <tr>
-    <th>2</th>
-    <th>0.086312</th>
-    <th>0.084802</th>
-    <th>0.958718</th>
-    <th>0.925416</th>
-  </tr>
-  <tr>
-    <th>3</th>
-    <th>0.084824</th>
-    <th>0.082339</th>
-    <th>0.959975</th>
-    <th>0.930054</th>
-  </tr>
-  <tr>
-    <th>4</th>
-    <th>0.078784</th>
-    <th>0.081425</th>
-    <th>0.959983</th>
-    <th>0.929634</th>
-  </tr>
-  <tr>
-    <th>5</th>
-    <th>0.074530</th>
-    <th>0.080791</th>
-    <th>0.960426</th>
-    <th>0.931257</th>
-  </tr>
-</table></p>
-
+</code></pre><pre><code>learn.unfreeze()
+</code></pre><pre><code>learn.fit_one_cycle(5, slice(1e-5, lr/5))
+</code></pre><p>Total time: 11:25 <!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <pre><code>learn.recorder.plot_losses()
-</code></pre>
-
-<p><img src="200325_lesson3_planet_50_0.png" alt="png" /></p>
-
+</code></pre><p><img src="200325_lesson3_planet_50_0.png" alt="png"></p>
 <pre><code>learn.save('stage-2-256-rn50')
-</code></pre>
-
-<p>You won&rsquo;t really know how you&rsquo;re going until you submit to Kaggle, since the leaderboard isn&rsquo;t using the same subset as we have for training. But as a guide, 50th place (out of 938 teams) on the private leaderboard was a score of <code>0.930</code>.</p>
-
+</code></pre><p>You won&rsquo;t really know how you&rsquo;re going until you submit to Kaggle, since the leaderboard isn&rsquo;t using the same subset as we have for training. But as a guide, 50th place (out of 938 teams) on the private leaderboard was a score of <code>0.930</code>.</p>
 <pre><code>learn.export()
-</code></pre>
-
-<h2 id="fin">fin</h2>
-
+</code></pre><h2 id="fin">fin</h2>
 <p>(This section will be covered in part 2 - please don&rsquo;t ask about it just yet! :) )</p>
-
 <pre><code>#! kaggle competitions download -c planet-understanding-the-amazon-from-space -f test-jpg.tar.7z -p {path}  
 #! 7za -bd -y -so x {path}/test-jpg.tar.7z | tar xf - -C {path}
 #! kaggle competitions download -c planet-understanding-the-amazon-from-space -f test-jpg-additional.tar.7z -p {path}  
 #! 7za -bd -y -so x {path}/test-jpg-additional.tar.7z | tar xf - -C {path}
-</code></pre>
-
-<pre><code>test = ImageList.from_folder(path/'test-jpg').add(ImageList.from_folder(path/'test-jpg-additional'))
+</code></pre><pre><code>test = ImageList.from_folder(path/'test-jpg').add(ImageList.from_folder(path/'test-jpg-additional'))
 len(test)
+</code></pre><pre><code>61191
 </code></pre>
-
-<pre><code>61191
-</code></pre>
-
 <pre><code>learn = load_learner(path, test=test)
 preds, _ = learn.get_preds(ds_type=DatasetType.Test)
-</code></pre>
-
-<pre><code>thresh = 0.2
+</code></pre><pre><code>thresh = 0.2
 labelled_preds = [' '.join([learn.data.classes[i] for i,p in enumerate(pred) if p &gt; thresh]) for pred in preds]
-</code></pre>
-
-<pre><code>labelled_preds[:5]
-</code></pre>
-
-<pre><code>['agriculture cultivation partly_cloudy primary road',
+</code></pre><pre><code>labelled_preds[:5]
+</code></pre><pre><code>['agriculture cultivation partly_cloudy primary road',
  'clear haze primary water',
  'agriculture clear cultivation primary',
  'clear primary',
  'partly_cloudy primary']
 </code></pre>
-
 <pre><code>fnames = [f.name[:-4] for f in learn.data.test_ds.items]
-</code></pre>
-
-<pre><code>df = pd.DataFrame({'image_name':fnames, 'tags':labelled_preds}, columns=['image_name', 'tags'])
-</code></pre>
-
-<pre><code>df.to_csv(path/'submission.csv', index=False)
-</code></pre>
-
-<pre><code>! kaggle competitions submit planet-understanding-the-amazon-from-space -f {path/'submission.csv'} -m &quot;My submission&quot;
-</code></pre>
-
-<pre><code>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run 'chmod 600 /home/ubuntu/.kaggle/kaggle.json'
+</code></pre><pre><code>df = pd.DataFrame({'image_name':fnames, 'tags':labelled_preds}, columns=['image_name', 'tags'])
+</code></pre><pre><code>df.to_csv(path/'submission.csv', index=False)
+</code></pre><pre><code>! kaggle competitions submit planet-understanding-the-amazon-from-space -f {path/'submission.csv'} -m &quot;My submission&quot;
+</code></pre><pre><code>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run 'chmod 600 /home/ubuntu/.kaggle/kaggle.json'
 100%|██████████████████████████████████████| 2.18M/2.18M [00:02&lt;00:00, 1.05MB/s]
 Successfully submitted to Planet: Understanding the Amazon from Space
 </code></pre>
-
 <p>Private Leaderboard score: 0.9296 (around 80th)</p><ul class="pa0">
   
 </ul>
