@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.78.1" />
+    <meta name="generator" content="Hugo 0.55.5" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -31,18 +31,21 @@
     <meta property="og:title" content="Integrating AI and AR" />
 <meta property="og:description" content="Thoughts on AR/AI Integration Here&rsquo;s a great article by Adobe that covers some of the ways that they are using an integrated AI/AR approach.
 Another good starting point is this article on &ldquo;Combining artificial intelligence and augmented reality in mobile apps&rdquo;. It&rsquo;s somewhat of a sales pitch for Fritz.ai, but it does contain a lot of useful links - some of which I have incorporated.
-Other applications of AI that are useful in AR:" />
+Other applications of AI that are useful in AR: * Object Detection - finding the boundaries of objects * Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world * Pose Estimation - determining position of hands to control movement * Text Recognition - determine text (not always horizontally aligned) and convert to actionable content * Audio Recognition - voice commands to control movement" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/200729_ar-ai/" />
-<meta property="article:published_time" content="2020-07-29T22:40:19-05:00" />
-<meta property="article:modified_time" content="2020-07-29T22:40:19-05:00" />
+<meta property="article:published_time" content="2020-07-29T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2020-07-29T22:40:19-05:00"/>
+
 <meta itemprop="name" content="Integrating AI and AR">
 <meta itemprop="description" content="Thoughts on AR/AI Integration Here&rsquo;s a great article by Adobe that covers some of the ways that they are using an integrated AI/AR approach.
 Another good starting point is this article on &ldquo;Combining artificial intelligence and augmented reality in mobile apps&rdquo;. It&rsquo;s somewhat of a sales pitch for Fritz.ai, but it does contain a lot of useful links - some of which I have incorporated.
-Other applications of AI that are useful in AR:">
+Other applications of AI that are useful in AR: * Object Detection - finding the boundaries of objects * Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world * Pose Estimation - determining position of hands to control movement * Text Recognition - determine text (not always horizontally aligned) and convert to actionable content * Audio Recognition - voice commands to control movement">
+
+
 <meta itemprop="datePublished" content="2020-07-29T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2020-07-29T22:40:19-05:00" />
-<meta itemprop="wordCount" content="396">
+<meta itemprop="wordCount" content="401">
 
 
 
@@ -51,7 +54,7 @@ Other applications of AI that are useful in AR:">
 <meta name="twitter:title" content="Integrating AI and AR"/>
 <meta name="twitter:description" content="Thoughts on AR/AI Integration Here&rsquo;s a great article by Adobe that covers some of the ways that they are using an integrated AI/AR approach.
 Another good starting point is this article on &ldquo;Combining artificial intelligence and augmented reality in mobile apps&rdquo;. It&rsquo;s somewhat of a sales pitch for Fritz.ai, but it does contain a lot of useful links - some of which I have incorporated.
-Other applications of AI that are useful in AR:"/>
+Other applications of AI that are useful in AR: * Object Detection - finding the boundaries of objects * Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world * Pose Estimation - determining position of hands to control movement * Text Recognition - determine text (not always horizontally aligned) and convert to actionable content * Audio Recognition - voice commands to control movement"/>
 
   </head>
 
@@ -174,38 +177,56 @@ Other applications of AI that are useful in AR:"/>
       
     </header>
 
-    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="thoughts-on-arai-integration">Thoughts on AR/AI Integration</h2>
+    <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="thoughts-on-ar-ai-integration">Thoughts on AR/AI Integration</h2>
+
 <p>Here&rsquo;s a great article by <a href="https://cmo.adobe.com/articles/2019/8/how-aipowered-augmented-reality-transforms-digital-experiences.html">Adobe</a> that covers some of the ways that they are using an integrated AI/AR approach.</p>
+
 <p>Another good starting point is this article on &ldquo;<a href="https://heartbeat.fritz.ai/combining-artificial-intelligence-and-augmented-reality-in-mobile-apps-e0e0ad2cfddc">Combining artificial intelligence and augmented reality in mobile apps</a>&rdquo;. It&rsquo;s somewhat of a sales pitch for Fritz.ai, but it does contain a lot of useful links - some of which I have incorporated.</p>
-<p>Other applications of AI that are useful in AR:</p>
-<ul>
-<li>Object Detection - finding the boundaries of objects</li>
-<li>Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world</li>
-<li>Pose Estimation - determining position of hands to control movement</li>
-<li>Text Recognition - determine text (not always horizontally aligned) and convert to actionable content</li>
-<li>Audio Recognition - voice commands to control movement</li>
-</ul>
+
+<p>Other applications of AI that are useful in AR:
+* Object Detection - finding the boundaries of objects
+* Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world
+* Pose Estimation - determining position of hands to control movement
+* Text Recognition - determine text (not always horizontally aligned) and convert to actionable content
+* Audio Recognition - voice commands to control movement</p>
+
 <h2 id="moving-ai-to-mobile-devices">Moving AI to mobile devices</h2>
+
 <p>Before AI models were available to be run on mobile devices, most applications followed something along these lines:</p>
+
 <ol>
 <li>Grab data on the device</li>
 <li>Move it to a storage location</li>
 <li>Trigger some operation (possibly store the results as well)</li>
 <li>Respond to the device with the results</li>
 </ol>
-<p><img src="https://lh3.googleusercontent.com/POlcZ-FLDw9P2k_PYZTZQ7qyTz4zwHHvmywT_D23Bde-ODTkRvu4psxI6c5iiJkDyQEMkeFI4qBEtQCwbzFWEV-JbG9nSjkzbKn305hixN5yxug3wHsC5xRmLZ2a_bxSPdwKfNF3" alt="Image"><em>Image from <a href="http://blog.zenof.ai/object-detection-in-react-native-app-using-tensorflow-js/">http://blog.zenof.ai/object-detection-in-react-native-app-using-tensorflow-js/</a></em></p>
+
+<p><img src="https://lh3.googleusercontent.com/POlcZ-FLDw9P2k_PYZTZQ7qyTz4zwHHvmywT_D23Bde-ODTkRvu4psxI6c5iiJkDyQEMkeFI4qBEtQCwbzFWEV-JbG9nSjkzbKn305hixN5yxug3wHsC5xRmLZ2a_bxSPdwKfNF3" alt="Image" /><em>Image from <a href="http://blog.zenof.ai/object-detection-in-react-native-app-using-tensorflow-js/">http://blog.zenof.ai/object-detection-in-react-native-app-using-tensorflow-js/</a></em></p>
+
 <p>To be &ldquo;believable&rdquo;, we need better performance to combine with reality.
-<img src="https://miro.medium.com/max/640/0*XO0UhtqKz5yk39Mr.gif" alt="Image"><!-- raw HTML omitted -->
+<img src="https://miro.medium.com/max/640/0*XO0UhtqKz5yk39Mr.gif" alt="Image" /><br/>
 <em>Animation from <a href="https://heartbeat.fritz.ai/combining-artificial-intelligence-and-augmented-reality-in-mobile-apps-e0e0ad2cfddc">https://heartbeat.fritz.ai/combining-artificial-intelligence-and-augmented-reality-in-mobile-apps-e0e0ad2cfddc</a></em></p>
+
 <h3 id="question">Question???</h3>
+
 <p>Are there any performance guidelines available for maintaining a realistic application? Something for response times or update rate?</p>
+
 <h2 id="mobile-ar-development-frameworks">Mobile AR Development Frameworks</h2>
+
 <p>There are frameworks available for AR in both the Apple (iOS) and Google (Andriod) ecosystems. Apple&rsquo;s offering is <a href="https://developer.apple.com/documentation/arkit">AR Kit</a>, while Google provides <a href="https://developers.google.com/ar/discover">AR Core</a>. These frameworks are mostly for basic AR development, but they do provide some broad applications of AI. <em>Walk through each link to highlight AI integration</em></p>
+
 <h2 id="mobile-ai-frameworks">Mobile AI Frameworks</h2>
+
 <p>Similar to the AR frameworks, there are also AI development frameworks available for both Apple and Google. In this case, Apple provides <a href="https://coremltools.readme.io/docs">Core-ML</a> while Google provides <a href="https://www.tensorflow.org/lite/guide">TensorFlow Lite</a>.</p>
+
 <p>Both frameworks appear to be &lsquo;inference only&rsquo; by using a minimized network optimized to their particular hardware platform. This would be useful if you needed a more specialized implementation of an AI technique and wanted to integrate it yourself.</p>
+
 <p>And then there&rsquo;s <a href="https://blog.tensorflow.org/2020/02/tensorflowjs-for-react-native-is-here.html">React+TenforFlow.js</a></p>
+
 <h2 id="thoughts-going-forward">Thoughts going forward</h2>
+
 <p>One thought is to take our application of image recognition for trail camera use and apply it to a mobile platform. We may need some help getting a basic iOS and Android application created though. Maybe a cross-group project somewhere?</p>
 <ul class="pa0">
   

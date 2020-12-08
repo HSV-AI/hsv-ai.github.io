@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.78.1" />
+    <meta name="generator" content="Hugo 0.55.5" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,17 +30,22 @@
 
     <meta property="og:title" content="Classification with Scikit-Learn" />
 <meta property="og:description" content="This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.
+
 The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: Musk (Version 2) Data Set" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/190213_musk_classification/" />
-<meta property="article:published_time" content="2019-02-23T22:40:19-05:00" />
-<meta property="article:modified_time" content="2019-02-23T22:40:19-05:00" />
+<meta property="article:published_time" content="2019-02-23T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2019-02-23T22:40:19-05:00"/>
+
 <meta itemprop="name" content="Classification with Scikit-Learn">
 <meta itemprop="description" content="This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.
+
 The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: Musk (Version 2) Data Set">
+
+
 <meta itemprop="datePublished" content="2019-02-23T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-02-23T22:40:19-05:00" />
-<meta itemprop="wordCount" content="1487">
+<meta itemprop="wordCount" content="1485">
 
 
 
@@ -48,6 +53,7 @@ The dataset that we will use for this example was provided by the UCI Machine Le
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Classification with Scikit-Learn"/>
 <meta name="twitter:description" content="This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.
+
 The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: Musk (Version 2) Data Set"/>
 
   </head>
@@ -172,95 +178,129 @@ The dataset that we will use for this example was provided by the UCI Machine Le
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.</p>
-<p>The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: <!-- raw HTML omitted -->Musk (Version 2) Data Set<!-- raw HTML omitted --></p>
+
+<p>The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: <a href="https://archive.ics.uci.edu/ml/datasets/Musk+(Version+2)">Musk (Version 2) Data Set</a></p>
+
 <h3 id="data-set-information">Data Set Information:</h3>
+
 <p>This dataset describes a set of 102 molecules of which 39 are judged by human experts to be musks and the remaining 63 molecules are judged to be non-musks. The goal is to learn to predict whether new molecules will be musks or non-musks. However, the 166 features that describe these molecules depend upon the exact shape, or conformation, of the molecule. Because bonds can rotate, a single molecule can adopt many different shapes. To generate this data set, all the low-energy conformations of the molecules were generated to produce 6,598 conformations. Then, a feature vector was extracted that describes each conformation.</p>
+
 <p>This many-to-one relationship between feature vectors and molecules is called the &ldquo;multiple instance problem&rdquo;. When learning a classifier for this data, the classifier should classify a molecule as &ldquo;musk&rdquo; if ANY of its conformations is classified as a musk. A molecule should be classified as &ldquo;non-musk&rdquo; if NONE of its conformations is classified as a musk.</p>
+
 <h2 id="notebooks">Notebooks</h2>
-<p>View the IPython notebook for this session on Github [here](<a href="https://github.com/HSV-AI/presentations/blob/master/2019/190213/MUSK">https://github.com/HSV-AI/presentations/blob/master/2019/190213/MUSK</a> Classification.ipynb)</p>
+
+<p>View the IPython notebook for this session on Github <a href="https://github.com/HSV-AI/presentations/blob/master/2019/190213/MUSK Classification.ipynb">here</a></p>
+
 <p>Or launch the notebook in Google Colab or MyBinder:</p>
-<p>[<img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab">](<a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190213/MUSK">https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190213/MUSK</a> Classification.ipynb)</p>
-<p>[<img src="https://mybinder.org/badge_logo.svg" alt="Binder">](<a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190213/MUSK">https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190213/MUSK</a> Classification.ipynb)</p>
+
+<p><a href="https://colab.research.google.com/github/HSV-AI/presentations/blob/master/2019/190213/MUSK Classification.ipynb"><img src="https://badgen.net/badge/Launch/on%20Google%20Colab/blue?icon=terminal" alt="Google Colab" /></a></p>
+
+<p><a href="https://mybinder.org/v2/gh/HSV-AI/presentations/master?filepath=2019/190213/MUSK Classification.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
+
 <h2 id="loading-data">Loading data</h2>
+
 <p>First we will load this data from the csv file into a Pandas dataframe and get a look at it.</p>
+
 <p>You can see that by using a 0 based index, the features are in columns 3-168 and the class is in column 169.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
-<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
-<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
-<span style="color:#f92672">from</span> sklearn <span style="color:#f92672">import</span> metrics
 
-df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;data/musk_csv.csv&#34;</span>) 
-<span style="color:#75715e"># Preview the first 5 lines of the loaded data </span>
-df<span style="color:#f92672">.</span>head()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Total number of rows: </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> len(df))
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Breakdown by class:&#34;</span>)
-<span style="color:#66d9ef">print</span>(df<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#39;class&#39;</span>)<span style="color:#f92672">.</span>size())
-</code></pre></div><h2 id="training--validation">Training &amp; Validation</h2>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import metrics
+
+df = pd.read_csv(&quot;data/musk_csv.csv&quot;) 
+# Preview the first 5 lines of the loaded data 
+df.head()
+</code></pre>
+
+<pre><code class="language-python">print(&quot;Total number of rows: %d&quot; % len(df))
+print(&quot;Breakdown by class:&quot;)
+print(df.groupby('class').size())
+</code></pre>
+
+<h2 id="training-validation">Training &amp; Validation</h2>
+
 <p>Before we start looking at different methods for classification, we need to split this data into a training set and a validation set. The problem is that if we train using all of the data, we do not have an independent way of testing the accuracy of the model.</p>
+
 <p>Luckily, scikit-learn provides an easy way to do this: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">train_test_split</a></p>
+
 <p>First, we will slice the original dataframe to create a dataframe with only the 166 attributes, and another with only the classes.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
 
-X <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[:,<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">169</span>]
-y <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>iloc[:, <span style="color:#ae81ff">169</span>]
-Xtrain, Xtest, ytrain, ytest <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=.</span><span style="color:#ae81ff">25</span>)
+<pre><code class="language-python">from sklearn.model_selection import train_test_split
 
-chance <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">**</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Chance of hittings heads ten times in a row: &#34;</span> <span style="color:#f92672">+</span> str(chance))
-<span style="color:#66d9ef">print</span>(y<span style="color:#f92672">.</span>mean())
-<span style="color:#66d9ef">print</span>(ytrain<span style="color:#f92672">.</span>mean())
+X = df.iloc[:,3:169]
+y = df.iloc[:, 169]
+Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=.25)
+
+chance = 0.5 ** 10 * 100
+print(&quot;Chance of hittings heads ten times in a row: &quot; + str(chance))
+print(y.mean())
+print(ytrain.mean())
 
 
-</code></pre></div><h2 id="classifier-testing-approach">Classifier Testing Approach</h2>
-<p>Now that we have the data ready for training and validation, we can start working through the different classifiers provided by scikit-learn. To do that, we will look at two primary measurements of each classifier:</p>
-<ol>
-<li>Accuracy - what percentage of the overal set did the model classify correctly</li>
-<li>Confusion Matrix - which classes were classified correctly, and which were classified as the opposite</li>
-</ol>
+</code></pre>
+
+<h2 id="classifier-testing-approach">Classifier Testing Approach</h2>
+
+<p>Now that we have the data ready for training and validation, we can start working through the different classifiers provided by scikit-learn. To do that, we will look at two primary measurements of each classifier:
+1. Accuracy - what percentage of the overal set did the model classify correctly
+2. Confusion Matrix - which classes were classified correctly, and which were classified as the opposite</p>
+
 <p>Here is a great write-up for a <a href="https://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/">Confusion Matrix</a></p>
+
 <p>A good place to start for finding a list of classifiers is <a href="https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html">here</a></p>
+
 <h2 id="support-vector-machine">Support Vector Machine</h2>
+
 <p>The first classifier that we will look at is the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html">Support Vector Classifier</a></p>
+
 <p>This can be used with several different kernel types. We will start with the default &lsquo;rbf&rsquo;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.svm <span style="color:#f92672">import</span> SVC  <span style="color:#75715e"># &#34;Support Vector Classifier&#34;</span>
-clf <span style="color:#f92672">=</span> SVC(kernel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rbf&#39;</span>, gamma<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scale&#39;</span>)
-clf<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> clf<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.svm import SVC  # &quot;Support Vector Classifier&quot;
+clf = SVC(kernel='rbf', gamma='scale')
+clf.fit(Xtrain, ytrain)
+ypred = clf.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
 
-</code></pre></div><h2 id="support-vector-machine-1">Support Vector Machine</h2>
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+
+</code></pre>
+
+<h2 id="support-vector-machine-1">Support Vector Machine</h2>
+
 <p>Next we will try the linear classifier. Note - this takes a long time&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># from sklearn.svm import SVC  # &#34;Support Vector Classifier&#34;</span>
-<span style="color:#75715e"># clf = SVC(kernel=&#39;linear&#39;, gamma=&#39;scale&#39;)</span>
-<span style="color:#75715e"># %time clf.fit(Xtrain, ytrain)</span>
-<span style="color:#75715e"># ypred = clf.predict(Xtest)</span>
-<span style="color:#75715e"># print(&#34;Accuracy: %f\n&#34; % metrics.accuracy_score(ypred, ytest))</span>
 
-<span style="color:#75715e"># confusion_matrix = metrics.confusion_matrix(ypred, ytest)</span>
-<span style="color:#75715e"># print(&#34;Confusion Matrix: &#34;)</span>
-<span style="color:#75715e"># print(confusion_matrix)</span>
-<span style="color:#75715e"># print()</span>
+<pre><code class="language-python"># from sklearn.svm import SVC  # &quot;Support Vector Classifier&quot;
+# clf = SVC(kernel='linear', gamma='scale')
+# %time clf.fit(Xtrain, ytrain)
+# ypred = clf.predict(Xtest)
+# print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-<span style="color:#75715e"># plt.imshow(confusion_matrix,</span>
-<span style="color:#75715e">#            interpolation=&#39;nearest&#39;, cmap=plt.cm.binary)</span>
-<span style="color:#75715e"># plt.grid(False)</span>
-<span style="color:#75715e"># plt.colorbar()</span>
-<span style="color:#75715e"># plt.xlabel(&#34;predicted label&#34;)</span>
-<span style="color:#75715e"># plt.ylabel(&#34;true label&#34;);</span>
+# confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+# print(&quot;Confusion Matrix: &quot;)
+# print(confusion_matrix)
+# print()
 
-</code></pre></div><pre><code>CPU times: user 2h 15min 33s, sys: 97.1 ms, total: 2h 15min 34s
+# plt.imshow(confusion_matrix,
+#            interpolation='nearest', cmap=plt.cm.binary)
+# plt.grid(False)
+# plt.colorbar()
+# plt.xlabel(&quot;predicted label&quot;)
+# plt.ylabel(&quot;true label&quot;);
+
+</code></pre>
+
+<pre><code>CPU times: user 2h 15min 33s, sys: 97.1 ms, total: 2h 15min 34s
 Wall time: 2h 15min 33s
 Accuracy: 0.949697
 
@@ -268,231 +308,284 @@ Confusion Matrix:
 [[1366   54]
  [  29  201]]
 </code></pre>
-<p><img src="MUSK%20Classification_files/MUSK%20Classification_9_1.png" alt="png"></p>
+
+<p><img src="MUSK%20Classification_files/MUSK%20Classification_9_1.png" alt="png" /></p>
+
 <h2 id="decision-tree-classifier">Decision Tree Classifier</h2>
+
 <p>The next classifier that we will look at is the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html">Decision Tree Classifier</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.tree <span style="color:#f92672">import</span> DecisionTreeClassifier
-dtc <span style="color:#f92672">=</span> DecisionTreeClassifier()
-dtc<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> dtc<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.tree import DecisionTreeClassifier
+dtc = DecisionTreeClassifier()
+dtc.fit(Xtrain, ytrain)
+ypred = dtc.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
 
-</code></pre></div><h2 id="random-forest-classifier">Random Forest Classifier</h2>
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+
+</code></pre>
+
+<h2 id="random-forest-classifier">Random Forest Classifier</h2>
+
 <p>The next classifier that we will look at is the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">Random Forest Classifier</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
-rfc <span style="color:#f92672">=</span> RandomForestClassifier(n_estimators<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-rfc<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> rfc<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.ensemble import RandomForestClassifier
+rfc = RandomForestClassifier(n_estimators=100, random_state=0)
+rfc.fit(Xtrain, ytrain)
+ypred = rfc.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="adaboost-classifier">AdaBoost Classifier</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="adaboost-classifier">AdaBoost Classifier</h2>
+
 <p>How about an <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html#sklearn.ensemble.AdaBoostClassifier">AdaBoost Classifier</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> AdaBoostClassifier
-abc <span style="color:#f92672">=</span> AdaBoostClassifier(random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-abc<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> abc<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.ensemble import AdaBoostClassifier
+abc = AdaBoostClassifier(random_state=0)
+abc.fit(Xtrain, ytrain)
+ypred = abc.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="gaussian-naive-bayes">Gaussian Naive Bayes</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="gaussian-naive-bayes">Gaussian Naive Bayes</h2>
+
 <p>Did someone say &ldquo;<a href="https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB">Gaussian Naive Bays</a>&rdquo;?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.naive_bayes <span style="color:#f92672">import</span> GaussianNB
-gnb <span style="color:#f92672">=</span> GaussianNB()
-gnb<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> gnb<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.naive_bayes import GaussianNB
+gnb = GaussianNB()
+gnb.fit(Xtrain, ytrain)
+ypred = gnb.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="quadraticdiscriminantanalysis">QuadraticDiscriminantAnalysis</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="quadraticdiscriminantanalysis">QuadraticDiscriminantAnalysis</h2>
+
 <p>Everyone&rsquo;s favorite - <a href="https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html#sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis">QuadraticDiscriminantAnalysis</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.discriminant_analysis <span style="color:#f92672">import</span> QuadraticDiscriminantAnalysis
-qda <span style="color:#f92672">=</span> QuadraticDiscriminantAnalysis()
-qda<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> qda<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+qda = QuadraticDiscriminantAnalysis()
+qda.fit(Xtrain, ytrain)
+ypred = qda.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="k-nearest-neighbors">K-Nearest Neighbors</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="k-nearest-neighbors">K-Nearest Neighbors</h2>
+
 <p>Will you be my <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier">KNeighborsClassifier</a>?</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.neighbors <span style="color:#f92672">import</span> KNeighborsClassifier
-knc <span style="color:#f92672">=</span> KNeighborsClassifier()
-knc<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> knc<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.neighbors import KNeighborsClassifier
+knc = KNeighborsClassifier()
+knc.fit(Xtrain, ytrain)
+ypred = knc.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="multi-layer-perceptron-classifier">Multi-Layer Perceptron Classifier</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="multi-layer-perceptron-classifier">Multi-Layer Perceptron Classifier</h2>
+
 <p>We can&rsquo;t have AI without <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier">MLPClassifier</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.neural_network <span style="color:#f92672">import</span> MLPClassifier
-mlp <span style="color:#f92672">=</span> MLPClassifier()
-mlp<span style="color:#f92672">.</span>fit(Xtrain, ytrain)
-ypred <span style="color:#f92672">=</span> mlp<span style="color:#f92672">.</span>predict(Xtest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.neural_network import MLPClassifier
+mlp = MLPClassifier()
+mlp.fit(Xtrain, ytrain)
+ypred = mlp.predict(Xtest)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
-</code></pre></div><h2 id="dimensionality-reduction">Dimensionality Reduction</h2>
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
+
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+</code></pre>
+
+<h2 id="dimensionality-reduction">Dimensionality Reduction</h2>
+
 <p>Do we really need 166 attributes to be able to classify molecules as MUSK / NON-MUSK?</p>
+
 <p>Are any of these attributes dependent on others?</p>
+
 <p>We can use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">Primary Component Analysis</a> to give us a bit more information. First let&rsquo;s look at the explained variance ratio of the attributes (components) across the entire dataframe.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> PCA
 
-pca <span style="color:#f92672">=</span> PCA()<span style="color:#f92672">.</span>fit(X)
-plt<span style="color:#f92672">.</span>plot(np<span style="color:#f92672">.</span>cumsum(pca<span style="color:#f92672">.</span>explained_variance_ratio_))
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;number of components&#39;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;cumulative explained variance&#39;</span>);
-</code></pre></div><p>We can also use PCA to reduce the component count while keeping a percentage of the variance. The next step shows that 95% of the variance can be kept with only 35 components.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pca <span style="color:#f92672">=</span> PCA(<span style="color:#ae81ff">0.95</span>) <span style="color:#75715e"># keep 95% of variance</span>
-Xtotal_xform <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>fit_transform(X)
-Xtrain_xform <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>fit_transform(Xtrain)
-Xtest_xform <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>transform(Xtest)
-<span style="color:#66d9ef">print</span>(X<span style="color:#f92672">.</span>shape)
-<span style="color:#66d9ef">print</span>(Xtotal_xform<span style="color:#f92672">.</span>shape)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;95</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">f the variance can be represented by &#34;</span><span style="color:#f92672">+</span> str((Xtrain_xform<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> X<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span>)) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">% o</span><span style="color:#e6db74">f the original components count!&#34;</span>)
-</code></pre></div><h2 id="classification-with-dimensionality-reduction">Classification with Dimensionality Reduction</h2>
+<pre><code class="language-python">from sklearn.decomposition import PCA
+
+pca = PCA().fit(X)
+plt.plot(np.cumsum(pca.explained_variance_ratio_))
+plt.xlabel('number of components')
+plt.ylabel('cumulative explained variance');
+</code></pre>
+
+<p>We can also use PCA to reduce the component count while keeping a percentage of the variance. The next step shows that 95% of the variance can be kept with only 35 components.</p>
+
+<pre><code class="language-python">pca = PCA(0.95) # keep 95% of variance
+Xtotal_xform = pca.fit_transform(X)
+Xtrain_xform = pca.fit_transform(Xtrain)
+Xtest_xform = pca.transform(Xtest)
+print(X.shape)
+print(Xtotal_xform.shape)
+print(&quot;95% of the variance can be represented by &quot;+ str((Xtrain_xform.shape[1] / X.shape[1] * 100)) + &quot;% of the original components count!&quot;)
+</code></pre>
+
+<h2 id="classification-with-dimensionality-reduction">Classification with Dimensionality Reduction</h2>
+
 <p>Now let&rsquo;s try repeating the classification exercise with the reduced dimensionality dataframe.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.tree <span style="color:#f92672">import</span> DecisionTreeClassifier
-dtc <span style="color:#f92672">=</span> DecisionTreeClassifier()
-dtc<span style="color:#f92672">.</span>fit(Xtrain_xform, ytrain)
-ypred <span style="color:#f92672">=</span> dtc<span style="color:#f92672">.</span>predict(Xtest_xform)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Accuracy: </span><span style="color:#e6db74">%f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> metrics<span style="color:#f92672">.</span>accuracy_score(ypred, ytest))
 
-confusion_matrix <span style="color:#f92672">=</span> metrics<span style="color:#f92672">.</span>confusion_matrix(ypred, ytest)
-<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Confusion Matrix: &#34;</span>)
-<span style="color:#66d9ef">print</span>(confusion_matrix)
-<span style="color:#66d9ef">print</span>()
+<pre><code class="language-python">from sklearn.tree import DecisionTreeClassifier
+dtc = DecisionTreeClassifier()
+dtc.fit(Xtrain_xform, ytrain)
+ypred = dtc.predict(Xtest_xform)
+print(&quot;Accuracy: %f\n&quot; % metrics.accuracy_score(ypred, ytest))
 
-plt<span style="color:#f92672">.</span>imshow(confusion_matrix,
-           interpolation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;nearest&#39;</span>, cmap<span style="color:#f92672">=</span>plt<span style="color:#f92672">.</span>cm<span style="color:#f92672">.</span>binary)
-plt<span style="color:#f92672">.</span>grid(False)
-plt<span style="color:#f92672">.</span>colorbar()
-plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;predicted label&#34;</span>)
-plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;true label&#34;</span>);
+confusion_matrix = metrics.confusion_matrix(ypred, ytest)
+print(&quot;Confusion Matrix: &quot;)
+print(confusion_matrix)
+print()
 
-</code></pre></div><h2 id="k-fold-validation">K-Fold Validation</h2>
+plt.imshow(confusion_matrix,
+           interpolation='nearest', cmap=plt.cm.binary)
+plt.grid(False)
+plt.colorbar()
+plt.xlabel(&quot;predicted label&quot;)
+plt.ylabel(&quot;true label&quot;);
+
+</code></pre>
+
+<h2 id="k-fold-validation">K-Fold Validation</h2>
+
 <p>Initially, we have been splitting the data into a 75% training set and a 25% testing set by random sampling. This is commonly called &ldquo;Cross-validation&rdquo;.</p>
+
 <p>From <a href="https://machinelearningmastery.com/k-fold-cross-validation/">Machine Learning Mastery</a>:
 Cross-validation is primarily used in applied machine learning to estimate the skill of a machine learning model on unseen data. That is, to use a limited sample in order to estimate how the model is expected to perform in general when used to make predictions on data not used during the training of the model.</p>
+
 <p>An additional approach is known as k-Fold Validation:
 The procedure has a single parameter called k that refers to the number of groups that a given data sample is to be split into. As such, the procedure is often called k-fold cross-validation. When a specific value for k is chosen, it may be used in place of k in the reference to the model, such as k=10 becoming 10-fold cross-validation.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 2-fold cross-validation</span>
-X1, X2, y1, y2 <span style="color:#f92672">=</span> train_test_split(X, y, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-X1<span style="color:#f92672">.</span>shape, X2<span style="color:#f92672">.</span>shape
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(SVC(kernel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rbf&#39;</span>, gamma<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scale&#39;</span>)<span style="color:#f92672">.</span>fit(X2, y2)<span style="color:#f92672">.</span>score(X1, y1))
-<span style="color:#66d9ef">print</span>(SVC(kernel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rbf&#39;</span>, gamma<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scale&#39;</span>)<span style="color:#f92672">.</span>fit(X1, y1)<span style="color:#f92672">.</span>score(X2, y2))
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> cross_val_score
-cv <span style="color:#f92672">=</span> cross_val_score(SVC(kernel<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rbf&#39;</span>, gamma<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;scale&#39;</span>), X, y, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-cv<span style="color:#f92672">.</span>mean()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> learning_curve
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">plot_learning_curve</span>(estimator):
-    train_sizes, train_scores, test_scores <span style="color:#f92672">=</span> learning_curve(estimator, X, y, cv<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+<pre><code class="language-python"># 2-fold cross-validation
+X1, X2, y1, y2 = train_test_split(X, y, test_size=0.5, random_state=0)
+X1.shape, X2.shape
+</code></pre>
 
-    <span style="color:#75715e"># train_scores = result[0]</span>
-    <span style="color:#75715e"># valid_scores = result[1]</span>
-    title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Learning Curves (&#34;</span><span style="color:#f92672">+</span> type(estimator)<span style="color:#f92672">.</span>__name__ <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;)&#34;</span>
-    plt<span style="color:#f92672">.</span>figure()
-    plt<span style="color:#f92672">.</span>title(title)
-    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Training examples&#34;</span>)
-    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Score&#34;</span>)
-    train_scores_mean <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(train_scores, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    train_scores_std <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>std(train_scores, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    test_scores_mean <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mean(test_scores, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    test_scores_std <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>std(test_scores, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    plt<span style="color:#f92672">.</span>grid()
+<pre><code class="language-python">print(SVC(kernel='rbf', gamma='scale').fit(X2, y2).score(X1, y1))
+print(SVC(kernel='rbf', gamma='scale').fit(X1, y1).score(X2, y2))
+</code></pre>
 
-    plt<span style="color:#f92672">.</span>fill_between(train_sizes, train_scores_mean <span style="color:#f92672">-</span> train_scores_std,
-                     train_scores_mean <span style="color:#f92672">+</span> train_scores_std, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
-                     color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;r&#34;</span>)
-    plt<span style="color:#f92672">.</span>fill_between(train_sizes, test_scores_mean <span style="color:#f92672">-</span> test_scores_std,
-                     test_scores_mean <span style="color:#f92672">+</span> test_scores_std, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;g&#34;</span>)
-    plt<span style="color:#f92672">.</span>plot(train_sizes, train_scores_mean, <span style="color:#e6db74">&#39;o-&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;r&#34;</span>,
-             label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Training score&#34;</span>)
-    plt<span style="color:#f92672">.</span>plot(train_sizes, test_scores_mean, <span style="color:#e6db74">&#39;o-&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;g&#34;</span>,
-             label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Cross-validation score&#34;</span>)
-    plt<span style="color:#f92672">.</span>legend(loc<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;best&#34;</span>)
-    plt<span style="color:#f92672">.</span>show()
+<pre><code class="language-python">from sklearn.model_selection import cross_val_score
+cv = cross_val_score(SVC(kernel='rbf', gamma='scale'), X, y, cv=2)
+cv.mean()
+</code></pre>
+
+<pre><code class="language-python">from sklearn.model_selection import learning_curve
+
+def plot_learning_curve(estimator):
+    train_sizes, train_scores, test_scores = learning_curve(estimator, X, y, cv=5)
+
+    # train_scores = result[0]
+    # valid_scores = result[1]
+    title = &quot;Learning Curves (&quot;+ type(estimator).__name__ + &quot;)&quot;
+    plt.figure()
+    plt.title(title)
+    plt.xlabel(&quot;Training examples&quot;)
+    plt.ylabel(&quot;Score&quot;)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    plt.grid()
+
+    plt.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                     train_scores_mean + train_scores_std, alpha=0.1,
+                     color=&quot;r&quot;)
+    plt.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                     test_scores_mean + test_scores_std, alpha=0.1, color=&quot;g&quot;)
+    plt.plot(train_sizes, train_scores_mean, 'o-', color=&quot;r&quot;,
+             label=&quot;Training score&quot;)
+    plt.plot(train_sizes, test_scores_mean, 'o-', color=&quot;g&quot;,
+             label=&quot;Cross-validation score&quot;)
+    plt.legend(loc=&quot;best&quot;)
+    plt.show()
 
 plot_learning_curve(GaussianNB())
-<span style="color:#75715e"># plot_learning_curve(SVC())</span>
+# plot_learning_curve(SVC())
 plot_learning_curve(DecisionTreeClassifier())
-plot_learning_curve(RandomForestClassifier(n_estimators<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>))
+plot_learning_curve(RandomForestClassifier(n_estimators=100))
 plot_learning_curve(AdaBoostClassifier())
 plot_learning_curve(QuadraticDiscriminantAnalysis())
-<span style="color:#75715e"># plot_learning_curve(KNeighborsClassifier())</span>
-</code></pre></div><ul class="pa0">
+# plot_learning_curve(KNeighborsClassifier())
+</code></pre><ul class="pa0">
   
 </ul>
 <div class="mt6">

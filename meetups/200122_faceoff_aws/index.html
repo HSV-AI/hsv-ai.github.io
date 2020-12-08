@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.78.1" />
+    <meta name="generator" content="Hugo 0.55.5" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,14 +30,19 @@
 
     <meta property="og:title" content="Object Recognition Face-off" />
 <meta property="og:description" content="Object Recognition Face-off
+
 This week we will start a series of tutorials intended to evaluate different frameworks for object detection. Rather than just looking at the various models for implementation, we will consider the entire framework for deployment." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/200122_faceoff_aws/" />
-<meta property="article:published_time" content="2020-01-22T22:40:19-05:00" />
-<meta property="article:modified_time" content="2020-01-22T22:40:19-05:00" />
+<meta property="article:published_time" content="2020-01-22T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2020-01-22T22:40:19-05:00"/>
+
 <meta itemprop="name" content="Object Recognition Face-off">
 <meta itemprop="description" content="Object Recognition Face-off
+
 This week we will start a series of tutorials intended to evaluate different frameworks for object detection. Rather than just looking at the various models for implementation, we will consider the entire framework for deployment.">
+
+
 <meta itemprop="datePublished" content="2020-01-22T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2020-01-22T22:40:19-05:00" />
 <meta itemprop="wordCount" content="212">
@@ -48,6 +53,7 @@ This week we will start a series of tutorials intended to evaluate different fra
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Object Recognition Face-off"/>
 <meta name="twitter:description" content="Object Recognition Face-off
+
 This week we will start a series of tutorials intended to evaluate different frameworks for object detection. Rather than just looking at the various models for implementation, we will consider the entire framework for deployment."/>
 
   </head>
@@ -172,24 +178,38 @@ This week we will start a series of tutorials intended to evaluate different fra
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h1 id="object-recognition-face-off">Object Recognition Face-off</h1>
+
 <p>This week we will start a series of tutorials intended to evaluate different frameworks for object detection. Rather than just looking at the various models for implementation, we will consider the entire framework for deployment.</p>
+
 <p>Agenda:</p>
+
 <ul>
 <li>Intro &amp; Welcome</li>
 <li>Teams for Hudson Alpha Tech Challenge</li>
 <li>Fast.ai Lesson 1 announcement</li>
 <li>Amazon configuration for object detection</li>
 </ul>
+
 <p>Here are the details on the <a href="https://www.eventbrite.com/e/2020-hatch-hudsonalpha-tech-challenge-tickets-84916091315?aff=ebdssbdestsearch">2020 Hudson Alpha Tech Challenge</a></p>
+
 <p>For next week - here&rsquo;s a link to <a href="https://course.fast.ai/videos/?lesson=1">Lesson 1</a> of the Fast.ai Deep Learning Course.</p>
+
 <h2 id="steps-from-tutorial">Steps from tutorial</h2>
+
 <p>Don&rsquo;t forget to set a budget!!! <a href="https://console.aws.amazon.com/billing/home?region=us-east-1#/budgets">Link</a></p>
+
 <p>Install AWS CLI in a python virtual environment <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-virtualenv.html">Instructions</a></p>
+
 <p>Created a user for the AWS CLI.</p>
+
 <p>Set up the CLI following these <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration">instructions</a></p>
+
 <p>Clone the sample repository from <a href="https://github.com/aws-samples/amazon-rekognition-reviewing-user-content">Github</a></p>
+
 <p>StackFormation information <a href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks">here</a></p>
+
 <h2 id="initial-thoughts">Initial thoughts:</h2>
+
 <p>I don&rsquo;t know much about the AWS CloudFormation, but I do know that it&rsquo;s SLOW. This isn&rsquo;t some free tier thing - I&rsquo;m actually paying for this. So far, I&rsquo;m over an hour into this setup and CloudFormation has failed twice. Both times for valid reason, but the failure/rollback cycle is taking &gt; 20 minutes each. Then you have to delete the stack manually (after you figure out how to do that) which takes several more minutes before you can try the CloudFormation again.</p><ul class="pa0">
   
 </ul>

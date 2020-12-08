@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.78.1" />
+    <meta name="generator" content="Hugo 0.55.5" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,17 +30,22 @@
 
     <meta property="og:title" content="Trail Camera Image Classifier" />
 <meta property="og:description" content="This notebook originated directly from the Fast.ai Deep Learning course v3 Lesson 1
+
 It has been modified to see if it is possible to use the same approach to classify images from trail cameras." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hsv-ai.com/meetups/191120_trail_camera/" />
-<meta property="article:published_time" content="2019-11-20T22:40:19-05:00" />
-<meta property="article:modified_time" content="2019-11-20T22:40:19-05:00" />
+<meta property="article:published_time" content="2019-11-20T22:40:19-05:00"/>
+<meta property="article:modified_time" content="2019-11-20T22:40:19-05:00"/>
+
 <meta itemprop="name" content="Trail Camera Image Classifier">
 <meta itemprop="description" content="This notebook originated directly from the Fast.ai Deep Learning course v3 Lesson 1
+
 It has been modified to see if it is possible to use the same approach to classify images from trail cameras.">
+
+
 <meta itemprop="datePublished" content="2019-11-20T22:40:19-05:00" />
 <meta itemprop="dateModified" content="2019-11-20T22:40:19-05:00" />
-<meta itemprop="wordCount" content="1489">
+<meta itemprop="wordCount" content="1539">
 
 
 
@@ -48,6 +53,7 @@ It has been modified to see if it is possible to use the same approach to classi
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Trail Camera Image Classifier"/>
 <meta name="twitter:description" content="This notebook originated directly from the Fast.ai Deep Learning course v3 Lesson 1
+
 It has been modified to see if it is possible to use the same approach to classify images from trail cameras."/>
 
   </head>
@@ -172,21 +178,32 @@ It has been modified to see if it is possible to use the same approach to classi
     </header>
 
     <section class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>This notebook originated directly from the Fast.ai Deep Learning course v3 <a href="https://github.com/fastai/course-v3/raw/master/nbs/dl1/lesson1-pets.ipynb">Lesson 1</a></p>
+
 <p>It has been modified to see if it is possible to use the same approach to classify images from trail cameras.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span>reload_ext autoreload
-<span style="color:#f92672">%</span>autoreload <span style="color:#ae81ff">2</span>
-<span style="color:#f92672">%</span>matplotlib inline
-</code></pre></div><p>We import all the necessary packages. We are going to work with the <a href="http://www.fast.ai/2018/10/02/fastai-ai/">fastai V1 library</a> which sits on top of <a href="https://hackernoon.com/pytorch-1-0-468332ba5163">Pytorch 1.0</a>. The fastai library provides many useful functions that enable us to quickly and easily build neural networks and train our models.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> fastai.vision <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
-<span style="color:#f92672">from</span> fastai.metrics <span style="color:#f92672">import</span> error_rate
-</code></pre></div><h2 id="cuda-support">Cuda Support</h2>
+
+<pre><code class="language-python">%reload_ext autoreload
+%autoreload 2
+%matplotlib inline
+</code></pre>
+
+<p>We import all the necessary packages. We are going to work with the <a href="http://www.fast.ai/2018/10/02/fastai-ai/">fastai V1 library</a> which sits on top of <a href="https://hackernoon.com/pytorch-1-0-468332ba5163">Pytorch 1.0</a>. The fastai library provides many useful functions that enable us to quickly and easily build neural networks and train our models.</p>
+
+<pre><code class="language-python">from fastai.vision import *
+from fastai.metrics import error_rate
+</code></pre>
+
+<h2 id="cuda-support">Cuda Support</h2>
+
 <p>The next 4 lines check to see if there is CUDA support available.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> torch
-index <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>current_device()
-<span style="color:#66d9ef">print</span>(torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>device(index))
-<span style="color:#66d9ef">print</span>(torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>get_device_name(index))
-torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>is_available()
-</code></pre></div><pre><code>&lt;torch.cuda.device object at 0x000001D2D66BF748&gt;
+
+<pre><code class="language-python">import torch
+index = torch.cuda.current_device()
+print(torch.cuda.device(index))
+print(torch.cuda.get_device_name(index))
+torch.cuda.is_available()
+</code></pre>
+
+<pre><code>&lt;torch.cuda.device object at 0x000001D2D66BF748&gt;
 Quadro P1000
 
 
@@ -195,32 +212,55 @@ Quadro P1000
 
 True
 </code></pre>
+
 <p>If you&rsquo;re using a computer with an unusually small GPU, you may get an out of memory error when running this notebook. If this happens, click Kernel-&gt;Restart, uncomment the 2nd line below to use a smaller <em>batch size</em> (you&rsquo;ll learn all about what this means during the course), and try again.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># bs = 64</span>
-bs <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>   <span style="color:#75715e"># uncomment this line if you run out of memory even after clicking Kernel-&gt;Restart</span>
-</code></pre></div><h2 id="looking-at-the-data">Looking at the data</h2>
+
+<pre><code class="language-python"># bs = 64
+bs = 16   # uncomment this line if you run out of memory even after clicking Kernel-&gt;Restart
+</code></pre>
+
+<h2 id="looking-at-the-data">Looking at the data</h2>
+
 <p>We have changed from the dog breeds image set from the original Fast.ai lesson and instead are using a selection of images taken directly from a set of trail cameras provided by DeerDat.com</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path <span style="color:#f92672">=</span> pathlib<span style="color:#f92672">.</span>Path(<span style="color:#e6db74">&#39;C:/Users/JLangley/.fastai/data/deerdat&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">path<span style="color:#f92672">.</span>ls()
-</code></pre></div><pre><code>[WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/buck'),
+
+<pre><code class="language-python">path = pathlib.Path('C:/Users/JLangley/.fastai/data/deerdat')
+</code></pre>
+
+<pre><code class="language-python">path.ls()
+</code></pre>
+
+<pre><code>[WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/buck'),
  WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/doe'),
  WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/empty'),
  WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/models'),
  WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/person'),
  WindowsPath('C:/Users/JLangley/.fastai/data/deerdat/racoon')]
 </code></pre>
+
 <p>The first thing we do when we approach a problem is to take a look at the data. We <em>always</em> need to understand very well what the problem is and what the data looks like before we can figure out how to solve it. Taking a look at the data means understanding how the data directories are structured, what the labels are and what some sample images look like.</p>
+
 <p>The main difference between the handling of image classification datasets is the way labels are stored. In this particular dataset, labels are stored in the filenames themselves. We will need to extract them to be able to classify the images into the correct categories. Fortunately, the fastai library has a handy function made exactly for this, <code>ImageDataBunch.from_folder</code> gets the labels from the directories that the images are in.</p>
+
 <p>In our case, we have copied images of each category (~25-30 per category) into a folder with the same name as the category we want to classify.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data <span style="color:#f92672">=</span> ImageDataBunch<span style="color:#f92672">.</span>from_folder(path, train<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;.&#39;</span>, valid_pct<span style="color:#f92672">=</span><span style="color:#ae81ff">0.2</span>, size<span style="color:#f92672">=</span><span style="color:#ae81ff">224</span>, bs<span style="color:#f92672">=</span>bs
-                                  )<span style="color:#f92672">.</span>normalize(imagenet_stats)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#f92672">.</span>show_batch(rows<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">6</span>))
-</code></pre></div><p><img src="191120_Trail_Camera_15_0.png" alt="png"></p>
+
+<pre><code class="language-python">data = ImageDataBunch.from_folder(path, train='.', valid_pct=0.2, size=224, bs=bs
+                                  ).normalize(imagenet_stats)
+</code></pre>
+
+<pre><code class="language-python">data.show_batch(rows=3, figsize=(7,6))
+</code></pre>
+
+<p><img src="191120_Trail_Camera_15_0.png" alt="png" /></p>
+
 <p>You can see that in this example we have daytime and night vision images of deer (does &amp; bucks), racoons, people, and some that have nothing but a background.</p>
+
 <p>We can tell that there may be an issue with having multiple categories of animals in the same image, but we&rsquo;ll go with it for now to see what happens.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(data<span style="color:#f92672">.</span>classes)
-len(data<span style="color:#f92672">.</span>classes),data<span style="color:#f92672">.</span>c
-</code></pre></div><pre><code>['buck', 'doe', 'empty', 'person', 'racoon']
+
+<pre><code class="language-python">print(data.classes)
+len(data.classes),data.c
+</code></pre>
+
+<pre><code>['buck', 'doe', 'empty', 'person', 'racoon']
 
 
 
@@ -228,12 +268,20 @@ len(data<span style="color:#f92672">.</span>classes),data<span style="color:#f92
 
 (5, 5)
 </code></pre>
+
 <h2 id="training-resnet34">Training: resnet34</h2>
+
 <p>Now we will start training our model. We will use a <a href="http://cs231n.github.io/convolutional-networks/">convolutional neural network</a> backbone and a fully connected head with a single hidden layer as a classifier. Don&rsquo;t know what these things mean? Not to worry, we will dive deeper in the coming lessons. For the moment you need to know that we are building a model which will take images as input and will output the predicted probability for each of the categories (in this case, it will have 37 outputs).</p>
+
 <p>We will train for 4 epochs (4 cycles through all our data).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn <span style="color:#f92672">=</span> cnn_learner(data, models<span style="color:#f92672">.</span>resnet34, metrics<span style="color:#f92672">=</span>error_rate)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>model
-</code></pre></div><pre><code>Sequential(
+
+<pre><code class="language-python">learn = cnn_learner(data, models.resnet34, metrics=error_rate)
+</code></pre>
+
+<pre><code class="language-python">learn.model
+</code></pre>
+
+<pre><code>Sequential(
   (0): Sequential(
     (0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
     (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
@@ -388,41 +436,166 @@ len(data<span style="color:#f92672">.</span>classes),data<span style="color:#f92
   )
 )
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>fit_one_cycle(<span style="color:#ae81ff">4</span>)
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;stage-1&#39;</span>)
-</code></pre></div><h2 id="results">Results</h2>
+
+<pre><code class="language-python">learn.fit_one_cycle(4)
+</code></pre>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>error_rate</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2.557700</td>
+      <td>1.088776</td>
+      <td>0.360000</td>
+      <td>00:58</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1.590866</td>
+      <td>0.524802</td>
+      <td>0.200000</td>
+      <td>00:55</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1.137490</td>
+      <td>0.180604</td>
+      <td>0.080000</td>
+      <td>00:55</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.854171</td>
+      <td>0.150149</td>
+      <td>0.080000</td>
+      <td>00:55</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-python">learn.save('stage-1')
+</code></pre>
+
+<h2 id="results">Results</h2>
+
 <p>Let&rsquo;s see what results we have got.</p>
+
 <p>We will first see which were the categories that the model most confused with one another. We will try to see if what the model predicted was reasonable or not. In this case the mistakes look reasonable (none of the mistakes seems obviously naive). This is an indicator that our classifier is working correctly.</p>
+
 <p>Furthermore, when we plot the confusion matrix, we can see that the distribution is heavily skewed: the model makes the same mistakes over and over again but it rarely confuses other categories. This suggests that it just finds it difficult to distinguish some specific categories between each other; this is normal behaviour.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">interp <span style="color:#f92672">=</span> ClassificationInterpretation<span style="color:#f92672">.</span>from_learner(learn)
 
-losses,idxs <span style="color:#f92672">=</span> interp<span style="color:#f92672">.</span>top_losses()
+<pre><code class="language-python">interp = ClassificationInterpretation.from_learner(learn)
 
-len(data<span style="color:#f92672">.</span>valid_ds)<span style="color:#f92672">==</span>len(losses)<span style="color:#f92672">==</span>len(idxs)
-</code></pre></div><pre><code>True
+losses,idxs = interp.top_losses()
+
+len(data.valid_ds)==len(losses)==len(idxs)
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">interp<span style="color:#f92672">.</span>plot_top_losses(<span style="color:#ae81ff">9</span>, figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">11</span>))
-</code></pre></div><p><img src="191120_Trail_Camera_27_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">interp<span style="color:#f92672">.</span>plot_confusion_matrix(figsize<span style="color:#f92672">=</span>(<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">12</span>), dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span>)
-</code></pre></div><p><img src="191120_Trail_Camera_28_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">interp<span style="color:#f92672">.</span>most_confused(min_val<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
-</code></pre></div><pre><code>[('buck', 'doe', 2)]
+
+<pre><code>True
 </code></pre>
+
+<pre><code class="language-python">interp.plot_top_losses(9, figsize=(15,11))
+</code></pre>
+
+<p><img src="191120_Trail_Camera_27_0.png" alt="png" /></p>
+
+<pre><code class="language-python">interp.plot_confusion_matrix(figsize=(12,12), dpi=60)
+</code></pre>
+
+<p><img src="191120_Trail_Camera_28_0.png" alt="png" /></p>
+
+<pre><code class="language-python">interp.most_confused(min_val=2)
+</code></pre>
+
+<pre><code>[('buck', 'doe', 2)]
+</code></pre>
+
 <h2 id="unfreezing-fine-tuning-and-learning-rates">Unfreezing, fine-tuning, and learning rates</h2>
+
 <p>Since our model is working as we expect it to, we will <em>unfreeze</em> our model and train some more.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>unfreeze()
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>fit_one_cycle(<span style="color:#ae81ff">1</span>)
-</code></pre></div><!-- raw HTML omitted -->
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>load(<span style="color:#e6db74">&#39;stage-1&#39;</span>);
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>lr_find()
-</code></pre></div><pre><code>LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
+
+<pre><code class="language-python">learn.unfreeze()
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>recorder<span style="color:#f92672">.</span>plot()
-</code></pre></div><p><img src="191120_Trail_Camera_36_0.png" alt="png"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learn<span style="color:#f92672">.</span>unfreeze()
-learn<span style="color:#f92672">.</span>fit_one_cycle(<span style="color:#ae81ff">2</span>, max_lr<span style="color:#f92672">=</span>slice(<span style="color:#ae81ff">1e-4</span>,<span style="color:#ae81ff">1e-3</span>))
-</code></pre></div><!-- raw HTML omitted -->
+
+<pre><code class="language-python">learn.fit_one_cycle(1)
+</code></pre>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>error_rate</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.847428</td>
+      <td>0.553338</td>
+      <td>0.160000</td>
+      <td>00:57</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-python">learn.load('stage-1');
+</code></pre>
+
+<pre><code class="language-python">learn.lr_find()
+</code></pre>
+
+<pre><code>LR Finder is complete, type {learner_name}.recorder.plot() to see the graph.
+</code></pre>
+
+<pre><code class="language-python">learn.recorder.plot()
+</code></pre>
+
+<p><img src="191120_Trail_Camera_36_0.png" alt="png" /></p>
+
+<pre><code class="language-python">learn.unfreeze()
+learn.fit_one_cycle(2, max_lr=slice(1e-4,1e-3))
+</code></pre>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>error_rate</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.346265</td>
+      <td>0.393373</td>
+      <td>0.120000</td>
+      <td>00:58</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.394982</td>
+      <td>0.137451</td>
+      <td>0.080000</td>
+      <td>00:58</td>
+    </tr>
+  </tbody>
+</table>
+
 <p>That&rsquo;s a pretty accurate model!</p><ul class="pa0">
   
 </ul>

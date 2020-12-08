@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Huntsville AI</title>
@@ -6,7 +6,11 @@
     <description>Recent content on Huntsville AI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2020 22:40:19 -0500</lastBuildDate><atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Sep 2020 22:40:19 -0500</lastBuildDate>
+    
+	<atom:link href="https://hsv-ai.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Deploying ML Models with Django</title>
       <link>https://hsv-ai.com/meetups/200930_django_ml/</link>
@@ -52,7 +56,7 @@ The slides from the talk are available here.</description>
       <guid>https://hsv-ai.com/meetups/200729_ar-ai/</guid>
       <description>Thoughts on AR/AI Integration Here&amp;rsquo;s a great article by Adobe that covers some of the ways that they are using an integrated AI/AR approach.
 Another good starting point is this article on &amp;ldquo;Combining artificial intelligence and augmented reality in mobile apps&amp;rdquo;. It&amp;rsquo;s somewhat of a sales pitch for Fritz.ai, but it does contain a lot of useful links - some of which I have incorporated.
-Other applications of AI that are useful in AR:</description>
+Other applications of AI that are useful in AR: * Object Detection - finding the boundaries of objects * Image Classification - this can be used to identify known objects in a scene and make a correlation to an object in the digital world * Pose Estimation - determining position of hands to control movement * Text Recognition - determine text (not always horizontally aligned) and convert to actionable content * Audio Recognition - voice commands to control movement</description>
     </item>
     
     <item>
@@ -90,6 +94,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/200226_fast_ai_lesson_2/</guid>
       <description>&lt;h2 id=&#34;agenda&#34;&gt;Agenda:&lt;/h2&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Welcome / Intro&lt;/li&gt;
 &lt;li&gt;Fast.AI Lesson 2&lt;/li&gt;
@@ -113,6 +118,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/200129_fastai_lesson1/</guid>
       <description>&lt;h2 id=&#34;agenda&#34;&gt;Agenda:&lt;/h2&gt;
+
 &lt;ul&gt;
 &lt;li&gt;Welcome / Intro&lt;/li&gt;
 &lt;li&gt;Fast.AI Lesson 1&lt;/li&gt;
@@ -127,6 +133,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/200122_faceoff_aws/</guid>
       <description>&lt;h1 id=&#34;object-recognition-face-off&#34;&gt;Object Recognition Face-off&lt;/h1&gt;
+
 &lt;p&gt;This week we will start a series of tutorials intended to evaluate different frameworks for object detection. Rather than just looking at the various models for implementation, we will consider the entire framework for deployment.&lt;/p&gt;</description>
     </item>
     
@@ -137,6 +144,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/200108_kickoff/</guid>
       <description>&lt;p&gt;We had a pretty large group in attendance as we kicked off the 2020 year in Huntsville AI.&lt;/p&gt;
+
 &lt;p&gt;We discussed items and themes that we want to cover in the first half of 2020, and many that may run throughout the year. You can find a categorized list of topics below.&lt;/p&gt;</description>
     </item>
     
@@ -147,6 +155,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/191211_neurips/</guid>
       <description>&lt;p&gt;Huntsville AI was selected to host a remote NeurIPS meetup to coincide with the global NeurIPS conference in Vancouer Canada. The remote meetup consisted of a Wednesday night 3 hour session to close out Huntsville AI for 2019 and another 2 hour session held at Adtran on Thursday.&lt;/p&gt;
+
 &lt;p&gt;Both sessions were well attended, and a lot of good conversations and connections were made!&lt;/p&gt;</description>
     </item>
     
@@ -157,6 +166,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/191120_trail_camera/</guid>
       <description>&lt;p&gt;This notebook originated directly from the Fast.ai Deep Learning course v3 &lt;a href=&#34;https://github.com/fastai/course-v3/raw/master/nbs/dl1/lesson1-pets.ipynb&#34;&gt;Lesson 1&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;It has been modified to see if it is possible to use the same approach to classify images from trail cameras.&lt;/p&gt;</description>
     </item>
     
@@ -167,6 +177,7 @@ The slides from the talk are available here.</description>
       
       <guid>https://hsv-ai.com/meetups/191002_data_analysis_jupyter/</guid>
       <description>&lt;p&gt;Welcome to Huntsville AI. This week we are continuing to work through some technical tutorials in preparation for the NASA Space Apps Challenge.&lt;/p&gt;
+
 &lt;p&gt;If you are interested in joining Huntsville AI, please connect through one or more of our communication channels.&lt;/p&gt;</description>
     </item>
     
@@ -206,6 +217,7 @@ The slides from the talk are available here.</description>
       <description>&lt;p&gt;Ben gave a presentation about the issues and limitations of Artificial Intelligence
 and Machine Learning that you need to be aware of working with this technology. These
 items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
+
 &lt;h2 id=&#34;slides-coming-soon&#34;&gt;Slides coming soon!&lt;/h2&gt;</description>
     </item>
     
@@ -225,6 +237,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190731_open_discussion/</guid>
       <description>&lt;p&gt;Tonight we had an open discussion on AI for any topics the group wanted to cover. The different topics are listed below.&lt;/p&gt;
+
 &lt;p&gt;There aren&amp;rsquo;t a lot of updates to post on this type of meetup. You kind of have to be there&amp;hellip;&lt;/p&gt;</description>
     </item>
     
@@ -235,6 +248,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190717_deploying_ai_models/</guid>
       <description>&lt;p&gt;Here&amp;rsquo;s a discussion that we had about how to deploy models to be used in an AI application.&lt;/p&gt;
+
 &lt;p&gt;The thought process follows a pattern of providing a web interface of some sort with the requests being queued up and handled asynchrounously by a server running an AI model.&lt;/p&gt;</description>
     </item>
     
@@ -245,6 +259,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190710_business_applications/</guid>
       <description>&lt;p&gt;Dr Phil Bording walked us through a couple of examples of AI in use in business applications.&lt;/p&gt;
+
 &lt;p&gt;The examples included estimation of housing prices and mechanical failure in airplane landing gear.&lt;/p&gt;</description>
     </item>
     
@@ -255,6 +270,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190626_rnn_timeseries_part3/</guid>
       <description>&lt;p&gt;This week we will be covering the final part of RNN development to predict stock price information using previous values.&lt;/p&gt;
+
 &lt;p&gt;This notebook is based on a tutorial: &amp;ldquo;Multivariate Time Series using RNN with Keras&amp;rdquo; from &lt;a href=&#34;https://medium.com/datadriveninvestor/multivariate-time-series-using-rnn-with-keras-7f78f4488679&#34;&gt;here&lt;/a&gt;. We have modified the approach to use all available values as input instead of averaging the low and high price.&lt;/p&gt;</description>
     </item>
     
@@ -265,6 +281,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190612_recurrent_neural_networks/</guid>
       <description>&lt;h2 id=&#34;from-wikipedia&#34;&gt;From WikiPedia:&lt;/h2&gt;
+
 &lt;p&gt;A recurrent neural network (RNN) is a class of artificial neural network where connections between nodes form a directed graph along a temporal sequence. This allows it to exhibit temporal dynamic behavior.&lt;/p&gt;</description>
     </item>
     
@@ -274,7 +291,8 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       <pubDate>Wed, 29 May 2019 22:40:19 -0500</pubDate>
       
       <guid>https://hsv-ai.com/meetups/190529_opendiscussion/</guid>
-      <description>&lt;h1 id=&#34;show--tell&#34;&gt;Show &amp;amp; Tell&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;show-tell&#34;&gt;Show &amp;amp; Tell&lt;/h1&gt;
+
 &lt;p&gt;Updated from Huntsville AI members on their personal or work projects.&lt;/p&gt;</description>
     </item>
     
@@ -285,8 +303,11 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190522_sbir_topics/</guid>
       <description>&lt;p&gt;This discussion covered selected SBIR topics that included some type of Artificial Intelligence or Machine Learning in the description.&lt;/p&gt;
+
 &lt;h2 id=&#34;more-information&#34;&gt;More information:&lt;/h2&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://www.fbo.gov/index.php?s=opportunity&amp;amp;mode=form&amp;amp;id=82cbf6c93c77bee0ffa23d2cc8c2b422&amp;amp;tab=core&amp;amp;_cview=0&amp;amp;fbclid=IwAR2ddfEFkyEvUIEH-b5Ws2DmINOrRM7Y84X0J19GQmQWrW2kX44fDHe6xw4&#34;&gt;STTR 19.2&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://www.fbo.gov/index?s=opportunity&amp;amp;mode=form&amp;amp;id=0a3eac1d27ab54cfe57a0339b3f863d8&amp;amp;tab=core&amp;amp;_cview=0&amp;amp;fbclid=IwAR3bpKUeOgtN6AMdolrbpUaefVQjSrV-Hbe86M1CNOKC46lNFQ6eN25LCNU&#34;&gt;SBIR 19.2&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -297,7 +318,9 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190508_word_document_vectors/</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
 &lt;p&gt;From &lt;a href=&#34;https://en.wikipedia.org/wiki/Word_embedding&#34;&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+
 &lt;p&gt;Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing (NLP) where words or phrases from the vocabulary are mapped to vectors of real numbers. Conceptually it involves a mathematical embedding from a space with many dimensions per word to a continuous vector space with a much lower dimension.&lt;/p&gt;</description>
     </item>
     
@@ -308,8 +331,11 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190417_spacy/</guid>
       <description>&lt;p&gt;Main website is at &lt;a href=&#34;https://spacy.io/&#34;&gt;https://spacy.io/&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;You may also want to check out the company behind spaCy - &lt;a href=&#34;https://explosion.ai/&#34;&gt;Explosion AI&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;The best way to get off the ground is to head over to the &lt;a href=&#34;https://spacy.io/usage&#34;&gt;Usage&lt;/a&gt; page and start from the beginning.&lt;/p&gt;
+
 &lt;p&gt;After you are off the ground, head over to &lt;a href=&#34;https://spacy.io/usage/spacy-101&#34;&gt;spaCy 101&lt;/a&gt; and follow the tutorial.&lt;/p&gt;</description>
     </item>
     
@@ -320,6 +346,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190410_google_colaboratory/</guid>
       <description>&lt;h2 id=&#34;agenda&#34;&gt;Agenda:&lt;/h2&gt;
+
 &lt;ol&gt;
 &lt;li&gt;Brainstorm Ideas for Sessions&lt;/li&gt;
 &lt;li&gt;Play with Google Colaboratory&lt;/li&gt;
@@ -333,7 +360,9 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190403_ai_hardware/</guid>
       <description>&lt;p&gt;Huntsville AI - April 3, 2019&lt;/p&gt;
+
 &lt;p&gt;Ben Etheredge led the discussion on AI hardware, bottlenecks, and an introduction to Keras. You can download the slides below:&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190116_m1002_Intelligent_Agents.pptx?raw=true&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -353,7 +382,8 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190213_musk_classification/</guid>
       <description>&lt;p&gt;This notebook is a walkthrough of different classification approaches provided by the Scikit-Learn library.&lt;/p&gt;
-&lt;p&gt;The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: &lt;!-- raw HTML omitted --&gt;Musk (Version 2) Data Set&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+
+&lt;p&gt;The dataset that we will use for this example was provided by the UCI Machine Learning Repository and can be found here: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Musk+(Version+2)&#34;&gt;Musk (Version 2) Data Set&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -363,7 +393,9 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190130_azure_notebooks/</guid>
       <description>&lt;h2 id=&#34;welcome&#34;&gt;Welcome!!!&lt;/h2&gt;
+
 &lt;p&gt;Tonight we will be going through the setup of an Azure Notebook and running some basic machine learning tasks.&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://notebooks.azure.com/&#34;&gt;Azure Notebooks&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -374,6 +406,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190123_variance/</guid>
       <description>&lt;p&gt;Dr. Phil Bording let the session completing the discussion on linear models with Variance and Covariance. You can download the slides below:&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190123_Notes.pdf&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -384,6 +417,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190116_intelligent_agents/</guid>
       <description>&lt;p&gt;Dr. Phil Bording let the session covering Intelligent Agents. You can download the slides below:&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190116_m1002_Intelligent_Agents.pptx?raw=true&#34;&gt;Powerpoint Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -394,6 +428,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       
       <guid>https://hsv-ai.com/meetups/190109_linear_models/</guid>
       <description>&lt;p&gt;Dr. Phil Bording let the session covering linear models. You can download the slides below:&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&#34;https://github.com/HSV-AI/presentations/blob/master/2019/190109_Week1_Revised.pdf&#34;&gt;PDF Slides&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -405,7 +440,7 @@ items are often overlooked in the frenzy of promoting AI/ML.&lt;/p&gt;
       <guid>https://hsv-ai.com/projects/bug-analysis/</guid>
       <description>This project is hosted on GitHub here: Bug Analysis
 Bug Analysis The purpose of this project is to attempt to find a way to recommend similar bugs when assigning a bug or creating a new bug. At the time of this writing, the Eclipse Foundation Bugzilla Database contains 543131 bugs. Below is an excerpt from the Eclipse Foundation 2018 annual report:
- Photon Simultaneous Release   In June 2017 the Eclipse community shipped Eclipse Oxygen, its twelfth annual simultaneous release.</description>
+ Photon Simultaneous Release In June 2017 the Eclipse community shipped Eclipse Oxygen, its twelfth annual simultaneous release.</description>
     </item>
     
   </channel>
